@@ -6,7 +6,7 @@
 />
 <meta
   name="keywords"
-  content="{{ with .Params.Keywords }}{{ delimit . ", " }}{{ else }}{{ $.Site.Params.Keywords }}{{ end }}"
+  content="{{ $.Site.Params.Keywords }}{{ with .Params.Keywords }}, {{ delimit . ", " }}{{ end }}"
 />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="{{ .Permalink }}" />
