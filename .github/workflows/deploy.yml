@@ -12,10 +12,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup 🚧
+      - name: Setup Hugo 🚧
         run: |
-          wget https://github.com/gohugoio/hugo/releases/download/v0.75.1/hugo_0.75.1_Linux-64bit.tar.gz
-          tar -zxf hugo_0.75.1_Linux-64bit.tar.gz
+          HUGO_VERSION=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | jq -r '.tag_name')
+          mkdir tmp/ && cd tmp/
+          curl -sSL https://github.com/gohugoio/hugo/releases/download/${HUGO_VERSION}/hugo_extended_${HUGO_VERSION: -6}_Linux-64bit.tar.gz | tar -xzf-
+          mv hugo /usr/local/bin/
+          cd .. && rm -rf tmp/
 
       - name: Build 🔧
         run: |
