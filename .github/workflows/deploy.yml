@@ -13,7 +13,6 @@ jobs:
           persist-credentials: false
 
       - name: Setup 🚧
-        uses: actions/setup-go@v2
         run: |
           wget https://github.com/gohugoio/hugo/releases/download/v0.75.1/hugo_0.75.1_Linux-64bit.tar.gz
           tar -zxf hugo_0.75.1_Linux-64bit.tar.gz
