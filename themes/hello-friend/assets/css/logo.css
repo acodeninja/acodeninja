@@ -24,9 +24,10 @@
   &__cursor {
     display: inline-block;
     width: 10px;
-    height: 1rem;
-    background: #fe5186;
+    height: 0.2rem;
+    background: #dadde9;
     margin-left: 5px;
+    margin-top: 0.8rem;
     border-radius: 1px;
     animation: cursor 1s infinite;
   }
