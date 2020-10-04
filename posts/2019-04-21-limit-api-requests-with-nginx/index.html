@@ -1,0 +1,70 @@
+<!doctype html><html lang=en><head><title>limit http requests with nginx ::
+acode.ninja — Adventures of a code ninja</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="There are several ways that you can throttle the rate at which requests to your web application are processed.
+Rate limiting within your authentication mechanism is undoubtedly useful. However, the chances are that this requires several calls to database and cache. Database queries could become a costly operation when your application is running under load.
+To provide an extra layer of filtering, Nginx is capable of limiting request rates using the ngx_http_limit_req_module module."><meta name=keywords content="software developer,coder,learning to code,nginx,request rate limits,"><meta name=robots content="noodp"><link rel=canonical href=/posts/2019-04-21-limit-api-requests-with-nginx/><link rel=stylesheet href=/assets/style.css><link rel=stylesheet href=/style.css><link rel=apple-touch-icon-precomposed sizes=144x144 href=/img/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=/img/favicon.png><link href=/assets/fonts/Inter-Italic.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-Regular.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-Medium.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-MediumItalic.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-Bold.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-BoldItalic.woff2 rel=preload type=font/woff2 as=font crossorigin><meta name=twitter:card content="summary"><meta name=twitter:title content="limit http requests with nginx"><meta name=twitter:description content="There are several ways that you can throttle the rate at which requests to your web application are processed.
+Rate limiting within your authentication mechanism is undoubtedly useful. However, the chances are that this requires several calls to database and cache. Database queries could become a costly operation when your application is running under load.
+To provide an extra layer of filtering, Nginx is capable of limiting request rates using the ngx_http_limit_req_module module."><meta property="og:title" content="limit http requests with nginx"><meta property="og:description" content="There are several ways that you can throttle the rate at which requests to your web application are processed.
+Rate limiting within your authentication mechanism is undoubtedly useful. However, the chances are that this requires several calls to database and cache. Database queries could become a costly operation when your application is running under load.
+To provide an extra layer of filtering, Nginx is capable of limiting request rates using the ngx_http_limit_req_module module."><meta property="og:type" content="article"><meta property="og:url" content="/posts/2019-04-21-limit-api-requests-with-nginx/"><meta property="article:published_time" content="2019-04-21T00:00:00+00:00"><meta property="article:modified_time" content="2019-04-21T00:00:00+00:00"><meta property="og:site_name" content="acode.ninja"></head><body class=dark-theme><div class=container><header class=header><span class=header__inner><a href=/ class=logo style=text-decoration:none><span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg></span><span class=logo__text>acode.ninja</span>
+<span class=logo__cursor></span></a><span class=header__right><span class=theme-toggle><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 41C32.4934 41 41 32.4934 41 22 41 11.5066 32.4934 3 22 3 11.5066 3 3 11.5066 3 22s8.5066 19 19 19zM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22z"/></svg></span></span></span></header><div class=content><div class=post><h1 class=post-title>limit http requests with nginx</h1><div class=post-meta><span class=post-date>2019-04-21</span>
+<span class=post-read-time>— 3 min read</span></div><div class=post-content><p>There are several ways that you can throttle the rate at which requests to your
+web application are processed.</p><p>Rate limiting within your authentication mechanism is undoubtedly useful.
+However, the chances are that this requires several calls to database and cache.
+Database queries could become a costly operation when your application is
+running under load.</p><p>To provide an extra layer of filtering, Nginx is capable of limiting request
+rates using the <code>ngx_http_limit_req_module</code> module.</p><h2 id=creating-a-memory-zone>creating a memory zone</h2><p>To limit requests, we first need to create a space in memory to store a running
+log of requests. We need to decide which key on a request is used as a reference
+in the memory zone. The obvious first contender is the remote IP address of the
+requesting client.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># /etc/nginx/conf.d/rate-limit-zones.conf</span>
+limit_req_zone $binary_remote_addr zone<span style=color:#f92672>=</span>ipaddr:10m rate<span style=color:#f92672>=</span>1r/s;
+</code></pre></div><p>To declare a memory zone, we use the <code>limit_req_zone</code> directive. We tell Nginx
+what we want to use as a key, in this case <code>$binary_remote_addr</code>, the remote IP
+address of the requesting client. The zone is defined with the name <code>ipaddr</code>
+and 10 Megabytes of memory assigned to the zone. Rate of requests is then
+defined against the zone at 1 request per second.</p><h2 id=alternative-zone-keys>alternative zone keys</h2><p>While the above example uses the IP address, there are a number of other keys we
+can use.</p><ul><li><code>$server_name</code> is the domain name of the request, this would limit the number
+of requests per second a domain can serve to any client.</li><li><code>$uri</code> is the URI being requested from the server. This would limit the number
+of client requests to a given URI, independent of domain name.</li></ul><p>It is also worth noting that since Nginx version 1.7.6 you can use variables in
+any combination.</p><ul><li>&ldquo;<code>$binary_remote_addr$uri</code>&rdquo; limit requests by remote IP address and URI being
+accessed.</li><li>&ldquo;<code>$server_name$uri</code>&rdquo; limit requests by domain name and URI being accessed.</li></ul><p>Configuring a limit against a server
+A limit can be applied inside a server block. The most straight forward way is
+to apply a limit to a whole virtual server.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># /etc/nginx/sites-enabled/default</span>
+server <span style=color:#f92672>{</span>
+    limit_req zone<span style=color:#f92672>=</span>ipaddr burst<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span> nodelay;
+    ...
+<span style=color:#f92672>}</span>
+</code></pre></div><p>The limit is applied with the limit_req directive which specifies which memory
+zone to use for request limits. It also accepts optional burst and delay
+settings.</p><p>The burst parameter defaults to zero. It allows us to specify the number of
+requests over the limit that should be delayed rather than receiving an error.
+Delayed requests are processed at the rate configured in the limit_req_zone
+directive.</p><p>The delay parameter can either give a limit of requests that should not be
+delayed, or nodelay to indicate that no requests should be delayed.</p><h2 id=advanced-configuration>advanced configuration</h2><p>You could get a bit more fancy and only rate limit your API endpoints.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># /etc/nginx/sites-enabled/default</span>
+server <span style=color:#f92672>{</span>
+    ...
+    location /api/ <span style=color:#f92672>{</span>
+        limit_req zone<span style=color:#f92672>=</span>ipaddr burst<span style=color:#f92672>=</span>5;
+    <span style=color:#f92672>}</span>
+    ...
+<span style=color:#f92672>}</span>
+</code></pre></div><p>Or you can get even more fancy and not limit requests made to your API by local
+services.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># /etc/nginx/sites-enabled/default</span>
+geo $is_external_call <span style=color:#f92672>{</span>
+    default         1;
+    10.0.0.0/8      0;
+    172.16.0.0/12   0;
+    192.168.0.0/16  0;
+    fd00::/8        0;
+<span style=color:#f92672>}</span>
+
+server <span style=color:#f92672>{</span>
+    ...
+    location /api/ <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>$is_external_call<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            limit_req zone<span style=color:#f92672>=</span>ipaddr burst<span style=color:#f92672>=</span>5;
+        <span style=color:#f92672>}</span>
+        ...
+    <span style=color:#f92672>}</span>
+    ...
+<span style=color:#f92672>}</span>
+</code></pre></div></div></div></div><footer class=footer><div class=footer__inner><div class="copyright copyright--user">Lawrence Goldstien</div></div></footer><script src=/assets/main.js></script><script src=/assets/prism.js></script></div></body></html>

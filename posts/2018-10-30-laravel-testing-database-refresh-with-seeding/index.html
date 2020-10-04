@@ -1,0 +1,98 @@
+<!doctype html><html lang=en><head><title>laravel testing: database reset with seeding ::
+acode.ninja — Adventures of a code ninja</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Testing a Laravel application has a low barrier to entry compared to other PHP frameworks. What happens when you want to nuke the database between tests? I thought I&amp;rsquo;d share a solution here.
+feature testing One of the great features Laravel provides is the ability to refresh your database after each test. This has been really useful, but I needed to test verbs like DELETE and a simple php artisan migrate:fresh isn&amp;rsquo;t all that useful when you have seeds that add information to your database that your tests rely on."><meta name=keywords content="software developer,coder,learning to code,laravel,testing,database seeding,test case,acceptance testing"><meta name=robots content="noodp"><link rel=canonical href=/posts/2018-10-30-laravel-testing-database-refresh-with-seeding/><link rel=stylesheet href=/assets/style.css><link rel=stylesheet href=/style.css><link rel=apple-touch-icon-precomposed sizes=144x144 href=/img/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=/img/favicon.png><link href=/assets/fonts/Inter-Italic.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-Regular.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-Medium.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-MediumItalic.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-Bold.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-BoldItalic.woff2 rel=preload type=font/woff2 as=font crossorigin><meta name=twitter:card content="summary"><meta name=twitter:title content="laravel testing: database reset with seeding"><meta name=twitter:description content="Testing a Laravel application has a low barrier to entry compared to other PHP frameworks. What happens when you want to nuke the database between tests? I thought I&rsquo;d share a solution here.
+feature testing One of the great features Laravel provides is the ability to refresh your database after each test. This has been really useful, but I needed to test verbs like DELETE and a simple php artisan migrate:fresh isn&rsquo;t all that useful when you have seeds that add information to your database that your tests rely on."><meta property="og:title" content="laravel testing: database reset with seeding"><meta property="og:description" content="Testing a Laravel application has a low barrier to entry compared to other PHP frameworks. What happens when you want to nuke the database between tests? I thought I&rsquo;d share a solution here.
+feature testing One of the great features Laravel provides is the ability to refresh your database after each test. This has been really useful, but I needed to test verbs like DELETE and a simple php artisan migrate:fresh isn&rsquo;t all that useful when you have seeds that add information to your database that your tests rely on."><meta property="og:type" content="article"><meta property="og:url" content="/posts/2018-10-30-laravel-testing-database-refresh-with-seeding/"><meta property="article:published_time" content="2018-10-30T00:00:00+00:00"><meta property="article:modified_time" content="2018-10-30T00:00:00+00:00"><meta property="og:site_name" content="acode.ninja"></head><body class=dark-theme><div class=container><header class=header><span class=header__inner><a href=/ class=logo style=text-decoration:none><span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg></span><span class=logo__text>acode.ninja</span>
+<span class=logo__cursor></span></a><span class=header__right><span class=theme-toggle><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 41C32.4934 41 41 32.4934 41 22 41 11.5066 32.4934 3 22 3 11.5066 3 3 11.5066 3 22s8.5066 19 19 19zM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22z"/></svg></span></span></span></header><div class=content><div class=post><h1 class=post-title>laravel testing: database reset with seeding</h1><div class=post-meta><span class=post-date>2018-10-30</span>
+<span class=post-read-time>— 2 min read</span></div><div class=post-content><p>Testing a <a href=https://laravel.com/docs/5.7/testing>Laravel</a> application has a low
+barrier to entry compared to <a href=https://symfony.com/doc/current/testing.html>other</a>
+<a href=https://www.codeigniter.com/user_guide/libraries/unit_testing.html>PHP</a>
+<a href=https://book.cakephp.org/3.0/en/development/testing.html>frameworks</a>. What
+happens when you want to nuke the database between tests? I thought I&rsquo;d share a
+solution here.</p><h2 id=feature-testing>feature testing</h2><p>One of the great features Laravel provides is the ability to
+<a href=https://laravel.com/docs/5.7/database-testing#resetting-the-database-after-each-test>refresh</a>
+your database after each test. This has been really useful, but I needed to
+test verbs like <code>DELETE</code> and a simple <code>php artisan migrate:fresh</code> isn&rsquo;t all
+that useful when you have seeds that add information to your database that your
+tests rely on.</p><p>The class <code>Illuminate\Foundation\Testing\RefreshDatabase</code> has a method used to
+action the refresh refreshTestDatabase which just calls out to <code>artisan</code> for
+the <code>migrate:fresh</code> command. Step in my nice little override:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#75715e>// tests/ResetsDatabase.php
+</span><span style=color:#75715e></span><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>Tests</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Contracts\Console\Kernel</span>; 
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Foundation\Testing\RefreshDatabase</span>; 
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Foundation\Testing\RefreshDatabaseState</span>;
+
+<span style=color:#66d9ef>trait</span> <span style=color:#a6e22e>ResetsDatabase</span> {
+    <span style=color:#66d9ef>use</span> <span style=color:#a6e22e>RefreshDatabase</span>;
+    
+    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>refreshTestDatabase</span>()
+    {
+        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span> <span style=color:#a6e22e>RefreshDatabaseState</span><span style=color:#f92672>::</span>$migrated) {
+            $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>artisan</span>(<span style=color:#e6db74>&#39;migrate:fresh&#39;</span>, $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>shouldDropViews</span>() <span style=color:#f92672>?</span> [
+                <span style=color:#e6db74>&#39;--drop-views&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#66d9ef>true</span>,
+            ] <span style=color:#f92672>:</span> []);
+
+            $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>artisan</span>(<span style=color:#e6db74>&#39;db:seed&#39;</span>, []);
+            $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>artisan</span>(<span style=color:#e6db74>&#39;db:seed&#39;</span>, [
+                <span style=color:#e6db74>&#39;--class&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;TestDatabaseSeeder&#39;</span>,
+            ]);
+
+            $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>app</span>[<span style=color:#a6e22e>Kernel</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>]<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setArtisan</span>(<span style=color:#66d9ef>null</span>);
+
+            <span style=color:#a6e22e>RefreshDatabaseState</span><span style=color:#f92672>::</span>$migrated <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+        }
+
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>beginDatabaseTransaction</span>();
+    }
+}
+</code></pre></div><p>You can use this in your tests the same way you would the RefreshDatabase
+class. But instead of just refreshing the database, you will get db:seed for
+free along with any test seeds you want to run.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#75715e>// tests/Feature/UserApiTest.php
+</span><span style=color:#75715e></span><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>Tests\Feature</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Tests\ResetsDatabase</span>; 
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Tests\TestCase</span>;
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UserApiTest</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>TestCase</span> {
+    <span style=color:#66d9ef>use</span> <span style=color:#a6e22e>ResetsDatabase</span>;
+}
+</code></pre></div><h2 id=what-about-dusk>what about dusk?</h2><p>The same can be achieved in dusk [https://laravel.com/docs/5.7/dusk] with a
+similar change in the DatabaseMigrations trait provided for resetting the
+database.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#75715e>// tests/ResetsDatabaseInDusk.php
+</span><span style=color:#75715e></span><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>Tests</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Contracts\Console\Kernel</span>; 
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Foundation\Testing\DatabaseMigrations</span>; 
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Foundation\Testing\RefreshDatabaseState</span>;
+
+<span style=color:#66d9ef>trait</span> <span style=color:#a6e22e>ResetsDatabaseInDusk</span> {
+    <span style=color:#66d9ef>use</span> <span style=color:#a6e22e>DatabaseMigrations</span>;
+    
+    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>runDatabaseMigrations</span>()
+    {
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>artisan</span>(<span style=color:#e6db74>&#39;migrate:fresh&#39;</span>, [
+            <span style=color:#e6db74>&#39;--drop-views&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#66d9ef>true</span>,
+        ]);
+
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>artisan</span>(<span style=color:#e6db74>&#39;db:seed&#39;</span>, []);
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>artisan</span>(<span style=color:#e6db74>&#39;db:seed&#39;</span>, [
+            <span style=color:#e6db74>&#39;--class&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;TestDatabaseSeeder&#39;</span>,
+        ]);
+
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>app</span>[<span style=color:#a6e22e>Kernel</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>]<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setArtisan</span>(<span style=color:#66d9ef>null</span>);
+
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>beforeApplicationDestroyed</span>(<span style=color:#66d9ef>function</span> () {
+            $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>artisan</span>(<span style=color:#e6db74>&#39;migrate:rollback&#39;</span>);
+
+            <span style=color:#a6e22e>RefreshDatabaseState</span><span style=color:#f92672>::</span>$migrated <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+        });
+    }
+}
+</code></pre></div><p>This will do the same as the previous trait but for your Browser tests.</p></div></div></div><footer class=footer><div class=footer__inner><div class="copyright copyright--user">Lawrence Goldstien</div></div></footer><script src=/assets/main.js></script><script src=/assets/prism.js></script></div></body></html>

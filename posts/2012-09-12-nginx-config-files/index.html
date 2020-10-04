@@ -1,0 +1,50 @@
+<!doctype html><html lang=en><head><title>nginx config files ::
+acode.ninja — Adventures of a code ninja</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Ever since moving to Nginx I have had the self satisfied smile of someone who knows his web applications are going to be snappy. That&amp;rsquo;s not just down to good coding, but down to the quality of the server software employed.
+One problem that I came across with Nginx was implementing features found in the .htaccess files you would usually use to set per site and directory settings within PHP and Apache."><meta name=keywords content="software developer,coder,learning to code"><meta name=robots content="noodp"><link rel=canonical href=/posts/2012-09-12-nginx-config-files/><link rel=stylesheet href=/assets/style.css><link rel=stylesheet href=/style.css><link rel=apple-touch-icon-precomposed sizes=144x144 href=/img/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=/img/favicon.png><link href=/assets/fonts/Inter-Italic.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-Regular.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-Medium.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-MediumItalic.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-Bold.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-BoldItalic.woff2 rel=preload type=font/woff2 as=font crossorigin><meta name=twitter:card content="summary"><meta name=twitter:title content="nginx config files"><meta name=twitter:description content="Ever since moving to Nginx I have had the self satisfied smile of someone who knows his web applications are going to be snappy. That&rsquo;s not just down to good coding, but down to the quality of the server software employed.
+One problem that I came across with Nginx was implementing features found in the .htaccess files you would usually use to set per site and directory settings within PHP and Apache."><meta property="og:title" content="nginx config files"><meta property="og:description" content="Ever since moving to Nginx I have had the self satisfied smile of someone who knows his web applications are going to be snappy. That&rsquo;s not just down to good coding, but down to the quality of the server software employed.
+One problem that I came across with Nginx was implementing features found in the .htaccess files you would usually use to set per site and directory settings within PHP and Apache."><meta property="og:type" content="article"><meta property="og:url" content="/posts/2012-09-12-nginx-config-files/"><meta property="article:published_time" content="2012-09-12T00:00:00+00:00"><meta property="article:modified_time" content="2012-09-12T00:00:00+00:00"><meta property="og:site_name" content="acode.ninja"></head><body class=dark-theme><div class=container><header class=header><span class=header__inner><a href=/ class=logo style=text-decoration:none><span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg></span><span class=logo__text>acode.ninja</span>
+<span class=logo__cursor></span></a><span class=header__right><span class=theme-toggle><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 41C32.4934 41 41 32.4934 41 22 41 11.5066 32.4934 3 22 3 11.5066 3 3 11.5066 3 22s8.5066 19 19 19zM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22z"/></svg></span></span></span></header><div class=content><div class=post><h1 class=post-title>nginx config files</h1><div class=post-meta><span class=post-date>2012-09-12</span>
+<span class=post-read-time>— 2 min read</span></div><div class=post-content><p>Ever since moving to Nginx I have had the self satisfied smile of someone who
+knows his web applications are going to be snappy. That&rsquo;s not just down to good
+coding, but down to the quality of the server software employed.</p><p>One problem that I came across with Nginx was implementing features found in the
+.htaccess files you would usually use to set per site and directory settings
+within PHP and Apache. No longer would these work out of the box, so a new tack
+was needed.</p><p>Nginx has a pretty good config file structure, easy to read, logical and above
+all nice to look at. A standard server without any PHP looks a little something
+like this:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=color:#66d9ef>server</span> { 	
+    <span style=color:#f92672>root</span> <span style=color:#e6db74>/var/www/onmylemon.co.uk/www</span>; 	
+    <span style=color:#f92672>index</span> <span style=color:#e6db74>index.html</span>;
+
+    <span style=color:#f92672>access_log</span>  <span style=color:#e6db74>/var/www/onmylemon.co.uk/access.log</span>;
+    <span style=color:#f92672>error_log</span>  <span style=color:#e6db74>/var/www/onmylemon.co.uk/error.log</span>;
+
+    <span style=color:#f92672>server_name</span> <span style=color:#66d9ef>on</span><span style=color:#e6db74>mylemon.co.uk</span> <span style=color:#e6db74>www.onmylemon.co.uk</span>;
+}
+</code></pre></div><p>How nice does that look? On Debian you just drop this into the
+<code>/etc/nginx/conf.d</code> directory (making sure to call it somthing.conf) and run
+sudo <code>/etc/init.d/nginx restart</code>. On Ubuntu it is even easier, just drop this
+into /etc/nginx/sites-available/onmylemon.co.uk, run <code>ngxensite</code> then
+<code>sudo /etc/init.d/nginx restart</code>.</p><p>Try hammering it a little, I usually use loadimpact for this and you can run a
+few free tests every day against a URL of your choice.</p><p>Now you have this maybe lets try some PHP in there? You will need to get
+php5-fpm up and running but this isn’t too much of a challenge. A small
+alteration needs to be made to the configuration we used previously.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=color:#66d9ef>server</span> { 	
+    <span style=color:#f92672>root</span> <span style=color:#e6db74>/var/www/onmylemon.co.uk/www</span>; 	
+    <span style=color:#f92672>index</span> <span style=color:#e6db74>index.html</span>;
+
+    <span style=color:#f92672>access_log</span>  <span style=color:#e6db74>/var/www/onmylemon.co.uk/access.log</span>;
+    <span style=color:#f92672>error_log</span>  <span style=color:#e6db74>/var/www/onmylemon.co.uk/error.log</span>;
+
+    <span style=color:#f92672>server_name</span> <span style=color:#66d9ef>on</span><span style=color:#e6db74>mylemon.co.uk</span> <span style=color:#e6db74>www.onmylemon.co.uk</span>;
+
+    <span style=color:#f92672>location</span> ~ <span style=color:#e6db74>\.php$</span> {
+        <span style=color:#f92672>fastcgi_split_path_info</span> <span style=color:#e6db74>^(.+\.php)(/.+)</span>$;
+        <span style=color:#f92672>fastcgi_pass</span> 127.0.0.1:<span style=color:#ae81ff>9000</span>;
+        <span style=color:#f92672>fastcgi_index</span> <span style=color:#e6db74>index.php</span>;
+        <span style=color:#f92672>include</span> <span style=color:#e6db74>fastcgi_params</span>;
+    }
+}
+</code></pre></div><p>The first thing I noticed was <code>fastcgi_pass 127.0.0.1:9000;</code> at first it didn’t
+sink in, but then I realised this is one of Nginx more interesting features.
+This allows you to pass php execution off to other servers thus using the server
+with Nginx on it purely as a reverse proxy.</p><p>So this just covers some basic stuff with the configuration files, I’ll be
+putting up more information as I delve deeper.</p></div></div></div><footer class=footer><div class=footer__inner><div class="copyright copyright--user">Lawrence Goldstien</div></div></footer><script src=/assets/main.js></script><script src=/assets/prism.js></script></div></body></html>

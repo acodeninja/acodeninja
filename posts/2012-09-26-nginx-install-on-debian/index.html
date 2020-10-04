@@ -1,0 +1,49 @@
+<!doctype html><html lang=en><head><title>nginx install on debian ::
+acode.ninja — Adventures of a code ninja</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="It took ages to try, and find a guide that actually helps with installing Nginx on a Debian system. Most either involve compiling from source or are incomplete to the point of leaving you with a useless system.
+So there are a number of steps to take to get Nginx up and running on a Debian system, and I will cover my way here.
+Step 1 – sources.list First step is to get the sources for Nginx and php5-fpm into your apt source list."><meta name=keywords content="software developer,coder,learning to code"><meta name=robots content="noodp"><link rel=canonical href=/posts/2012-09-26-nginx-install-on-debian/><link rel=stylesheet href=/assets/style.css><link rel=stylesheet href=/style.css><link rel=apple-touch-icon-precomposed sizes=144x144 href=/img/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=/img/favicon.png><link href=/assets/fonts/Inter-Italic.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-Regular.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-Medium.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-MediumItalic.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-Bold.woff2 rel=preload type=font/woff2 as=font crossorigin><link href=/assets/fonts/Inter-BoldItalic.woff2 rel=preload type=font/woff2 as=font crossorigin><meta name=twitter:card content="summary"><meta name=twitter:title content="nginx install on debian"><meta name=twitter:description content="It took ages to try, and find a guide that actually helps with installing Nginx on a Debian system. Most either involve compiling from source or are incomplete to the point of leaving you with a useless system.
+So there are a number of steps to take to get Nginx up and running on a Debian system, and I will cover my way here.
+Step 1 – sources.list First step is to get the sources for Nginx and php5-fpm into your apt source list."><meta property="og:title" content="nginx install on debian"><meta property="og:description" content="It took ages to try, and find a guide that actually helps with installing Nginx on a Debian system. Most either involve compiling from source or are incomplete to the point of leaving you with a useless system.
+So there are a number of steps to take to get Nginx up and running on a Debian system, and I will cover my way here.
+Step 1 – sources.list First step is to get the sources for Nginx and php5-fpm into your apt source list."><meta property="og:type" content="article"><meta property="og:url" content="/posts/2012-09-26-nginx-install-on-debian/"><meta property="article:published_time" content="2012-09-26T00:00:00+00:00"><meta property="article:modified_time" content="2012-09-26T00:00:00+00:00"><meta property="og:site_name" content="acode.ninja"></head><body class=dark-theme><div class=container><header class=header><span class=header__inner><a href=/ class=logo style=text-decoration:none><span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg></span><span class=logo__text>acode.ninja</span>
+<span class=logo__cursor></span></a><span class=header__right><span class=theme-toggle><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 41C32.4934 41 41 32.4934 41 22 41 11.5066 32.4934 3 22 3 11.5066 3 3 11.5066 3 22s8.5066 19 19 19zM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22z"/></svg></span></span></span></header><div class=content><div class=post><h1 class=post-title>nginx install on debian</h1><div class=post-meta><span class=post-date>2012-09-26</span>
+<span class=post-read-time>— 3 min read</span></div><div class=post-content><h2>Table of Contents</h2><aside class=table-of-contents><nav id=TableOfContents><ul><li><a href=#step-1--sourceslist>Step 1 – sources.list</a></li><li><a href=#step-2--apt-keys>Step 2 – apt keys</a></li><li><a href=#step-3--aptitude-install>Step 3 – aptitude install</a></li><li><a href=#step-4--configuration>Step 4 – Configuration</a></li><li><a href=#conclusion>Conclusion</a></li></ul></nav></aside><p>It took ages to try, and find a guide that actually helps with installing Nginx
+on a Debian system. Most either involve compiling from source or are incomplete
+to the point of leaving you with a useless system.</p><p>So there are a number of steps to take to get Nginx up and running on a Debian
+system, and I will cover my way here.</p><h2 id=step-1--sourceslist>Step 1 – sources.list</h2><p>First step is to get the sources for Nginx and php5-fpm into your apt source
+list. To do this you need to add the following lines to your
+<code>/etc/apt/sources.list</code> file.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># NGinX Sources</span>
+deb http://nginx.org/packages/debian/ squeeze nginx deb-src
+http://nginx.org/packages/debian/ squeeze nginx
+
+<span style=color:#75715e># DotDeb Sources - php-fpm</span>
+deb http://dotdeb.mirror.somersettechsolutions.co.uk/ stable all deb-src
+http://dotdeb.mirror.somersettechsolutions.co.uk/ stable all
+</code></pre></div><p>Once you have done this the first impulse is to run aptitude update, don’t, it
+will fail and complain at you that there are no valid keys for the Nginx or
+dotdeb sources.</p><h2 id=step-2--apt-keys>Step 2 – apt keys</h2><p>So the next step is to set up the crypto keys that allow the new apt packages to
+be checked and trusted.</p><p><strong>Nginx</strong>
+With Nginx you need to download their signing key, to do this run the following
+command:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ wget http://nginx.org/keys/nginx_signing.key
+$ sudo apt-key add nginx_signing.key
+</code></pre></div><p>Drop the sudo if you are running as root (shouldn’t be but just in case). This
+will add the key to your apt keychain and allow for verification of the packages
+you download.</p><p><strong>php5-fpm</strong>
+php-fpm is the same, run the following command to add the signing key for the
+dotdeb repository.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ wget http://www.dotdeb.org/dotdeb.gpg
+$ sudo apt-key add dotdeb.gpg
+</code></pre></div><p>Once all this is done feel free to go ahead and run aptitude update</p><h2 id=step-3--aptitude-install>Step 3 – aptitude install</h2><p>So we have all the required apt repositories set up, now it&rsquo;s time to install a
+server stack. So what you do next depends on what you are intending to run on
+your server. I run Nginx primarily for WHMCS installations as it makes the most
+out of the VPS boxes my clients used to run it. For a WHMCS installation you
+need a few components:</p><ul><li>An SQL server</li><li>PHP-Curl (With SSL)</li><li>GD2 Image library</li><li>PHP-IMAP</li></ul><p>So for this I would go ahead and run:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ sudo aptitude install <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>  nginx mysql-server-5.5 mysql-client-5.5 php5-fpm <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>  php5-curl php5-gd php5-mysql php5-imap
+</code></pre></div><p>This will set up nginx with php5-fpm adding in the required modules, for a
+stripped down set up that doesn&rsquo;t include any extras try:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ sudo aptitude install <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>  nginx mysql-server-5.5 mysql-client-5.5 php5-fpm php5-mysql
+</code></pre></div><p>You can even get rid of the mysql packages if you have no plans to run an sql
+server.</p><h2 id=step-4--configuration>Step 4 – Configuration</h2><p>The last stage in sorting out your Nginx install is the configuration files.
+Check out my <a href=/posts/2012-09-12-nginx-config-files/>post on configuring Nginx</a>.</p><h2 id=conclusion>Conclusion</h2><p>Nginx is a very efficient and fast web server that when coupled with php-fpm
+provides a great platform for high traffic web applications. With this guide it
+is now easy to install and get up and running with a basic configuration.</p></div></div></div><footer class=footer><div class=footer__inner><div class="copyright copyright--user">Lawrence Goldstien</div></div></footer><script src=/assets/main.js></script><script src=/assets/prism.js></script></div></body></html>
