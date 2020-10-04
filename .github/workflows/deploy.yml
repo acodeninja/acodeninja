@@ -1,0 +1,31 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+
+      - name: Setup 🚧
+        uses: actions/setup-go@v2
+        run: |
+          wget https://github.com/gohugoio/hugo/releases/download/v0.75.1/hugo_0.75.1_Linux-64bit.tar.gz
+          tar -zxf hugo_0.75.1_Linux-64bit.tar.gz
+
+      - name: Build 🔧
+        run: |
+          git worktree add -B gh-pages public origin/gh-pages
+          hugo --minify
+
+      - name: Deploy 🚀
+        run: |
+          cd public
+          git add .
+          git commit -m "Publishing changes"
+          git push
