@@ -1,27 +1,44 @@
+title = "Adventures of a code ninja"
 baseURL = "/"
 languageCode = "en-gb"
-theme = "hello-friend"
+theme = "acodeninja"
+noreferrerLinks = true
 
 [params]
-defaultTheme = "dark"
-showMenuItems = 2
 showReadingTime = true
 
+[permalinks]
+posts = "/posts/:title/"
+
 [languages]
-    [languages.en]
-    title = "acode.ninja"
-    subtitle = "Adventures of a code ninja"
-    keywords = "software developer, coder, learning to code"
-    copyright = "Lawrence Goldstien"
-    menuMore = "Show more"
-    writtenBy = "Written by"
-    readMore = "Read more"
-    readOtherPosts = "Read other posts"
-    newerPosts = "Newer posts"
-    olderPosts = "Older posts"
-    minuteReadingTime = "min read"
-    dateFormatSingle = "2006-01-02"
-    dateFormatList = "2006-01-02"
-        [languages.en.params.logo]
-        logoText = "acode.ninja"
-        logoHomeLink = "/"
+  [languages.en]
+  subtitle = "Adventures of a code ninja"
+  keywords = "software developer, coder, learning to code"
+  copyright = "Lawrence Goldstien"
+  menuMore = "Show more"
+  writtenBy = "Written by"
+  readMore = "Read more"
+  readOtherPosts = "Read other posts"
+  newerPosts = "Newer posts"
+  olderPosts = "Older posts"
+  minuteReadingTime = "min read"
+  dateFormatSingle = "2006-01-02"
+  dateFormatList = "2006-01-02"
+  [languages.en.params.logo]
+    logoText = "adventures of a code ninja"
+    logoHomeLink = "/"
+  [languages.en.params.socialnames]
+    Github = "acodeninja"
+    Twitter = "acodeninja"
+    LinkedIn = "lawrence-goldstein-a7397418"
+  [languages.en.menu]
+    [[languages.en.menu.main]]
+      identifier = "blog"
+      name = "blog"
+      url = "/posts"
+      weight = 1
+#    [[languages.en.menu.main]]
+#      identifier = "about"
+#      name = "About me"
+#      url = "/about"
+#      weight = 2

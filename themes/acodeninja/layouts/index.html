@@ -1,0 +1,62 @@
+{{ define "main" }}
+
+  <div class="row">
+    <div class="left">
+      <h1>
+        👋 Hello,<br/>
+        I'm Lawrence,<br/>
+        a software developer based in London.
+      </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="right">
+      <h2>some recent writing ✍️</h2>
+
+      {{ $PageContext := . }}
+      {{ if .IsHome }}
+        {{ $PageContext = .Site }}
+      {{ end }}
+      {{ range first 4 (.Paginate (where $PageContext.RegularPages "Type" "posts")).Pages }}
+        <div>
+          <h3>
+            <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+          </h3>
+        </div>
+      {{ end }}
+      <div>
+        <h3>
+          <a href="/posts/">view more...</a>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  {{ with .Site.Params.SocialNames }}
+    <div class="row">
+      <div class="left">
+        <h2>🤙 find me elsewhere</h2>
+        <div class="social">
+          {{ with .Github }}
+            <a href="https://github.com/{{ . }}" target="_blank" rel="noopener">
+              <img src="/icons/github.svg" alt="Github ({{ . }})"/>
+            </a>
+          {{ end }}
+
+          {{ with .LinkedIn }}
+            <a href="https://www.linkedin.com/in/{{ . }}" target="_blank" rel="noopener">
+              <img src="/icons/linkedin.svg" alt="LinkedIn"/>
+            </a>
+          {{ end }}
+
+          {{ with .Twitter }}
+            <a href="https://twitter.com/{{ . }}" target="_blank" rel="noopener">
+              <img src="/icons/twitter.svg" alt="Twitter"/>
+            </a>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  {{ end }}
+{{ end }}

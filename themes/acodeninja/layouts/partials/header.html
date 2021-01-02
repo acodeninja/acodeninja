@@ -1,0 +1,22 @@
+<header>
+  <nav>
+    <a href="{{ .Site.Params.logo.logoHomeLink }}">
+      {{ if .Site.Params.logo.src }}
+        <img alt="{{ .Site.Params.logo.logoText }}"
+             src="{{ .Site.Params.logo.src }}">
+      {{ else }}
+        {{ .Site.Params.logo.logoText }}
+      {{ end }}
+    </a>
+    <ul>
+      {{ range .Site.Menus.main }}
+        <li>
+          <a href="{{ .URL }}">
+            {{ print .Name | safeHTML }}
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    <div id="theme-toggle"></div>
+  </nav>
+</header>

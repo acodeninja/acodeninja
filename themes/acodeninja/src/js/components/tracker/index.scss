@@ -1,0 +1,46 @@
+#tracker {
+  .popup {
+    color: #3b3d42;
+    opacity: 0.9;
+    border-radius: 1em;
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    margin: 1em;
+    padding: 1em;
+    height: 10em;
+    max-width: 20em;
+    background-color: #66d9ef;
+
+    strong {
+      display: block;
+      margin: 0;
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+      font-size: 0.9em;
+      font-weight: 600;
+      margin-bottom: 0.2em;
+    }
+
+    div {
+      display: flex;
+      justify-content: space-around;
+
+      a {
+        display: inline-block;
+        font-size: 1.8em;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 740px) {
+    .popup {
+      width: 90vw;
+      right: 5vw;
+      max-width: 80vw;
+    }
+  }
+}

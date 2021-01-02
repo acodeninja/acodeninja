@@ -1,0 +1,20 @@
+#theme-toggle {
+  @media only screen and (max-width: 740px) {
+    display: none;
+  }
+  button {
+    height: 1.2em;
+    border: none;
+    background-color: transparent;
+
+    &:focus {
+      outline: none;
+    }
+
+    img {
+      display: inline-block;
+      vertical-align: middle;
+      height: 1.2em;
+    }
+  }
+}

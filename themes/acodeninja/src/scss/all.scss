@@ -1,0 +1,14 @@
+@import "reset";
+@import "typeography";
+@import "pagination";
+
+.social {
+  a {
+    padding-top: 1em;
+    text-decoration: none;
+    img {
+      max-width: 2em;
+      display: inline;
+    }
+  }
+}
