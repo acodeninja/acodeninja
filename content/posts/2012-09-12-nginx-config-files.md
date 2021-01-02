@@ -4,8 +4,7 @@ date: 2012-09-12
 draft: false
 ---
 
-
-Ever since moving to Nginx I have had the self satisfied smile of someone who 
+Ever since moving to Nginx I have had the self-satisfied smile of someone who 
 knows his web applications are going to be snappy. That's not just down to good 
 coding, but down to the quality of the server software employed.
 

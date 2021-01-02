@@ -8,6 +8,8 @@ keywords:
     - database seeding
     - test case
     - acceptance testing
+aliases:
+    - /laravel-testing-database-refresh-with-seeding/
 ---
 
 Testing a [Laravel](https://laravel.com/docs/5.7/testing) application has a low

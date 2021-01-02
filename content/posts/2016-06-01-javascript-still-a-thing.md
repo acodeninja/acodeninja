@@ -2,6 +2,8 @@
 title: "javascript, still a thing?"
 date: 2016-06-01
 draft: false
+aliases:
+    - /javascript-still-a-thing/
 ---
 
 Javascript is a great, and expressive language. You can be as succinct or vague

@@ -2,6 +2,8 @@
 title: "frozen objects"
 date: 2016-06-03
 draft: false
+aliases:
+    - /frozen-objects/
 ---
 
 > objects are frozen,

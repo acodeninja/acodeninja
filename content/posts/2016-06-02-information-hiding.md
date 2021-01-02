@@ -2,6 +2,8 @@
 title: "information hiding"
 date: 2016-06-02
 draft: false
+aliases:
+    - /information-hiding/
 ---
 
 > object oriented

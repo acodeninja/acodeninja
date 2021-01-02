@@ -2,6 +2,8 @@
 title: "object.create, applying prototypes"
 date: 2016-06-07
 draft: false
+aliases:
+    - /object-create-applying-prototypes/
 ---
 
 > prototyping chaining,

@@ -7,6 +7,8 @@ keywords:
     - user-friendly
     - security
     - password security
+aliases:
+    - /warning-users-about-insecure-passwords/
 ---
 
 ## laravel pwned passwords validator
@@ -53,7 +55,7 @@ public function authenticated(Request $request, User $user)
 You can then display the errors as normal on the page your application redirects
 to, normally this would be `resources/views/home.blade.php`.
 
-```blade
+```php
 @if ($errors->any())
     <div class="alert alert-danger">         
         <ul>
@@ -66,8 +68,9 @@ to, normally this would be `resources/views/home.blade.php`.
 ```
 
 Or you can make it look a little nicer and display it above other messages with
+something like the following.
 
-```blade
+```php
 @if ($errors->has('password'))     
     <div class="alert alert-danger">         
         {{ $errors->first('password') }}    

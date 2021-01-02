@@ -2,6 +2,8 @@
 title: "what i am listening to: may 2013"
 date: 2013-05-19
 draft: false
+aliases:
+    - /what-i-am-listening-to-may-2013/
 ---
 
 It has been a while since I last put anything up here so I thought just sticking

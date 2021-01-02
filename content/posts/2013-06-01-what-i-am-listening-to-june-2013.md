@@ -2,6 +2,8 @@
 title: "what i am listening to june 2013"
 date: 2013-06-01
 draft: false
+aliases:
+    - /what-i-am-listening-to-june-2013/
 ---
 
 I think these posts might turn into a series! I was searching through

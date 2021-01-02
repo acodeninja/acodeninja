@@ -2,6 +2,8 @@
 title: "centre without text align center"
 date: 2013-02-27
 draft: false
+aliases:
+    - /centre-without-text-align-center/
 ---
 
 CSS is great for changing things around on a page but knowing the best way to

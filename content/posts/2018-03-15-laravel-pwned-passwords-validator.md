@@ -7,6 +7,8 @@ keywords:
     - haveibeenpwned
     - security
     - password security
+aliases:
+    - /laravel-pwned-passwords-validator/
 ---
 
 ## a bit about pwned passwords

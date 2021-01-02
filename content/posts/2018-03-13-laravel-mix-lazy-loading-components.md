@@ -9,6 +9,8 @@ keywords:
     - vuejs
     - laravel
     - laravel mix
+aliases:
+    - /laravel-mix-lazy-loading-components/
 ---
 
 ## why?

@@ -7,6 +7,8 @@ keywords:
     - aws s3
     - recursive upload
     - infrastructure as code
+aliases:
+    - /recursive-file-upload-to-s3-in-terraform/
 ---
 
 I've been working a lot with [HashiCorp's](https://www.hashicorp.com/) 
@@ -27,11 +29,7 @@ completely inside terraform.
 To begin with, we need an S3 bucket defined in our terraform project. The code
 block below comes with a website block that sets up web hosting for the bucket.
 
-{{<code 
-    language="hcl" 
-    title="S3 Webhosting Bucket"
-    isCollapsed="false"
->}}
+```hcl
 resource "aws_s3_bucket" "s3_static" {
   bucket  = "testing-website-static-hosting"
   acl     = "public-read"
@@ -41,7 +39,7 @@ resource "aws_s3_bucket" "s3_static" {
     error_document = "error.html"
   }
 }
-{{</code>}}
+```
 
 ## uploading multiple files
 Now we need get a set of files from a local directory containing the website
@@ -56,11 +54,7 @@ filename.
 The mimetypes variable is used with the file extension taken from the file
 path split on `.`.
 
-{{<code 
-    language="hcl" 
-    title="S3 recursive file upload"
-    isCollapsed="false"
->}}
+```hcl
 variable "upload_directory" {
   default = "${path.cwd}/codebases/website-static/"
 }
@@ -86,18 +80,14 @@ resource "aws_s3_bucket_object" "website_files" {
   etag          = filemd5("${var.upload_directory}${each.value}")
   content_type  = lookup(local.mime_types, split(".", each.value)[length(split(".", each.value)) - 1])
 }
-{{</code>}}
+```
 
 ## no caveats!
 The caveat from Andy's post around deleting files that are no longer in the list
 is not an issue any longer. If you remove a file from the folder and run 
 terraform plan  you will see a deletion.
 
-{{<code 
-    language="shell script" 
-    title="Output of `terraform plan`"
-    isCollapsed="false"
->}}
+```shell script
 An execution plan has been generated and is shown below.
 Resource actions are indicated with the following symbols:
   - destroy
@@ -105,7 +95,7 @@ Resource actions are indicated with the following symbols:
 Terraform will perform the following actions:
 
   aws_s3_bucket_object.website_files["test.html"] will be destroyed
-{{</code>}}
+```
 
 Hopefully this will help those who are using terraform to host a site in S3.
 I've been using this to build a maintenance holding page for emergency

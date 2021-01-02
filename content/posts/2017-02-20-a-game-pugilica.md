@@ -1,5 +1,5 @@
 ---
-title: "i designed a game - pugilica"
+title: "a game - pugilica"
 date: 2017-02-20
 draft: false
 ---
@@ -23,7 +23,7 @@ The game is themed around a gentlemanly boxing match, pitting two pugilists
 against each other, the winning combatant of three matches takes the cup and
 wins the game.
 
-![THE 3D PRINTED STAMINA TOKENS AND DICE]({{"/assets/images/posts/2017-02-20/stamina-tokens-and-dice.jpg" | absolute_url }})
+![THE 3D PRINTED STAMINA TOKENS AND DICE](/images/posts/2017-02-20-a-game-pugilica/stamina-tokens-and-dice.jpg)
 
 Players take turns to roll their ‘fists’ (two six-sided dice) and see if they
 are able to land a blow. The cards the player can use this round are decided by
@@ -44,7 +44,7 @@ The game is played with cards, tokens and dice. The contents:
  * 2 Respite cards
  * 30 Manoeuvre Cards
  
-![THE FULL CONTENTS OF THE GAME]({{"/assets/images/posts/2017-02-20/spread-cards.jpg" | absolute_url }})
+![THE FULL CONTENTS OF THE GAME](/images/posts/2017-02-20-a-game-pugilica/spread-cards.jpg)
 
 ## Playing the game
 Each player gets four stamina tokens and is dealt four cards from the freshly
@@ -59,13 +59,13 @@ cards with one dot or one card with two.
 The players continue to take turns rolling the dice, resolving any cards they
 wish to play and handing the dice to their opponent.
 
-![A GAME IN PROGRESS]({{ "/assets/images/posts/2017-02-20/play-setup.jpg" | absolute_url }})
+![A GAME IN PROGRESS](/images/posts/2017-02-20-a-game-pugilica/play-setup.jpg)
 
 Game play proceeds until one of the players has no remaining stamina tokens. The
 players both get their stamina back and the loosing player starts the next round
 by rolling the dice again. The game is won by the player that wins two of the
 three rounds.
 
-I approached this months challenge by researching as much as I could about game
+I approached challenge by researching as much as I could about game
 mechanics, specifically balancing luck and skill in a game. This game is my
-attempt first at achieving that balance, I hope you enjoyed reading about it.
+first attempt at achieving that balance, I hope you enjoyed reading about it.

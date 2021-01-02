@@ -9,6 +9,8 @@ keywords:
     - shell 
 summary: >-
     Discussion about what makes a good bash prompt. Including examples.
+aliases:
+    - /dot-files-and-the-search-for-the-perfect-bash-setup/
 ---
 
 ## the prompt

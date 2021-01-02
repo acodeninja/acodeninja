@@ -2,6 +2,8 @@
 title: "html5 document ready"
 date: 2016-06-08
 draft: false
+aliases:
+    - /html5-document-ready/
 ---
 
 > DOMContentLoaded,

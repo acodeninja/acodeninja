@@ -3,6 +3,8 @@ title: "nginx install on debian"
 date: 2012-09-26
 draft: false
 toc: true
+aliases:
+    - /nginx-install-on-debian/
 ---
 
 It took ages to try, and find a guide that actually helps with installing Nginx

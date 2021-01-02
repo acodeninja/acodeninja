@@ -2,6 +2,8 @@
 title: "nginx ssl only configuration"
 date: 2013-01-08
 draft: false
+aliases:
+    - /nginx-ssl-only-configuration/
 ---
 
 Configuring Nginx with SSL can be a bit of a nightmare to do properly.

@@ -5,7 +5,8 @@ draft: false
 keywords:
     - nginx
     - request rate limits
-    - 
+aliases:
+    - /limit-api-requests-with-nginx/
 ---
 
 There are several ways that you can throttle the rate at which requests to your

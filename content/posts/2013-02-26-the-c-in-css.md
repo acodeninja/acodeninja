@@ -2,6 +2,8 @@
 title: "the c in css"
 date: 2013-02-26
 draft: false
+aliases:
+    - /the-c-in-css/
 ---
 
 CSS is a very powerful tool for web designers and developers, as with all great

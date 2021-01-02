@@ -2,6 +2,8 @@
 title: "a few thoughts on ad-blockers"
 date: 2017-01-04
 draft: false
+aliases:
+    - /a-fex-thoughts-on-add-blockers/
 ---
 
 Although content creators should have the opportunity to generate income from

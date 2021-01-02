@@ -2,6 +2,8 @@
 title: "testing login to an smtp server using telnet"
 date: 2013-02-26
 draft: false
+aliases:
+    - /testing-login-to-an-smtp-server-using-telnet/
 ---
 
 So if you are having problems sending emails there is always one sure fire way

@@ -2,6 +2,8 @@
 title: "get a stream of tweets"
 date: 2013-05-21
 draft: false
+aliases:
+    - /get-a-stream-of-tweets/
 ---
 
 The first part of the course I have been taking on data science deals with
