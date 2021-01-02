@@ -1,23 +1,88 @@
-<!doctype html><html class=light lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=description content="So if you are having problems sending emails there is always one sure fire way to establish if the problem is your connection or not. This can be done using the telnet application, a command line tool that is included in most operating systems.
-To do this you will need to open the command prompt, on windows you can do this by pressing the windows key and tapping the R button once."><meta name=keywords content="software developer,coder,learning to code"><link rel=canonical href=/posts/testing-login-to-an-smtp-server-using-telnet/><title>testing login to an smtp server using telnet | Adventures of a code ninja</title><link rel=stylesheet media=all href=/all.css><link rel=stylesheet media=screen href=/screen.css><link rel=stylesheet media=screen href=/app.css></head><body><header><nav><a href=/>adventures of a code ninja</a><ul><li><a href=/posts>blog</a></li></ul><div id=theme-toggle></div></nav></header><main><h1>testing login to an smtp server using telnet</h1><nav id=TableOfContents></nav><br><br><p>So if you are having problems sending emails there is always one sure fire way
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  <meta name="description"
+        content="So if you are having problems sending emails there is always one sure fire way to establish if the problem is your connection or not. This can be done using the telnet application, a command line tool that is included in most operating systems.
+To do this you will need to open the command prompt, on windows you can do this by pressing the windows key and tapping the R button once."
+  />
+  <meta name="keywords"
+        content="software developer, coder, learning to code"
+  />
+
+  <link rel="canonical" href="/posts/testing-login-to-an-smtp-server-using-telnet/" />
+
+  <title>testing login to an smtp server using telnet | Adventures of a code ninja</title>
+
+  <link rel="stylesheet" media="all" href="/all.css"/>
+  <link rel="stylesheet" media="screen" href="/screen.css"/>
+  <link rel="stylesheet" media="screen" href="/app.css"/>
+</head>
+<body><header>
+  <nav>
+    <a href="/">
+      
+        adventures of a code ninja
+      
+    </a>
+    <ul>
+      
+        <li>
+          <a href="/posts">
+            blog
+          </a>
+        </li>
+      
+    </ul>
+    <div id="theme-toggle"></div>
+  </nav>
+</header>
+<main>
+  <h1>testing login to an smtp server using telnet</h1>
+  <nav id="TableOfContents"></nav>
+  <br><br>
+  <p>So if you are having problems sending emails there is always one sure fire way
 to establish if the problem is your connection or not. This can be done using
 the telnet application, a command line tool that is included in most operating
-systems.</p><p>To do this you will need to open the command prompt, on windows you can do this
+systems.</p>
+<p>To do this you will need to open the command prompt, on windows you can do this
 by pressing the windows key and tapping the R button once. The dialog that pops
-up just needs “cmd” input and the OK button pressing.</p><p>The commands should be entered as follows:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ telnet smtp.someserver.com <span style=color:#ae81ff>25</span>
-</code></pre></div><p>This will show the following on screen:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>Trying 212.159.8.107... Connected to smtp.someserver.com. 
-Escape character is <span style=color:#e6db74>&#39;^]&#39;</span>. <span style=color:#ae81ff>220</span> smtp01 smtp smtp.someserver.com
-</code></pre></div><p>To which you should respond by typing:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>ehlo server
+up just needs “cmd” input and the OK button pressing.</p>
+<p>The commands should be entered as follows:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ telnet smtp.someserver.com <span style="color:#ae81ff">25</span>
+</code></pre></div><p>This will show the following on screen:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Trying 212.159.8.107... Connected to smtp.someserver.com. 
+Escape character is <span style="color:#e6db74">&#39;^]&#39;</span>. <span style="color:#ae81ff">220</span> smtp01 smtp smtp.someserver.com
+</code></pre></div><p>To which you should respond by typing:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ehlo server
 </code></pre></div><p>The ehlo command produces a list of capabilities and starts then exchange of
 information between yourself and the SMTP server. Once this has been done you
 need to tell the server you intend to give it a username and password. To tell
-the server this you need to enter the following:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>auth login
-</code></pre></div><p>The server will then respond with</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#ae81ff>334</span> VXNlcm5hbWU6
+the server this you need to enter the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">auth login
+</code></pre></div><p>The server will then respond with</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ae81ff">334</span> VXNlcm5hbWU6
 </code></pre></div><p>This apparently random set of characters is actually a string encoded in base64
 this actually says “username”. So as it is asking the question in base64 we have
 to reply in the same encoding, to do this you will need to convert the username
 into base64. There is a handy website for doing this here:
-<a href=http://www.base64encode.org/>http://www.base64encode.org/</a></p><p>Once you enter the username the server will ask you for the password, again in
+<a href="http://www.base64encode.org/">http://www.base64encode.org/</a></p>
+<p>Once you enter the username the server will ask you for the password, again in
 base64. Once you enter the encoded password you will get confirmation of success
-or failure.</p><p>You can then go on to test sending an email but that is outside the scope of
-this article.</p></main><footer><div>&copy; Lawrence Goldstien</div><a href=/privacy>Privacy</a><div>My opinions are my own</div></footer><div id=tracker></div><script src=/app.js></script></body></html>
+or failure.</p>
+<p>You can then go on to test sending an email but that is outside the scope of
+this article.</p>
+
+
+</main><footer>
+  <div>&copy; Lawrence Goldstien</div>
+  <a href="/privacy">Privacy</a>
+  <div>My opinions are my own</div>
+</footer>
+<div id="tracker"></div>
+<script src="/app.js"></script>
+</body>
+</html>

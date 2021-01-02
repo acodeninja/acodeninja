@@ -1,16 +1,76 @@
-<!doctype html><html class=light lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=description content="objects are frozen,
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  <meta name="description"
+        content=" objects are frozen,
 never to be extended
 or altered again
- class Ninja { constructor() { this.dead = false; Object.freeze(this); } } var shinobi = new Ninja(); shinobi.dead = true; console.log(shinobi); // Ninja { dead: false }"><meta name=keywords content="software developer,coder,learning to code"><link rel=canonical href=/posts/frozen-objects/><title>frozen objects | Adventures of a code ninja</title><link rel=stylesheet media=all href=/all.css><link rel=stylesheet media=screen href=/screen.css><link rel=stylesheet media=screen href=/app.css></head><body><header><nav><a href=/>adventures of a code ninja</a><ul><li><a href=/posts>blog</a></li></ul><div id=theme-toggle></div></nav></header><main><h1>frozen objects</h1><nav id=TableOfContents></nav><br><br><blockquote><p>objects are frozen,</p><p>never to be extended</p><p>or altered again</p></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Ninja</span> {
-  <span style=color:#a6e22e>constructor</span>() {
-    <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>dead</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
-    Object.<span style=color:#a6e22e>freeze</span>(<span style=color:#66d9ef>this</span>);
+ class Ninja { constructor() { this.dead = false; Object.freeze(this); } } var shinobi = new Ninja(); shinobi.dead = true; console.log(shinobi); // Ninja { dead: false } "
+  />
+  <meta name="keywords"
+        content="software developer, coder, learning to code"
+  />
+
+  <link rel="canonical" href="/posts/frozen-objects/" />
+
+  <title>frozen objects | Adventures of a code ninja</title>
+
+  <link rel="stylesheet" media="all" href="/all.css"/>
+  <link rel="stylesheet" media="screen" href="/screen.css"/>
+  <link rel="stylesheet" media="screen" href="/app.css"/>
+</head>
+<body><header>
+  <nav>
+    <a href="/">
+      
+        adventures of a code ninja
+      
+    </a>
+    <ul>
+      
+        <li>
+          <a href="/posts">
+            blog
+          </a>
+        </li>
+      
+    </ul>
+    <div id="theme-toggle"></div>
+  </nav>
+</header>
+<main>
+  <h1>frozen objects</h1>
+  <nav id="TableOfContents"></nav>
+  <br><br>
+  <blockquote>
+<p>objects are frozen,</p>
+<p>never to be extended</p>
+<p>or altered again</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Ninja</span> {
+  <span style="color:#a6e22e">constructor</span>() {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">dead</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+    Object.<span style="color:#a6e22e">freeze</span>(<span style="color:#66d9ef">this</span>);
   }
 }
 
-<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>shinobi</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Ninja</span>();
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">shinobi</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Ninja</span>();
 
-<span style=color:#a6e22e>shinobi</span>.<span style=color:#a6e22e>dead</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+<span style="color:#a6e22e">shinobi</span>.<span style="color:#a6e22e">dead</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
 
-<span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#a6e22e>shinobi</span>); <span style=color:#75715e>// Ninja { dead: false }
-</span></code></pre></div></main><footer><div>&copy; Lawrence Goldstien</div><a href=/privacy>Privacy</a><div>My opinions are my own</div></footer><div id=tracker></div><script src=/app.js></script></body></html>
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">shinobi</span>); <span style="color:#75715e">// Ninja { dead: false }
+</span></code></pre></div>
+
+</main><footer>
+  <div>&copy; Lawrence Goldstien</div>
+  <a href="/privacy">Privacy</a>
+  <div>My opinions are my own</div>
+</footer>
+<div id="tracker"></div>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,57 +1,155 @@
-<!doctype html><html class=light lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=description content="why? Lazy loading components gives a great performance improvement. Larger components can take ages to load and result in an unusable page for a few seconds while the massive app.js file is loaded.
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  <meta name="description"
+        content="why? Lazy loading components gives a great performance improvement. Larger components can take ages to load and result in an unusable page for a few seconds while the massive app.js file is loaded.
 how? You can follow these steps on the tutorial repo .
 1. babel plugins You will need to add both the babel-plugin-dynamic-import-webpack and babel-plugin-syntax-dynamic-import packages to your package.json
-$ npm install --save-dev \  babel-plugin-dynamic-import-webpack \  babel-plugin-syntax-dynamic-import tutorial commit"><meta name=keywords content="software developer,coder,learning to code,lazy loading,frontend,vuejs,laravel,laravel mix"><link rel=canonical href=/posts/laravel-mix-lazy-loading-vue-components/><title>laravel mix - lazy loading Vue components | Adventures of a code ninja</title><link rel=stylesheet media=all href=/all.css><link rel=stylesheet media=screen href=/screen.css><link rel=stylesheet media=screen href=/app.css></head><body><header><nav><a href=/>adventures of a code ninja</a><ul><li><a href=/posts>blog</a></li></ul><div id=theme-toggle></div></nav></header><main><h1>laravel mix - lazy loading Vue components</h1><nav id=TableOfContents><ul><li><a href=#why>why?</a></li><li><a href=#how>how?</a><ul><li><a href=#1-babel-plugins>1. babel plugins</a></li><li><a href=#2-bable-config>2. bable config</a></li><li><a href=#3-webpack-config>3. webpack config</a></li><li><a href=#4-appjs>4. app.js</a></li><li><a href=#5-done>5. done</a></li></ul></li><li><a href=#a-note-on-sub-components>a note on sub-components</a></li></ul></nav><br><br><h2 id=why>why?</h2><p>Lazy loading components gives a great performance improvement. Larger components
-can take ages to load and result in an unusable page for a few seconds while the
-massive app.js file is loaded.</p><h2 id=how>how?</h2><p>You can follow these steps on the
-<a href=https://github.com/acodeninja/laravel-mix-lazy-loading-vue-components target=_blank rel="noreferrer noopener">tutorial repo</a>
-.</p><h3 id=1-babel-plugins>1. babel plugins</h3><p>You will need to add both the babel-plugin-dynamic-import-webpack and
-babel-plugin-syntax-dynamic-import packages to your package.json</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ npm install --save-dev <span style=color:#ae81ff>\ </span>
-    babel-plugin-dynamic-import-webpack <span style=color:#ae81ff>\
-</span><span style=color:#ae81ff></span>    babel-plugin-syntax-dynamic-import
-</code></pre></div><p><strong><a href=https://github.com/acodeninja/laravel-mix-lazy-loading-vue-components/commit/5bb734eb3e802fac9dc66acef52c95288e9d06f0 target=_blank rel="noreferrer noopener">tutorial commit</a></strong></p><h3 id=2-bable-config>2. bable config</h3><p>Create a file in the root of your Laravel application called .babelrc with the
-following contents.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
-    <span style=color:#f92672>&#34;plugins&#34;</span>: [<span style=color:#e6db74>&#34;syntax-dynamic-import&#34;</span>]
-}
-</code></pre></div><p><strong><a href=https://github.com/acodeninja/laravel-mix-lazy-loading-vue-components/commit/74a2fd135c4916dc8515dcc07839b9697b51520c target=_blank rel="noreferrer noopener">tutorial commit</a></strong></p><h3 id=3-webpack-config>3. webpack config</h3><p>Update your webpack.mix.js file to the following:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>mix</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>require</span>(<span style=color:#e6db74>&#39;laravel-mix&#39;</span>);
+$ npm install --save-dev \  babel-plugin-dynamic-import-webpack \  babel-plugin-syntax-dynamic-import tutorial commit"
+  />
+  <meta name="keywords"
+        content="software developer, coder, learning to code, lazy loading, frontend, vuejs, laravel, laravel mix"
+  />
 
-<span style=color:#75715e>// Override mix internal webpack output configuration
-</span><span style=color:#75715e></span><span style=color:#a6e22e>mix</span>.<span style=color:#a6e22e>config</span>.<span style=color:#a6e22e>webpackConfig</span>.<span style=color:#a6e22e>output</span> <span style=color:#f92672>=</span> {
-    <span style=color:#a6e22e>chunkFilename</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;js/[name].bundle.js&#39;</span>,
-    <span style=color:#a6e22e>publicPath</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;/&#39;</span>,
+  <link rel="canonical" href="/posts/laravel-mix-lazy-loading-vue-components/" />
+
+  <title>laravel mix - lazy loading Vue components | Adventures of a code ninja</title>
+
+  <link rel="stylesheet" media="all" href="/all.css"/>
+  <link rel="stylesheet" media="screen" href="/screen.css"/>
+  <link rel="stylesheet" media="screen" href="/app.css"/>
+</head>
+<body><header>
+  <nav>
+    <a href="/">
+      
+        adventures of a code ninja
+      
+    </a>
+    <ul>
+      
+        <li>
+          <a href="/posts">
+            blog
+          </a>
+        </li>
+      
+    </ul>
+    <div id="theme-toggle"></div>
+  </nav>
+</header>
+<main>
+  <h1>laravel mix - lazy loading Vue components</h1>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#why">why?</a></li>
+    <li><a href="#how">how?</a>
+      <ul>
+        <li><a href="#1-babel-plugins">1. babel plugins</a></li>
+        <li><a href="#2-bable-config">2. bable config</a></li>
+        <li><a href="#3-webpack-config">3. webpack config</a></li>
+        <li><a href="#4-appjs">4. app.js</a></li>
+        <li><a href="#5-done">5. done</a></li>
+      </ul>
+    </li>
+    <li><a href="#a-note-on-sub-components">a note on sub-components</a></li>
+  </ul>
+</nav>
+  <br><br>
+  <h2 id="why">why?</h2>
+<p>Lazy loading components gives a great performance improvement. Larger components
+can take ages to load and result in an unusable page for a few seconds while the
+massive app.js file is loaded.</p>
+<h2 id="how">how?</h2>
+<p>You can follow these steps on the
+<a href="https://github.com/acodeninja/laravel-mix-lazy-loading-vue-components" target="_blank" rel="noreferrer noopener">tutorial repo</a>
+.</p>
+<h3 id="1-babel-plugins">1. babel plugins</h3>
+<p>You will need to add both the babel-plugin-dynamic-import-webpack  and
+babel-plugin-syntax-dynamic-import  packages to your package.json</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ npm install --save-dev <span style="color:#ae81ff">\ </span>
+    babel-plugin-dynamic-import-webpack <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    babel-plugin-syntax-dynamic-import
+</code></pre></div><p><strong><a href="https://github.com/acodeninja/laravel-mix-lazy-loading-vue-components/commit/5bb734eb3e802fac9dc66acef52c95288e9d06f0" target="_blank" rel="noreferrer noopener">tutorial commit</a>
+</strong></p>
+<h3 id="2-bable-config">2. bable config</h3>
+<p>Create a file in the root of your Laravel application called .babelrc  with the
+following contents.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;plugins&#34;</span>: [<span style="color:#e6db74">&#34;syntax-dynamic-import&#34;</span>]
+}
+</code></pre></div><p><strong><a href="https://github.com/acodeninja/laravel-mix-lazy-loading-vue-components/commit/74a2fd135c4916dc8515dcc07839b9697b51520c" target="_blank" rel="noreferrer noopener">tutorial commit</a>
+</strong></p>
+<h3 id="3-webpack-config">3. webpack config</h3>
+<p>Update your webpack.mix.js file to the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">mix</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;laravel-mix&#39;</span>);
+
+<span style="color:#75715e">// Override mix internal webpack output configuration
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">mix</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">webpackConfig</span>.<span style="color:#a6e22e">output</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">chunkFilename</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;js/[name].bundle.js&#39;</span>,
+    <span style="color:#a6e22e">publicPath</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/&#39;</span>,
 };
 
-<span style=color:#a6e22e>mix</span>.<span style=color:#a6e22e>js</span>(<span style=color:#e6db74>&#39;resources/assets/js/app.js&#39;</span>, <span style=color:#e6db74>&#39;public/js&#39;</span>)
-   .<span style=color:#a6e22e>sass</span>(<span style=color:#e6db74>&#39;resources/assets/sass/app.scss&#39;</span>, <span style=color:#e6db74>&#39;public/css&#39;</span>)
-   .<span style=color:#a6e22e>version</span>(); 
-</code></pre></div><p><strong><a href=https://github.com/acodeninja/laravel-mix-lazy-loading-vue-components/commit/52116781379d3f829909cc21bd8bd3f8ce1e2676 target=_blank rel="noreferrer noopener">tutorial commit</a></strong></p><h3 id=4-appjs>4. app.js</h3><p>Instead of loading components in the standard way,</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#a6e22e>Vue</span>.<span style=color:#a6e22e>component</span>(
-    <span style=color:#e6db74>&#39;example-component&#39;</span>,
-    <span style=color:#a6e22e>require</span>(<span style=color:#e6db74>&#39;./components/ExampleComponent.vue&#39;</span>) 
+<span style="color:#a6e22e">mix</span>.<span style="color:#a6e22e">js</span>(<span style="color:#e6db74">&#39;resources/assets/js/app.js&#39;</span>, <span style="color:#e6db74">&#39;public/js&#39;</span>)
+   .<span style="color:#a6e22e">sass</span>(<span style="color:#e6db74">&#39;resources/assets/sass/app.scss&#39;</span>, <span style="color:#e6db74">&#39;public/css&#39;</span>)
+   .<span style="color:#a6e22e">version</span>(); 
+</code></pre></div><p><strong><a href="https://github.com/acodeninja/laravel-mix-lazy-loading-vue-components/commit/52116781379d3f829909cc21bd8bd3f8ce1e2676" target="_blank" rel="noreferrer noopener">tutorial commit</a>
+</strong></p>
+<h3 id="4-appjs">4. app.js</h3>
+<p>Instead of loading components in the standard way,</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">component</span>(
+    <span style="color:#e6db74">&#39;example-component&#39;</span>,
+    <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;./components/ExampleComponent.vue&#39;</span>) 
 );
-</code></pre></div><p>We need to use the lazy loading import method.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#a6e22e>Vue</span>.<span style=color:#a6e22e>component</span>(
-    <span style=color:#e6db74>&#39;example-component&#39;</span>, 
-    () =&gt; <span style=color:#66d9ef>import</span>(
-        <span style=color:#75715e>/* webpackChunkName: &#34;example-component&#34; */</span>
-        <span style=color:#e6db74>&#39;./components/ExampleComponent.vue&#39;</span>
+</code></pre></div><p>We need to use the lazy loading import method.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">component</span>(
+    <span style="color:#e6db74">&#39;example-component&#39;</span>, 
+    () =&gt; <span style="color:#66d9ef">import</span>(
+        <span style="color:#75715e">/* webpackChunkName: &#34;example-component&#34; */</span>
+        <span style="color:#e6db74">&#39;./components/ExampleComponent.vue&#39;</span>
     )
 );
-</code></pre></div><p>The <a href=https://github.com/tc39/proposal-dynamic-import target=_blank rel="noreferrer noopener"><code>import()</code></a>
-function will
+</code></pre></div><p>The <a href="https://github.com/tc39/proposal-dynamic-import" target="_blank" rel="noreferrer noopener"><code>import()</code></a>
+ function will
 load the Vue component in dynamically, so it is only loaded by the browser when
-actually used.</p><p><code>/* webpackChunkName: "example-component" */</code> is used to specify the name of
+actually used.</p>
+<p><code>/* webpackChunkName: &quot;example-component&quot; */</code>  is used to specify the name of
 the bundle file webpack generates. In this instance a file called
-<code>example-component.bundle.js</code> is created in the <code>public/js/</code> directory.</p><p><strong><a href=https://github.com/acodeninja/laravel-mix-lazy-loading-vue-components/commit/75b15fcabf9b9a7b84fb8c3f43f358e624a2e194 target=_blank rel="noreferrer noopener">tutorial commit</a></strong></p><h3 id=5-done>5. done</h3><p>Now you have lazy loading components, your application will be a little more
+<code>example-component.bundle.js</code> is created in the <code>public/js/</code> directory.</p>
+<p><strong><a href="https://github.com/acodeninja/laravel-mix-lazy-loading-vue-components/commit/75b15fcabf9b9a7b84fb8c3f43f358e624a2e194" target="_blank" rel="noreferrer noopener">tutorial commit</a>
+</strong></p>
+<h3 id="5-done">5. done</h3>
+<p>Now you have lazy loading components, your application will be a little more
 responsive on first load and when each Vue component initialises, the browser
-will load the component&rsquo;s file chunk.</p><h2 id=a-note-on-sub-components>a note on sub-components</h2><p>Sub-components will be included in the bundle of the parent component they are
-imported into.</p><p>Say we add a new component to <code>ExampleComponent.vue</code></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>ExampleSubComponent</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./ExampleSubComponent.vue&#39;</span>; 
+will load the component&rsquo;s file chunk.</p>
+<h2 id="a-note-on-sub-components">a note on sub-components</h2>
+<p>Sub-components will be included in the bundle of the parent component they are
+imported into.</p>
+<p>Say we add a new component to <code>ExampleComponent.vue</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">ExampleSubComponent</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./ExampleSubComponent.vue&#39;</span>; 
 
-<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> {   
-    <span style=color:#a6e22e>components</span><span style=color:#f92672>:</span> {    
-        <span style=color:#a6e22e>ExampleSubComponent</span>,
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {   
+    <span style="color:#a6e22e">components</span><span style="color:#f92672">:</span> {    
+        <span style="color:#a6e22e">ExampleSubComponent</span>,
     },   
-    <span style=color:#a6e22e>mounted</span>() {
-        <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#e6db74>&#39;Component mounted.&#39;</span>)   
+    <span style="color:#a6e22e">mounted</span>() {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Component mounted.&#39;</span>)   
     } 
 };
 </code></pre></div><p>The <code>ExampleSubComponent</code> will be included in <code>public/js/example-component.bundle.js</code>
-rather than <code>public/js/app.js</code>.</p></main><footer><div>&copy; Lawrence Goldstien</div><a href=/privacy>Privacy</a><div>My opinions are my own</div></footer><div id=tracker></div><script src=/app.js></script></body></html>
+rather than <code>public/js/app.js</code>.</p>
+
+
+</main><footer>
+  <div>&copy; Lawrence Goldstien</div>
+  <a href="/privacy">Privacy</a>
+  <div>My opinions are my own</div>
+</footer>
+<div id="tracker"></div>
+<script src="/app.js"></script>
+</body>
+</html>

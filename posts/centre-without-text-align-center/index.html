@@ -1,22 +1,87 @@
-<!doctype html><html class=light lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=description content="CSS is great for changing things around on a page but knowing the best way to accomplish something when you are just starting out is difficult. So how do you centre block level elements, and what on earth are block level elements anyway? Well for a list of html elements that are block level check out the MDN site here: https://developer.mozilla.org/en-US/docs/HTML/Block-level_elements
-So now we know what they are what is the best way to centre them on a page or within a parent element?"><meta name=keywords content="software developer,coder,learning to code"><link rel=canonical href=/posts/centre-without-text-align-center/><title>centre without text align center | Adventures of a code ninja</title><link rel=stylesheet media=all href=/all.css><link rel=stylesheet media=screen href=/screen.css><link rel=stylesheet media=screen href=/app.css></head><body><header><nav><a href=/>adventures of a code ninja</a><ul><li><a href=/posts>blog</a></li></ul><div id=theme-toggle></div></nav></header><main><h1>centre without text align center</h1><nav id=TableOfContents><ul><li><a href=#sidebar>Sidebar</a></li></ul></nav><br><br><p>CSS is great for changing things around on a page but knowing the best way to
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  <meta name="description"
+        content="CSS is great for changing things around on a page but knowing the best way to accomplish something when you are just starting out is difficult. So how do you centre block level elements, and what on earth are block level elements anyway? Well for a list of html elements that are block level check out the MDN site here: https://developer.mozilla.org/en-US/docs/HTML/Block-level_elements
+So now we know what they are what is the best way to centre them on a page or within a parent element?"
+  />
+  <meta name="keywords"
+        content="software developer, coder, learning to code"
+  />
+
+  <link rel="canonical" href="/posts/centre-without-text-align-center/" />
+
+  <title>centre without text align center | Adventures of a code ninja</title>
+
+  <link rel="stylesheet" media="all" href="/all.css"/>
+  <link rel="stylesheet" media="screen" href="/screen.css"/>
+  <link rel="stylesheet" media="screen" href="/app.css"/>
+</head>
+<body><header>
+  <nav>
+    <a href="/">
+      
+        adventures of a code ninja
+      
+    </a>
+    <ul>
+      
+        <li>
+          <a href="/posts">
+            blog
+          </a>
+        </li>
+      
+    </ul>
+    <div id="theme-toggle"></div>
+  </nav>
+</header>
+<main>
+  <h1>centre without text align center</h1>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#sidebar">Sidebar</a></li>
+  </ul>
+</nav>
+  <br><br>
+  <p>CSS is great for changing things around on a page but knowing the best way to
 accomplish something when you are just starting out is difficult. So how do you
 centre block level elements, and what on earth are block level elements anyway?
 Well for a list of html elements that are block level check out the MDN site
-here: <a href=https://developer.mozilla.org/en-US/docs/HTML/Block-level_elements>https://developer.mozilla.org/en-US/docs/HTML/Block-level_elements</a></p><p>So now we know what they are what is the best way to centre them on a page or
+here: <a href="https://developer.mozilla.org/en-US/docs/HTML/Block-level_elements">https://developer.mozilla.org/en-US/docs/HTML/Block-level_elements</a></p>
+<p>So now we know what they are what is the best way to centre them on a page or
 within a parent element? Well you might think to try and use the text-align
 style, or you might not, I don’t know. But the way you should do it is like
-this:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html>&lt;<span style=color:#f92672>body</span>&gt;
-  &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>class</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;centre&#34;</span>&gt;&lt;/<span style=color:#f92672>div</span>&gt;
-&lt;/<span style=color:#f92672>body</span>&gt;
-</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-css data-lang=css>.<span style=color:#a6e22e>centre</span> { 
-  <span style=color:#66d9ef>width</span>: <span style=color:#ae81ff>400</span><span style=color:#66d9ef>px</span>; 
-  <span style=color:#66d9ef>margin</span>: <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>auto</span>;
+this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">body</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;centre&#34;</span>&gt;&lt;/<span style="color:#f92672">div</span>&gt;
+&lt;/<span style="color:#f92672">body</span>&gt;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#a6e22e">centre</span> { 
+  <span style="color:#66d9ef">width</span>: <span style="color:#ae81ff">400</span><span style="color:#66d9ef">px</span>; 
+  <span style="color:#66d9ef">margin</span>: <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">auto</span>;
 }
-</code></pre></div><p>We are using a <code>&lt;div></code> here as it is a very common block level element. Applying
-the class of centre to the <code>&lt;div></code> so that we have granular control over the
+</code></pre></div><p>We are using a <code>&lt;div&gt;</code>  here as it is a very common block level element. Applying
+the class of centre to the <code>&lt;div&gt;</code>  so that we have granular control over the
 centring of elements. You might even want to create a separate class to define
-the width of your element to offer even more control.</p><p>This technique will centre block level elements no matter what size the viewport
-and is recommended when you want to get something centred.</p><h2 id=sidebar>Sidebar</h2><p>If you want to centre inline elements (as listed on this page:
-<a href=https://developer.mozilla.org/en-US/docs/HTML/Inline_elements>https://developer.mozilla.org/en-US/docs/HTML/Inline_elements</a>) then you can and
-should apply the style <code>text-align: center;</code> to the element.</p></main><footer><div>&copy; Lawrence Goldstien</div><a href=/privacy>Privacy</a><div>My opinions are my own</div></footer><div id=tracker></div><script src=/app.js></script></body></html>
+the width of your element to offer even more control.</p>
+<p>This technique will centre block level elements no matter what size the viewport
+and is recommended when you want to get something centred.</p>
+<h2 id="sidebar">Sidebar</h2>
+<p>If you want to centre inline elements (as listed on this page:
+<a href="https://developer.mozilla.org/en-US/docs/HTML/Inline_elements">https://developer.mozilla.org/en-US/docs/HTML/Inline_elements</a>) then you can and
+should apply the style <code>text-align: center;</code>  to the element.</p>
+
+
+</main><footer>
+  <div>&copy; Lawrence Goldstien</div>
+  <a href="/privacy">Privacy</a>
+  <div>My opinions are my own</div>
+</footer>
+<div id="tracker"></div>
+<script src="/app.js"></script>
+</body>
+</html>

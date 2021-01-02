@@ -1,18 +1,358 @@
-<!doctype html><html class=light lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=description content><meta name=keywords content="software developer,coder,learning to code"><link rel=canonical href=/posts/><title>Posts | Adventures of a code ninja</title><link rel=stylesheet media=all href=/all.css><link rel=stylesheet media=screen href=/screen.css><link rel=stylesheet media=screen href=/app.css></head><body><header><nav><a href=/>adventures of a code ninja</a><ul><li><a href=/posts>blog</a></li></ul><div id=theme-toggle></div></nav></header><main><div class=list><div class=post><h2 class=title><a href=/posts/object.create-applying-prototypes/>object.create, applying prototypes</a></h2><div class=post-meta><span class=post-date>2016-06-07</span></div><p class=summary>prototyping chaining,
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  <meta name="description"
+        content=""
+  />
+  <meta name="keywords"
+        content="software developer, coder, learning to code"
+  />
+
+  <link rel="canonical" href="/posts/" />
+
+  <title>Posts | Adventures of a code ninja</title>
+
+  <link rel="stylesheet" media="all" href="/all.css"/>
+  <link rel="stylesheet" media="screen" href="/screen.css"/>
+  <link rel="stylesheet" media="screen" href="/app.css"/>
+</head>
+<body><header>
+  <nav>
+    <a href="/">
+      
+        adventures of a code ninja
+      
+    </a>
+    <ul>
+      
+        <li>
+          <a href="/posts">
+            blog
+          </a>
+        </li>
+      
+    </ul>
+    <div id="theme-toggle"></div>
+  </nav>
+</header>
+<main>
+    
+    
+
+    
+    
+    
+
+    
+
+    <div class="list">
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/object.create-applying-prototypes/">object.create, applying prototypes</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2016-06-07
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              prototyping chaining,
 object extension for all the
 modern programmers
-var Ninja = function () {}; Ninja.prototype.throw = function (item) { console.log('Throwing ' + item); }; var Shinobi = function () {}; Shinobi.prototype = Object.create(Ninja.prototype); var shinobi = new Shinobi; shinobi.throw('knife'); // Throwing knife</p><span>1 min read</span><div><a class=read href=/posts/object.create-applying-prototypes/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/frozen-objects/>frozen objects</a></h2><div class=post-meta><span class=post-date>2016-06-03</span></div><p class=summary>objects are frozen,
+var Ninja = function () {}; Ninja.prototype.throw = function (item) { console.log('Throwing ' + item); }; var Shinobi = function () {}; Shinobi.prototype = Object.create(Ninja.prototype); var shinobi = new Shinobi; shinobi.throw('knife'); // Throwing knife
+            
+          </p>
+          
+            <span>1 min read</span>
+          
+          
+            <div><a class="read" href="/posts/object.create-applying-prototypes/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/frozen-objects/">frozen objects</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2016-06-03
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              objects are frozen,
 never to be extended
 or altered again
-class Ninja { constructor() { this.dead = false; Object.freeze(this); } } var shinobi = new Ninja(); shinobi.dead = true; console.log(shinobi); // Ninja { dead: false }</p><span>1 min read</span><div><a class=read href=/posts/frozen-objects/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/information-hiding/>information hiding</a></h2><div class=post-meta><span class=post-date>2016-06-02</span></div><p class=summary>object oriented
+class Ninja { constructor() { this.dead = false; Object.freeze(this); } } var shinobi = new Ninja(); shinobi.dead = true; console.log(shinobi); // Ninja { dead: false }
+            
+          </p>
+          
+            <span>1 min read</span>
+          
+          
+            <div><a class="read" href="/posts/frozen-objects/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/information-hiding/">information hiding</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2016-06-02
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              object oriented
 information hiding done.
 closures: private methods
-class Person { constructor(name, dob) { var dob = dob; this.name = name; this.getBirthyear = () => new Date(dob).getFullYear(); } } var person = new Person('thejsninja', '1985-12-04'); console.log(person.getBirthyear()); // 1985</p><span>1 min read</span><div><a class=read href=/posts/information-hiding/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/javascript-still-a-thing/>javascript, still a thing?</a></h2><div class=post-meta><span class=post-date>2016-06-01</span></div><p class=summary>Javascript is a great, and expressive language. You can be as succinct or vague as you like, you can scratch the surface or leverage a really powerful event loop.
+class Person { constructor(name, dob) { var dob = dob; this.name = name; this.getBirthyear = () =&gt; new Date(dob).getFullYear(); } } var person = new Person('thejsninja', '1985-12-04'); console.log(person.getBirthyear()); // 1985
+            
+          </p>
+          
+            <span>1 min read</span>
+          
+          
+            <div><a class="read" href="/posts/information-hiding/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/javascript-still-a-thing/">javascript, still a thing?</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2016-06-01
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              Javascript is a great, and expressive language. You can be as succinct or vague as you like, you can scratch the surface or leverage a really powerful event loop.
 alert('Annoying popup'); Lots of people just think of the annoying browser popup, but you can deeper than that.
 Classes can be defined, albeit through some syntax sugar over the top of javascript’s prototype inheritance.
-'use strict'; class Person { constructor(firstname, lastname) { this.</p><span>1 min read</span><div><a class=read href=/posts/javascript-still-a-thing/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/what-i-am-listening-to-june-2013/>what i am listening to june 2013</a></h2><div class=post-meta><span class=post-date>2013-06-01</span></div><p class=summary>I think these posts might turn into a series! I was searching through soundcloud the other day and came across TheBluesMobile.com a blues show on soundcloud. The interview and bio/history of Hot Tuna brought me in, but then on came The California Honeydrops a blues / gospel / new orleans jazz band. I am now hooked and as soon as pay day comes around will be buying their new album Like you mean it.</p><span>1 min read</span><div><a class=read href=/posts/what-i-am-listening-to-june-2013/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/get-a-stream-of-tweets/>get a stream of tweets</a></h2><div class=post-meta><span class=post-date>2013-05-21</span></div><p class=summary>The first part of the course I have been taking on data science deals with analysis of Twitter data. This is aimed at discerning the overall sentiment of a Tweet or collection of tweets.
-To get this going the first thing you need is a big collection of tweets in a format that is easy for a program to digest. Step in JSON, a text based output that represents data in a collection of arrays.</p><span>2 min read</span><div><a class=read href=/posts/get-a-stream-of-tweets/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/what-i-am-listening-to-may-2013/>what i am listening to: may 2013</a></h2><div class=post-meta><span class=post-date>2013-05-19</span></div><p class=summary>It has been a while since I last put anything up here so I thought just sticking up a post with my latest listening experience might be the way to go. A while ago Wil Wheaton stuck a Zoe Keating track on This is my Jam called Tetrishead, fell in love with it while walking around the downs in Bristol (UK).
-So today while at my day job I am listening to Zoe Keating’s Album “Into the Trees”.</p><span>1 min read</span><div><a class=read href=/posts/what-i-am-listening-to-may-2013/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/centre-without-text-align-center/>centre without text align center</a></h2><div class=post-meta><span class=post-date>2013-02-27</span></div><p class=summary>CSS is great for changing things around on a page but knowing the best way to accomplish something when you are just starting out is difficult. So how do you centre block level elements, and what on earth are block level elements anyway? Well for a list of html elements that are block level check out the MDN site here: <a href=https://developer.mozilla.org/en-US/docs/HTML/Block-level_elements>https://developer.mozilla.org/en-US/docs/HTML/Block-level_elements</a>
-So now we know what they are what is the best way to centre them on a page or within a parent element?</p><span>2 min read</span><div><a class=read href=/posts/centre-without-text-align-center/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/testing-login-to-an-smtp-server-using-telnet/>testing login to an smtp server using telnet</a></h2><div class=post-meta><span class=post-date>2013-02-26</span></div><p class=summary>So if you are having problems sending emails there is always one sure fire way to establish if the problem is your connection or not. This can be done using the telnet application, a command line tool that is included in most operating systems.
-To do this you will need to open the command prompt, on windows you can do this by pressing the windows key and tapping the R button once.</p><span>2 min read</span><div><a class=read href=/posts/testing-login-to-an-smtp-server-using-telnet/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/the-c-in-css/>the c in css</a></h2><div class=post-meta><span class=post-date>2013-02-26</span></div><p class=summary>CSS is a very powerful tool for web designers and developers, as with all great tools you need to know how to use it effectively to get things right. This article covers some fundamentals about the Cascading part of CSS to give you a better handle on how your CSS affects the HTML content of sites you work on.
-Cascade based on style location So, what does it mean by Cascade?</p><span>2 min read</span><div><a class=read href=/posts/the-c-in-css/>Read more →</a></div></div></div><ul class=pagination><li class=page-item><a href=/posts/ class=page-link aria-label=First><span aria-hidden=true>&#171;&#171;</span></a></li><li class=page-item><a href=/posts/ class=page-link aria-label=Previous><span aria-hidden=true>&#171;</span></a></li><li class=page-item><a class=page-link href=/posts/>1</a></li><li class="page-item active"><a class=page-link href=/posts/page/2/>2</a></li><li class=page-item><a class=page-link href=/posts/page/3/>3</a></li><li class=page-item><a href=/posts/page/3/ class=page-link aria-label=Next><span aria-hidden=true>&#187;</span></a></li><li class=page-item><a href=/posts/page/3/ class=page-link aria-label=Last><span aria-hidden=true>&#187;&#187;</span></a></li></ul></main><footer><div>&copy; Lawrence Goldstien</div><a href=/privacy>Privacy</a><div>My opinions are my own</div></footer><div id=tracker></div><script src=/app.js></script></body></html>
+'use strict'; class Person { constructor(firstname, lastname) { this.
+            
+          </p>
+          
+            <span>1 min read</span>
+          
+          
+            <div><a class="read" href="/posts/javascript-still-a-thing/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/what-i-am-listening-to-june-2013/">what i am listening to june 2013</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2013-06-01
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              I think these posts might turn into a series! I was searching through soundcloud the other day and came across TheBluesMobile.com a blues show on soundcloud. The interview and bio/history of Hot Tuna brought me in, but then on came The California Honeydrops a blues / gospel / new orleans jazz band. I am now hooked and as soon as pay day comes around will be buying their new album Like you mean it.
+            
+          </p>
+          
+            <span>1 min read</span>
+          
+          
+            <div><a class="read" href="/posts/what-i-am-listening-to-june-2013/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/get-a-stream-of-tweets/">get a stream of tweets</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2013-05-21
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              The first part of the course I have been taking on data science deals with analysis of Twitter data. This is aimed at discerning the overall sentiment of a Tweet or collection of tweets.
+To get this going the first thing you need is a big collection of tweets in a format that is easy for a program to digest. Step in JSON, a text based output that represents data in a collection of arrays.
+            
+          </p>
+          
+            <span>2 min read</span>
+          
+          
+            <div><a class="read" href="/posts/get-a-stream-of-tweets/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/what-i-am-listening-to-may-2013/">what i am listening to: may 2013</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2013-05-19
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              It has been a while since I last put anything up here so I thought just sticking up a post with my latest listening experience might be the way to go. A while ago Wil Wheaton stuck a Zoe Keating track on This is my Jam called Tetrishead, fell in love with it while walking around the downs in Bristol (UK).
+So today while at my day job I am listening to Zoe Keating’s Album “Into the Trees”.
+            
+          </p>
+          
+            <span>1 min read</span>
+          
+          
+            <div><a class="read" href="/posts/what-i-am-listening-to-may-2013/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/centre-without-text-align-center/">centre without text align center</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2013-02-27
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              CSS is great for changing things around on a page but knowing the best way to accomplish something when you are just starting out is difficult. So how do you centre block level elements, and what on earth are block level elements anyway? Well for a list of html elements that are block level check out the MDN site here: <a href="https://developer.mozilla.org/en-US/docs/HTML/Block-level_elements">https://developer.mozilla.org/en-US/docs/HTML/Block-level_elements</a>
+So now we know what they are what is the best way to centre them on a page or within a parent element?
+            
+          </p>
+          
+            <span>2 min read</span>
+          
+          
+            <div><a class="read" href="/posts/centre-without-text-align-center/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/testing-login-to-an-smtp-server-using-telnet/">testing login to an smtp server using telnet</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2013-02-26
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              So if you are having problems sending emails there is always one sure fire way to establish if the problem is your connection or not. This can be done using the telnet application, a command line tool that is included in most operating systems.
+To do this you will need to open the command prompt, on windows you can do this by pressing the windows key and tapping the R button once.
+            
+          </p>
+          
+            <span>2 min read</span>
+          
+          
+            <div><a class="read" href="/posts/testing-login-to-an-smtp-server-using-telnet/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/the-c-in-css/">the c in css</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2013-02-26
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              CSS is a very powerful tool for web designers and developers, as with all great tools you need to know how to use it effectively to get things right. This article covers some fundamentals about the Cascading part of CSS to give you a better handle on how your CSS affects the HTML content of sites you work on.
+Cascade based on style location So, what does it mean by Cascade?
+            
+          </p>
+          
+            <span>2 min read</span>
+          
+          
+            <div><a class="read" href="/posts/the-c-in-css/">Read more →</a></div>
+          
+        </div>
+      
+    </div>
+
+    
+<ul class="pagination">
+  <li class="page-item">
+    <a href="/posts/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+  </li>
+  <li class="page-item">
+    <a href="/posts/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/posts/">1</a>
+  </li>
+  <li class="page-item active">
+    <a class="page-link" href="/posts/page/2/">2</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/posts/page/3/">3</a>
+  </li>
+  <li class="page-item">
+    <a href="/posts/page/3/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+  </li>
+  <li class="page-item">
+    <a href="/posts/page/3/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+  </li>
+</ul>
+
+
+
+</main><footer>
+  <div>&copy; Lawrence Goldstien</div>
+  <a href="/privacy">Privacy</a>
+  <div>My opinions are my own</div>
+</footer>
+<div id="tracker"></div>
+<script src="/app.js"></script>
+</body>
+</html>

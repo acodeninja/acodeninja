@@ -1,7 +1,197 @@
-<!doctype html><html class=light lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=description content><meta name=keywords content="software developer,coder,learning to code"><link rel=canonical href=/posts/><title>Posts | Adventures of a code ninja</title><link rel=stylesheet media=all href=/all.css><link rel=stylesheet media=screen href=/screen.css><link rel=stylesheet media=screen href=/app.css></head><body><header><nav><a href=/>adventures of a code ninja</a><ul><li><a href=/posts>blog</a></li></ul><div id=theme-toggle></div></nav></header><main><div class=list><div class=post><h2 class=title><a href=/posts/nginx-ssl-only-configuration/>nginx ssl only configuration</a></h2><div class=post-meta><span class=post-date>2013-01-08</span></div><p class=summary>Configuring Nginx with SSL can be a bit of a nightmare to do properly. Here is a handy config file I use as a starting base for it.
-#HTTP Redirect server { # Set up the port listener listen 80; listen [IPV6]:80 default ipv6only=on; # Set the hostname to be served server_name SITE www.SITE; # Set up access and error logs accesslog /var/www/SITE/logs/nginx.access.log; errorlog /var/www/SITE/logs/nginx.error.log; # Redirect all requests on http to https location / { rewrite ^ https://$servername$requesturi?</p><span>2 min read</span><div><a class=read href=/posts/nginx-ssl-only-configuration/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/msd-fail/>msd fail</a></h2><div class=post-meta><span class=post-date>2012-10-19</span></div><p class=summary>When security fails it’s all good to point and laugh but sometimes it really isn’t funny.
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  <meta name="description"
+        content=""
+  />
+  <meta name="keywords"
+        content="software developer, coder, learning to code"
+  />
+
+  <link rel="canonical" href="/posts/" />
+
+  <title>Posts | Adventures of a code ninja</title>
+
+  <link rel="stylesheet" media="all" href="/all.css"/>
+  <link rel="stylesheet" media="screen" href="/screen.css"/>
+  <link rel="stylesheet" media="screen" href="/app.css"/>
+</head>
+<body><header>
+  <nav>
+    <a href="/">
+      
+        adventures of a code ninja
+      
+    </a>
+    <ul>
+      
+        <li>
+          <a href="/posts">
+            blog
+          </a>
+        </li>
+      
+    </ul>
+    <div id="theme-toggle"></div>
+  </nav>
+</header>
+<main>
+    
+    
+
+    
+    
+    
+
+    
+
+    <div class="list">
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/nginx-ssl-only-configuration/">nginx ssl only configuration</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2013-01-08
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              Configuring Nginx with SSL can be a bit of a nightmare to do properly. Here is a handy config file I use as a starting base for it.
+#HTTP Redirect server { # Set up the port listener  listen 80; listen [IPV6]:80 default ipv6only=on; # Set the hostname to be served  server_name SITE www.SITE; # Set up access and error logs  accesslog /var/www/SITE/logs/nginx.access.log; errorlog /var/www/SITE/logs/nginx.error.log; # Redirect all requests on http to https  location / { rewrite ^ https://$servername$requesturi?
+            
+          </p>
+          
+            <span>2 min read</span>
+          
+          
+            <div><a class="read" href="/posts/nginx-ssl-only-configuration/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/msd-fail/">msd fail</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2012-10-19
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              When security fails it’s all good to point and laugh but sometimes it really isn’t funny.
 The MSD (Ministry of Social Development) in New Zealand set up a kiosk system to assist with job seeking at local centres around the country. Unfortunately they didn’t heed the security report produced by Dimension Data and left open a gaping hole into their enterprise network.
-This hole was accessible by one of the oldest tricks in the book, Microsoft Word’s File > Open > Browse Network.</p><span>1 min read</span><div><a class=read href=/posts/msd-fail/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/nginx-install-on-debian/>nginx install on debian</a></h2><div class=post-meta><span class=post-date>2012-09-26</span></div><p class=summary>It took ages to try, and find a guide that actually helps with installing Nginx on a Debian system. Most either involve compiling from source or are incomplete to the point of leaving you with a useless system.
+This hole was accessible by one of the oldest tricks in the book, Microsoft Word’s File &gt; Open &gt; Browse Network.
+            
+          </p>
+          
+            <span>1 min read</span>
+          
+          
+            <div><a class="read" href="/posts/msd-fail/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/nginx-install-on-debian/">nginx install on debian</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2012-09-26
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              It took ages to try, and find a guide that actually helps with installing Nginx on a Debian system. Most either involve compiling from source or are incomplete to the point of leaving you with a useless system.
 So there are a number of steps to take to get Nginx up and running on a Debian system, and I will cover my way here.
-Step 1 – sources.list First step is to get the sources for Nginx and php5-fpm into your apt source list.</p><span>3 min read</span><div><a class=read href=/posts/nginx-install-on-debian/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/nginx-config-files/>nginx config files</a></h2><div class=post-meta><span class=post-date>2012-09-12</span></div><p class=summary>Ever since moving to Nginx I have had the self-satisfied smile of someone who knows his web applications are going to be snappy. That’s not just down to good coding, but down to the quality of the server software employed.
-One problem that I came across with Nginx was implementing features found in the .htaccess files you would usually use to set per site and directory settings within PHP and Apache.</p><span>2 min read</span><div><a class=read href=/posts/nginx-config-files/>Read more →</a></div></div></div><ul class=pagination><li class=page-item><a href=/posts/ class=page-link aria-label=First><span aria-hidden=true>&#171;&#171;</span></a></li><li class=page-item><a href=/posts/page/2/ class=page-link aria-label=Previous><span aria-hidden=true>&#171;</span></a></li><li class=page-item><a class=page-link href=/posts/>1</a></li><li class=page-item><a class=page-link href=/posts/page/2/>2</a></li><li class="page-item active"><a class=page-link href=/posts/page/3/>3</a></li><li class="page-item disabled"><a class=page-link aria-label=Next><span aria-hidden=true>&#187;</span></a></li><li class=page-item><a href=/posts/page/3/ class=page-link aria-label=Last><span aria-hidden=true>&#187;&#187;</span></a></li></ul></main><footer><div>&copy; Lawrence Goldstien</div><a href=/privacy>Privacy</a><div>My opinions are my own</div></footer><div id=tracker></div><script src=/app.js></script></body></html>
+Step 1 – sources.list First step is to get the sources for Nginx and php5-fpm into your apt source list.
+            
+          </p>
+          
+            <span>3 min read</span>
+          
+          
+            <div><a class="read" href="/posts/nginx-install-on-debian/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/nginx-config-files/">nginx config files</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2012-09-12
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              Ever since moving to Nginx I have had the self-satisfied smile of someone who knows his web applications are going to be snappy. That’s not just down to good coding, but down to the quality of the server software employed.
+One problem that I came across with Nginx was implementing features found in the .htaccess files you would usually use to set per site and directory settings within PHP and Apache.
+            
+          </p>
+          
+            <span>2 min read</span>
+          
+          
+            <div><a class="read" href="/posts/nginx-config-files/">Read more →</a></div>
+          
+        </div>
+      
+    </div>
+
+    
+<ul class="pagination">
+  <li class="page-item">
+    <a href="/posts/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+  </li>
+  <li class="page-item">
+    <a href="/posts/page/2/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/posts/">1</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/posts/page/2/">2</a>
+  </li>
+  <li class="page-item active">
+    <a class="page-link" href="/posts/page/3/">3</a>
+  </li>
+  <li class="page-item disabled">
+    <a  class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+  </li>
+  <li class="page-item">
+    <a href="/posts/page/3/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+  </li>
+</ul>
+
+
+
+</main><footer>
+  <div>&copy; Lawrence Goldstien</div>
+  <a href="/privacy">Privacy</a>
+  <div>My opinions are my own</div>
+</footer>
+<div id="tracker"></div>
+<script src="/app.js"></script>
+</body>
+</html>

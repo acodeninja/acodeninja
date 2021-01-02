@@ -1,44 +1,112 @@
-<!doctype html><html class=light lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=description content="laravel pwned passwords validator This small guide expects you to have my pwned passwords validator for laravel 5.6. It&amp;rsquo;s painless to install and set up:
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  <meta name="description"
+        content="laravel pwned passwords validator This small guide expects you to have my pwned passwords validator for laravel 5.6. It&amp;rsquo;s painless to install and set up:
 $ composer require acodeninja/laravel-pwned-passwords-validator Once installed, Laravel&amp;rsquo;s package discovery will take care of loading the package for use in your application. Read more about using the validator .
-checking passwords and warning users on login To check if a password is secure each time a user logs in you can use the validator."><meta name=keywords content="software developer,coder,learning to code,laravel,user-friendly,security,password security"><link rel=canonical href=/posts/warning-users-about-insecure-passwords/><title>warning users about insecure passwords | Adventures of a code ninja</title><link rel=stylesheet media=all href=/all.css><link rel=stylesheet media=screen href=/screen.css><link rel=stylesheet media=screen href=/app.css></head><body><header><nav><a href=/>adventures of a code ninja</a><ul><li><a href=/posts>blog</a></li></ul><div id=theme-toggle></div></nav></header><main><h1>warning users about insecure passwords</h1><nav id=TableOfContents><ul><li><a href=#laravel-pwned-passwords-validator>laravel pwned passwords validator</a></li><li><a href=#checking-passwords-and-warning-users-on-login>checking passwords and warning users on login</a></li></ul></nav><br><br><h2 id=laravel-pwned-passwords-validator>laravel pwned passwords validator</h2><p>This small guide expects you to have my pwned passwords validator for laravel
-5.6. It&rsquo;s painless to install and set up:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ composer require acodeninja/laravel-pwned-passwords-validator
+checking passwords and warning users on login To check if a password is secure each time a user logs in you can use the validator."
+  />
+  <meta name="keywords"
+        content="software developer, coder, learning to code, laravel, user-friendly, security, password security"
+  />
+
+  <link rel="canonical" href="/posts/warning-users-about-insecure-passwords/" />
+
+  <title>warning users about insecure passwords | Adventures of a code ninja</title>
+
+  <link rel="stylesheet" media="all" href="/all.css"/>
+  <link rel="stylesheet" media="screen" href="/screen.css"/>
+  <link rel="stylesheet" media="screen" href="/app.css"/>
+</head>
+<body><header>
+  <nav>
+    <a href="/">
+      
+        adventures of a code ninja
+      
+    </a>
+    <ul>
+      
+        <li>
+          <a href="/posts">
+            blog
+          </a>
+        </li>
+      
+    </ul>
+    <div id="theme-toggle"></div>
+  </nav>
+</header>
+<main>
+  <h1>warning users about insecure passwords</h1>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#laravel-pwned-passwords-validator">laravel pwned passwords validator</a></li>
+    <li><a href="#checking-passwords-and-warning-users-on-login">checking passwords and warning users on login</a></li>
+  </ul>
+</nav>
+  <br><br>
+  <h2 id="laravel-pwned-passwords-validator">laravel pwned passwords validator</h2>
+<p>This small guide expects you to have my pwned passwords validator for laravel
+5.6. It&rsquo;s painless to install and set up:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ composer require acodeninja/laravel-pwned-passwords-validator
 </code></pre></div><p>Once installed, Laravel&rsquo;s package discovery will take care of loading the
 package for use in your application. Read more about using the
-<a href=/posts/2018-03-15-laravel-pwned-passwords-validator/>validator</a>
-.</p><h2 id=checking-passwords-and-warning-users-on-login>checking passwords and warning users on login</h2><p>To check if a password is secure each time a user logs in you can use the
+<a href="/posts/2018-03-15-laravel-pwned-passwords-validator/">validator</a>
+.</p>
+<h2 id="checking-passwords-and-warning-users-on-login">checking passwords and warning users on login</h2>
+<p>To check if a password is secure each time a user logs in you can use the
 validator. To do this, you use the validator and redirect with errors if the
-login password fails to pass.</p><p>Simply put, add the following to your application&rsquo;s login controller, in a
-default application this is at <code>app/Http/Controllers/Auth/LoginController.php</code>.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#e6db74>/**
-</span><span style=color:#e6db74> * @param Request $request
-</span><span style=color:#e6db74> * @param User $user
-</span><span style=color:#e6db74> * @return $this|\Illuminate\Http\RedirectResponse
-</span><span style=color:#e6db74> */</span>
-<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>authenticated</span>(<span style=color:#a6e22e>Request</span> $request, <span style=color:#a6e22e>User</span> $user)
+login password fails to pass.</p>
+<p>Simply put, add the following to your application&rsquo;s login controller, in a
+default application this is at <code>app/Http/Controllers/Auth/LoginController.php</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * @param Request $request
+</span><span style="color:#e6db74"> * @param User $user
+</span><span style="color:#e6db74"> * @return $this|\Illuminate\Http\RedirectResponse
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">authenticated</span>(<span style="color:#a6e22e">Request</span> $request, <span style="color:#a6e22e">User</span> $user)
 {
-    $validator <span style=color:#f92672>=</span> <span style=color:#a6e22e>Validator</span><span style=color:#f92672>::</span><span style=color:#a6e22e>make</span>($request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>all</span>(), [
-        <span style=color:#e6db74>&#39;password&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;required|pwned_password_strict&#39;</span>,
+    $validator <span style="color:#f92672">=</span> <span style="color:#a6e22e">Validator</span><span style="color:#f92672">::</span><span style="color:#a6e22e">make</span>($request<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">all</span>(), [
+        <span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|pwned_password_strict&#39;</span>,
     ]);
 
-    $redirect <span style=color:#f92672>=</span> <span style=color:#a6e22e>redirect</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>intended</span>($this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>redirectPath</span>());
+    $redirect <span style="color:#f92672">=</span> <span style="color:#a6e22e">redirect</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">intended</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">redirectPath</span>());
 
-    <span style=color:#66d9ef>return</span> $validator<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>fails</span>() <span style=color:#f92672>?</span>
-    	$redirect<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>withErrors</span>($validator<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>errors</span>()) <span style=color:#f92672>:</span>
-    	<span style=color:#66d9ef>null</span>;
+    <span style="color:#66d9ef">return</span> $validator<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">fails</span>() <span style="color:#f92672">?</span>
+    	$redirect<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">withErrors</span>($validator<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">errors</span>()) <span style="color:#f92672">:</span>
+    	<span style="color:#66d9ef">null</span>;
 }
 </code></pre></div><p>You can then display the errors as normal on the page your application redirects
-to, normally this would be <code>resources/views/home.blade.php</code>.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>@</span><span style=color:#66d9ef>if</span> ($errors<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>any</span>())
-    <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>div</span> <span style=color:#a6e22e>class</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;alert alert-danger&#34;</span><span style=color:#f92672>&gt;</span>         
-        <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>ul</span><span style=color:#f92672>&gt;</span>
-        <span style=color:#f92672>@</span><span style=color:#66d9ef>foreach</span> ($errors<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>all</span>() <span style=color:#66d9ef>as</span> $error)
-            <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>li</span><span style=color:#f92672>&gt;</span>{{ $error }}<span style=color:#f92672>&lt;/</span><span style=color:#a6e22e>li</span><span style=color:#f92672>&gt;</span>
-        <span style=color:#f92672>@</span><span style=color:#66d9ef>endforeach</span>
-        <span style=color:#f92672>&lt;/</span><span style=color:#a6e22e>ul</span><span style=color:#f92672>&gt;</span>
-    <span style=color:#f92672>&lt;/</span><span style=color:#a6e22e>div</span><span style=color:#f92672>&gt;</span>
-<span style=color:#f92672>@</span><span style=color:#66d9ef>endif</span>
+to, normally this would be <code>resources/views/home.blade.php</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">@</span><span style="color:#66d9ef">if</span> ($errors<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">any</span>())
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;alert alert-danger&#34;</span><span style="color:#f92672">&gt;</span>         
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ul</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">@</span><span style="color:#66d9ef">foreach</span> ($errors<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">all</span>() <span style="color:#66d9ef">as</span> $error)
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span><span style="color:#f92672">&gt;</span>{{ $error }}<span style="color:#f92672">&lt;/</span><span style="color:#a6e22e">li</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">@</span><span style="color:#66d9ef">endforeach</span>
+        <span style="color:#f92672">&lt;/</span><span style="color:#a6e22e">ul</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;/</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">@</span><span style="color:#66d9ef">endif</span>
 </code></pre></div><p>Or you can make it look a little nicer and display it above other messages with
-something like the following.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>@</span><span style=color:#66d9ef>if</span> ($errors<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>has</span>(<span style=color:#e6db74>&#39;password&#39;</span>))     
-    <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>div</span> <span style=color:#a6e22e>class</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;alert alert-danger&#34;</span><span style=color:#f92672>&gt;</span>         
-        {{ $errors<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>first</span>(<span style=color:#e6db74>&#39;password&#39;</span>) }}    
-    <span style=color:#f92672>&lt;/</span><span style=color:#a6e22e>div</span><span style=color:#f92672>&gt;</span>
-<span style=color:#f92672>@</span><span style=color:#66d9ef>endif</span>
-</code></pre></div></main><footer><div>&copy; Lawrence Goldstien</div><a href=/privacy>Privacy</a><div>My opinions are my own</div></footer><div id=tracker></div><script src=/app.js></script></body></html>
+something like the following.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">@</span><span style="color:#66d9ef">if</span> ($errors<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#39;password&#39;</span>))     
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;alert alert-danger&#34;</span><span style="color:#f92672">&gt;</span>         
+        {{ $errors<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">first</span>(<span style="color:#e6db74">&#39;password&#39;</span>) }}    
+    <span style="color:#f92672">&lt;/</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">@</span><span style="color:#66d9ef">endif</span>
+</code></pre></div>
+
+</main><footer>
+  <div>&copy; Lawrence Goldstien</div>
+  <a href="/privacy">Privacy</a>
+  <div>My opinions are my own</div>
+</footer>
+<div id="tracker"></div>
+<script src="/app.js"></script>
+</body>
+</html>

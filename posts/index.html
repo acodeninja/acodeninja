@@ -1,15 +1,359 @@
-<!doctype html><html class=light lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=description content><meta name=keywords content="software developer,coder,learning to code"><link rel=canonical href=/posts/><title>Posts | Adventures of a code ninja</title><link rel=stylesheet media=all href=/all.css><link rel=stylesheet media=screen href=/screen.css><link rel=stylesheet media=screen href=/app.css></head><body><header><nav><a href=/>adventures of a code ninja</a><ul><li><a href=/posts>blog</a></li></ul><div id=theme-toggle></div></nav></header><main><div class=list><div class=post><h2 class=title><a href=/posts/recursive-file-upload-to-s3-in-terraform/>recursive file upload to s3 in terraform</a></h2><div class=post-meta><span class=post-date>2019-09-10</span></div><p class=summary>I’ve been working a lot with HashiCorp’s terraform recently. From learning how to set up a highly available container based infrastructure using AWS ECS , to setting up a CloudFront distribution for a static site hosted on S3 .
-One problem I have had to solve a number of times, is uploading the contents of a directory recursively to an S3 bucket. With the help of a post from Andy Dote’s blog, I was able to get some files uploaded.</p><span>2 min read</span><div><a class=read href=/posts/recursive-file-upload-to-s3-in-terraform/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/limit-http-requests-with-nginx/>limit http requests with nginx</a></h2><div class=post-meta><span class=post-date>2019-04-21</span></div><p class=summary>There are several ways that you can throttle the rate at which requests to your web application are processed.
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  <meta name="description"
+        content=""
+  />
+  <meta name="keywords"
+        content="software developer, coder, learning to code"
+  />
+
+  <link rel="canonical" href="/posts/" />
+
+  <title>Posts | Adventures of a code ninja</title>
+
+  <link rel="stylesheet" media="all" href="/all.css"/>
+  <link rel="stylesheet" media="screen" href="/screen.css"/>
+  <link rel="stylesheet" media="screen" href="/app.css"/>
+</head>
+<body><header>
+  <nav>
+    <a href="/">
+      
+        adventures of a code ninja
+      
+    </a>
+    <ul>
+      
+        <li>
+          <a href="/posts">
+            blog
+          </a>
+        </li>
+      
+    </ul>
+    <div id="theme-toggle"></div>
+  </nav>
+</header>
+<main>
+    
+    
+
+    
+    
+    
+
+    
+
+    <div class="list">
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/recursive-file-upload-to-s3-in-terraform/">recursive file upload to s3 in terraform</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2019-09-10
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              I’ve been working a lot with HashiCorp’s terraform recently. From learning how to set up a highly available container based infrastructure using AWS ECS , to setting up a CloudFront distribution for a static site hosted on S3 .
+One problem I have had to solve a number of times, is uploading the contents of a directory recursively to an S3 bucket. With the help of a post from Andy Dote’s blog, I was able to get some files uploaded.
+            
+          </p>
+          
+            <span>2 min read</span>
+          
+          
+            <div><a class="read" href="/posts/recursive-file-upload-to-s3-in-terraform/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/limit-http-requests-with-nginx/">limit http requests with nginx</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2019-04-21
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              There are several ways that you can throttle the rate at which requests to your web application are processed.
 Rate limiting within your authentication mechanism is undoubtedly useful. However, the chances are that this requires several calls to database and cache. Database queries could become a costly operation when your application is running under load.
-To provide an extra layer of filtering, Nginx is capable of limiting request rates using the ngx_http_limit_req_module module.</p><span>3 min read</span><div><a class=read href=/posts/limit-http-requests-with-nginx/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/laravel-testing-database-reset-with-seeding/>laravel testing: database reset with seeding</a></h2><div class=post-meta><span class=post-date>2018-10-30</span></div><p class=summary>Testing a Laravel application has a low barrier to entry compared to other PHP frameworks . What happens when you want to nuke the database between tests? I thought I’d share a solution here.
-feature testing One of the great features Laravel provides is the ability to refresh your database after each test. This has been really useful, but I needed to test verbs like DELETE and a simple php artisan migrate:fresh isn’t all that useful when you have seeds that add information to your database that your tests rely on.</p><span>2 min read</span><div><a class=read href=/posts/laravel-testing-database-reset-with-seeding/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/warning-users-about-insecure-passwords/>warning users about insecure passwords</a></h2><div class=post-meta><span class=post-date>2018-03-19</span></div><p class=summary>laravel pwned passwords validator This small guide expects you to have my pwned passwords validator for laravel 5.6. It’s painless to install and set up:
+To provide an extra layer of filtering, Nginx is capable of limiting request rates using the ngx_http_limit_req_module module.
+            
+          </p>
+          
+            <span>3 min read</span>
+          
+          
+            <div><a class="read" href="/posts/limit-http-requests-with-nginx/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/laravel-testing-database-reset-with-seeding/">laravel testing: database reset with seeding</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2018-10-30
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              Testing a Laravel application has a low barrier to entry compared to other PHP frameworks . What happens when you want to nuke the database between tests? I thought I’d share a solution here.
+feature testing One of the great features Laravel provides is the ability to refresh your database after each test. This has been really useful, but I needed to test verbs like DELETE and a simple php artisan migrate:fresh isn’t all that useful when you have seeds that add information to your database that your tests rely on.
+            
+          </p>
+          
+            <span>2 min read</span>
+          
+          
+            <div><a class="read" href="/posts/laravel-testing-database-reset-with-seeding/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/warning-users-about-insecure-passwords/">warning users about insecure passwords</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2018-03-19
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              laravel pwned passwords validator This small guide expects you to have my pwned passwords validator for laravel 5.6. It’s painless to install and set up:
 $ composer require acodeninja/laravel-pwned-passwords-validator Once installed, Laravel’s package discovery will take care of loading the package for use in your application. Read more about using the validator .
-checking passwords and warning users on login To check if a password is secure each time a user logs in you can use the validator.</p><span>2 min read</span><div><a class=read href=/posts/warning-users-about-insecure-passwords/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/laravel-pwned-passwords-validator/>laravel pwned passwords validator</a></h2><div class=post-meta><span class=post-date>2018-03-15</span></div><p class=summary>a bit about pwned passwords So, a while ago the pwned passwords database was made available to the public. It was a great idea, a collection of all the discrete passwords that had been included in all the data breaches from &lsquo;;–have i been pwned? . Annoyingly to check this database with version 1 of the api you could only specify a username to see if that was included in a breach.</p><span>2 min read</span><div><a class=read href=/posts/laravel-pwned-passwords-validator/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/laravel-mix-lazy-loading-vue-components/>laravel mix - lazy loading Vue components</a></h2><div class=post-meta><span class=post-date>2018-03-13</span></div><p class=summary><p>why? Lazy loading components gives a great performance improvement. Larger components can take ages to load and result in an unusable page for a few seconds while the massive app.js file is loaded.
-how? You can follow these steps on the tutorial repo .</p><ol><li>babel plugins You will need to add both the babel-plugin-dynamic-import-webpack and babel-plugin-syntax-dynamic-import packages to your package.json
-$ npm install &ndash;save-dev \ babel-plugin-dynamic-import-webpack \ babel-plugin-syntax-dynamic-import tutorial commit</li></ol></p><span>2 min read</span><div><a class=read href=/posts/laravel-mix-lazy-loading-vue-components/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/dot-files-and-the-search-for-the-perfect-bash-setup/>dot files and the search for the perfect bash setup</a></h2><div class=post-meta><span class=post-date>2018-03-12</span></div><p class=summary>Discussion about what makes a good bash prompt. Including examples.</p><span>4 min read</span><div><a class=read href=/posts/dot-files-and-the-search-for-the-perfect-bash-setup/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/a-game-pugilica/>a game - pugilica</a></h2><div class=post-meta><span class=post-date>2017-02-20</span></div><p class=summary>Coming up with a great game idea was a lot harder than I initially thought, but then why did I think it would be easy anyway?
-Enter Pugilica, a game I thought up while toying with some dice and card mechanics. The basic mechanic for the game would be players taking turns to roll the dice, the roll deciding how many cards they could play that turn to effect other players.</p><span>3 min read</span><div><a class=read href=/posts/a-game-pugilica/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/a-few-thoughts-on-ad-blockers/>a few thoughts on ad-blockers</a></h2><div class=post-meta><span class=post-date>2017-01-04</span></div><p class=summary>Although content creators should have the opportunity to generate income from their work, this should not be at the expense of the end user.
+checking passwords and warning users on login To check if a password is secure each time a user logs in you can use the validator.
+            
+          </p>
+          
+            <span>2 min read</span>
+          
+          
+            <div><a class="read" href="/posts/warning-users-about-insecure-passwords/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/laravel-pwned-passwords-validator/">laravel pwned passwords validator</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2018-03-15
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              a bit about pwned passwords So, a while ago the pwned passwords database was made available to the public. It was a great idea, a collection of all the discrete passwords that had been included in all the data breaches from &lsquo;;–have i been pwned? . Annoyingly to check this database with version 1 of the api you could only specify a username to see if that was included in a breach.
+            
+          </p>
+          
+            <span>2 min read</span>
+          
+          
+            <div><a class="read" href="/posts/laravel-pwned-passwords-validator/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/laravel-mix-lazy-loading-vue-components/">laravel mix - lazy loading Vue components</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2018-03-13
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              <p>why? Lazy loading components gives a great performance improvement. Larger components can take ages to load and result in an unusable page for a few seconds while the massive app.js file is loaded.
+how? You can follow these steps on the tutorial repo .</p>
+<ol>
+<li>babel plugins You will need to add both the babel-plugin-dynamic-import-webpack and babel-plugin-syntax-dynamic-import packages to your package.json
+$ npm install &ndash;save-dev \  babel-plugin-dynamic-import-webpack \  babel-plugin-syntax-dynamic-import tutorial commit</li>
+</ol>
+
+            
+          </p>
+          
+            <span>2 min read</span>
+          
+          
+            <div><a class="read" href="/posts/laravel-mix-lazy-loading-vue-components/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/dot-files-and-the-search-for-the-perfect-bash-setup/">dot files and the search for the perfect bash setup</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2018-03-12
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              Discussion about what makes a good bash prompt. Including examples.
+            
+          </p>
+          
+            <span>4 min read</span>
+          
+          
+            <div><a class="read" href="/posts/dot-files-and-the-search-for-the-perfect-bash-setup/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/a-game-pugilica/">a game - pugilica</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2017-02-20
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              Coming up with a great game idea was a lot harder than I initially thought, but then why did I think it would be easy anyway?
+Enter Pugilica, a game I thought up while toying with some dice and card mechanics. The basic mechanic for the game would be players taking turns to roll the dice, the roll deciding how many cards they could play that turn to effect other players.
+            
+          </p>
+          
+            <span>3 min read</span>
+          
+          
+            <div><a class="read" href="/posts/a-game-pugilica/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/a-few-thoughts-on-ad-blockers/">a few thoughts on ad-blockers</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2017-01-04
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              Although content creators should have the opportunity to generate income from their work, this should not be at the expense of the end user.
 Online advertising networks have a responsibility to ensure that the content they are delivering does not contain malware. Advertisers need to ensure that their content makes efficient use of system resources.
-Adverts should complement the content on a page, rather than being specific to the end user.</p><span>1 min read</span><div><a class=read href=/posts/a-few-thoughts-on-ad-blockers/>Read more →</a></div></div><div class=post><h2 class=title><a href=/posts/html5-document-ready/>html5 document ready</a></h2><div class=post-meta><span class=post-date>2016-06-08</span></div><p class=summary>DOMContentLoaded,
+Adverts should complement the content on a page, rather than being specific to the end user.
+            
+          </p>
+          
+            <span>1 min read</span>
+          
+          
+            <div><a class="read" href="/posts/a-few-thoughts-on-ad-blockers/">Read more →</a></div>
+          
+        </div>
+      
+        <div class="post">
+          <h2 class="title"><a href="/posts/html5-document-ready/">html5 document ready</a></h2>
+          <div class="post-meta">
+            
+              <span class="post-date">
+                2016-06-08
+              </span>
+            
+
+            
+          </div>
+
+          <p class="summary">
+            
+              DOMContentLoaded,
 document ready or not?
 jQuery: overhead.
-document.addEventListener("DOMContentLoaded", function(event) { console.log('document load time: ' + event.timeStamp); });</p><span>1 min read</span><div><a class=read href=/posts/html5-document-ready/>Read more →</a></div></div></div><ul class=pagination><li class=page-item><a href=/posts/ class=page-link aria-label=First><span aria-hidden=true>&#171;&#171;</span></a></li><li class="page-item disabled"><a class=page-link aria-label=Previous><span aria-hidden=true>&#171;</span></a></li><li class="page-item active"><a class=page-link href=/posts/>1</a></li><li class=page-item><a class=page-link href=/posts/page/2/>2</a></li><li class=page-item><a class=page-link href=/posts/page/3/>3</a></li><li class=page-item><a href=/posts/page/2/ class=page-link aria-label=Next><span aria-hidden=true>&#187;</span></a></li><li class=page-item><a href=/posts/page/3/ class=page-link aria-label=Last><span aria-hidden=true>&#187;&#187;</span></a></li></ul></main><footer><div>&copy; Lawrence Goldstien</div><a href=/privacy>Privacy</a><div>My opinions are my own</div></footer><div id=tracker></div><script src=/app.js></script></body></html>
+document.addEventListener(&quot;DOMContentLoaded&quot;, function(event) { console.log('document load time: ' + event.timeStamp); });
+            
+          </p>
+          
+            <span>1 min read</span>
+          
+          
+            <div><a class="read" href="/posts/html5-document-ready/">Read more →</a></div>
+          
+        </div>
+      
+    </div>
+
+    
+<ul class="pagination">
+  <li class="page-item">
+    <a href="/posts/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+  </li>
+  <li class="page-item disabled">
+    <a  class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+  </li>
+  <li class="page-item active">
+    <a class="page-link" href="/posts/">1</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/posts/page/2/">2</a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="/posts/page/3/">3</a>
+  </li>
+  <li class="page-item">
+    <a href="/posts/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+  </li>
+  <li class="page-item">
+    <a href="/posts/page/3/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+  </li>
+</ul>
+
+
+
+</main><footer>
+  <div>&copy; Lawrence Goldstien</div>
+  <a href="/privacy">Privacy</a>
+  <div>My opinions are my own</div>
+</footer>
+<div id="tracker"></div>
+<script src="/app.js"></script>
+</body>
+</html>
