@@ -1,0 +1,189 @@
+<!doctype html><html class=light lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=description content="Discussion about what makes a good bash prompt. Including examples."><meta name=keywords content="software developer,coder,learning to code,bash profile,ps1,shell"><link rel=canonical href=/posts/dot-files-and-the-search-for-the-perfect-bash-setup/><title>dot files and the search for the perfect bash setup | Adventures of a code ninja</title><link rel=stylesheet media=all href=/all.css><link rel=stylesheet media=screen href=/screen.css><link rel=stylesheet media=screen href=/app.css></head><body><header><nav><a href=/>adventures of a code ninja</a><ul><li><a href=/posts>blog</a></li></ul><div id=theme-toggle></div></nav></header><main><h1>dot files and the search for the perfect bash setup</h1><nav id=TableOfContents><ul><li><a href=#the-prompt>the prompt</a></li><li><a href=#the-aliases>the aliases</a><ul><li><a href=#colour-grep-output-for-ease-of-use>colour grep output for ease of use</a></li><li><a href=#confirm-file-operations>confirm file operations</a></li><li><a href=#handy-ls-aliases>handy ls aliases</a></li><li><a href=#handy-php-version-switcher>handy php version switcher</a></li></ul></li></ul></nav><br><br><h2 id=the-prompt>the prompt</h2><p>What makes a good bash prompt?</p><p>Ubuntu 17.10 has a nice easy to look at prompt, but it doesn&rsquo;t give you a lot of
+information.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>acodeninja@laptop:~$ _
+</code></pre></div><p>It&rsquo;s nice to have some information relevant to your current task.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#f92672>[</span>acodeninja@laptop<span style=color:#f92672>]</span> <span style=color:#f92672>[</span>master !? - me@acode.ninja<span style=color:#f92672>]</span> 
+~/code/dotty &gt; _
+</code></pre></div><p>Or tasks you have running in the background</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#f92672>[</span>acodeninja@laptop<span style=color:#f92672>]</span> <span style=color:#f92672>[</span>jobs: <span style=color:#ae81ff>1</span> running <span style=color:#ae81ff>2</span> stopped<span style=color:#f92672>]</span> 
+~/code/dotty &gt; _
+</code></pre></div><p>Or the exit code of your last command</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#f92672>[</span>acodeninja@laptop<span style=color:#f92672>]</span> <span style=color:#f92672>[</span>130<span style=color:#f92672>]</span> 
+~/code/dotty &gt; _
+</code></pre></div><p>The following functions give us all we need to put the information above into
+our terminal prompt.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e>#!/bin/sh
+</span><span style=color:#75715e></span>
+<span style=color:#75715e># get last command return value</span>
+<span style=color:#66d9ef>function</span> nonzero_return<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+	RETVAL<span style=color:#f92672>=</span>$?
+	<span style=color:#f92672>[</span> $RETVAL -ne <span style=color:#ae81ff>0</span> <span style=color:#f92672>]</span> <span style=color:#f92672>&amp;&amp;</span> echo <span style=color:#e6db74>&#34; [</span>$RETVAL<span style=color:#e6db74>]&#34;</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#75715e># get the current git repo author email</span>
+<span style=color:#66d9ef>function</span> get_git_author<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+	BRANCH<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>git branch 2&gt; /dev/null | sed -e <span style=color:#e6db74>&#39;/^[^*]/d&#39;</span> -e <span style=color:#e6db74>&#39;s/* \(.*\)/\1/&#39;</span><span style=color:#e6db74>`</span>
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> ! <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>BRANCH<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;&#34;</span> <span style=color:#f92672>]</span>
+	<span style=color:#66d9ef>then</span>
+		echo <span style=color:#e6db74>&#34; [</span><span style=color:#66d9ef>$(</span>git config user.email<span style=color:#66d9ef>)</span><span style=color:#e6db74>]&#34;</span>
+	<span style=color:#66d9ef>else</span>
+		echo <span style=color:#e6db74>&#34;&#34;</span>
+	<span style=color:#66d9ef>fi</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#75715e># get current branch in git repo</span>
+<span style=color:#66d9ef>function</span> get_git_branch<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+	BRANCH<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>git branch 2&gt; /dev/null | sed -e <span style=color:#e6db74>&#39;/^[^*]/d&#39;</span> -e <span style=color:#e6db74>&#39;s/* \(.*\)/\1/&#39;</span><span style=color:#e6db74>`</span>
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> ! <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>BRANCH<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;&#34;</span> <span style=color:#f92672>]</span>
+	<span style=color:#66d9ef>then</span>
+		STAT<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>get_git_dirty<span style=color:#e6db74>`</span>
+		echo <span style=color:#e6db74>&#34; [</span><span style=color:#e6db74>${</span>BRANCH<span style=color:#e6db74>}${</span>STAT<span style=color:#e6db74>}</span><span style=color:#e6db74>]&#34;</span>
+	<span style=color:#66d9ef>else</span>
+		echo <span style=color:#e6db74>&#34;&#34;</span>
+	<span style=color:#66d9ef>fi</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#75715e># get current status of git repo</span>
+<span style=color:#66d9ef>function</span> get_git_dirty <span style=color:#f92672>{</span>
+	status<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>git status 2&gt;&amp;<span style=color:#ae81ff>1</span> | tee<span style=color:#e6db74>`</span>
+	dirty<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>echo -n <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>status<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> 2&gt; /dev/null | grep <span style=color:#e6db74>&#34;modified:&#34;</span> &amp;&gt; /dev/null; echo <span style=color:#e6db74>&#34;</span>$?<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>`</span>
+	untracked<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>echo -n <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>status<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> 2&gt; /dev/null | grep <span style=color:#e6db74>&#34;Untracked files&#34;</span> &amp;&gt; /dev/null; echo <span style=color:#e6db74>&#34;</span>$?<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>`</span>
+	ahead<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>echo -n <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>status<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> 2&gt; /dev/null | grep <span style=color:#e6db74>&#34;Your branch is ahead of&#34;</span> &amp;&gt; /dev/null; echo <span style=color:#e6db74>&#34;</span>$?<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>`</span>
+	newfile<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>echo -n <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>status<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> 2&gt; /dev/null | grep <span style=color:#e6db74>&#34;new file:&#34;</span> &amp;&gt; /dev/null; echo <span style=color:#e6db74>&#34;</span>$?<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>`</span>
+	renamed<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>echo -n <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>status<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> 2&gt; /dev/null | grep <span style=color:#e6db74>&#34;renamed:&#34;</span> &amp;&gt; /dev/null; echo <span style=color:#e6db74>&#34;</span>$?<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>`</span>
+	deleted<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>echo -n <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>status<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> 2&gt; /dev/null | grep <span style=color:#e6db74>&#34;deleted:&#34;</span> &amp;&gt; /dev/null; echo <span style=color:#e6db74>&#34;</span>$?<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>`</span>
+	bits<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;&#39;</span>
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>renamed<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+		bits<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;&gt;</span><span style=color:#e6db74>${</span>bits<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+	<span style=color:#66d9ef>fi</span>
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>ahead<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+		bits<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;*</span><span style=color:#e6db74>${</span>bits<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+	<span style=color:#66d9ef>fi</span>
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>newfile<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+		bits<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;+</span><span style=color:#e6db74>${</span>bits<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+	<span style=color:#66d9ef>fi</span>
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>untracked<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+		bits<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;?</span><span style=color:#e6db74>${</span>bits<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+	<span style=color:#66d9ef>fi</span>
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>deleted<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+		bits<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;x</span><span style=color:#e6db74>${</span>bits<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+	<span style=color:#66d9ef>fi</span>
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>dirty<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+		bits<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;!</span><span style=color:#e6db74>${</span>bits<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+	<span style=color:#66d9ef>fi</span>
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> ! <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>bits<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+		echo <span style=color:#e6db74>&#34; </span><span style=color:#e6db74>${</span>bits<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+	<span style=color:#66d9ef>else</span>
+		echo <span style=color:#e6db74>&#34;&#34;</span>
+	<span style=color:#66d9ef>fi</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#75715e># Get count of background processes</span>
+<span style=color:#66d9ef>function</span> get_background_job_count <span style=color:#f92672>{</span>
+	STOPPED_FILE<span style=color:#f92672>=</span>/tmp/$$-stopped
+	RUNNING_FILE<span style=color:#f92672>=</span>/tmp/$$-running
+	echo <span style=color:#ae81ff>0</span> &gt; $STOPPED_FILE
+	echo <span style=color:#ae81ff>0</span> &gt; $RUNNING_FILE
+
+	jobs | <span style=color:#66d9ef>while</span> read line ; <span style=color:#66d9ef>do</span>
+		<span style=color:#66d9ef>if</span> <span style=color:#f92672>[[</span> $line <span style=color:#f92672>=</span>~ <span style=color:#e6db74>&#34;Stopped&#34;</span> <span style=color:#f92672>]]</span>; <span style=color:#66d9ef>then</span>
+			STOPPED<span style=color:#f92672>=</span><span style=color:#66d9ef>$(($(</span>cat $STOPPED_FILE<span style=color:#66d9ef>)</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span><span style=color:#66d9ef>))</span>
+			echo $STOPPED &gt; $STOPPED_FILE;
+		<span style=color:#66d9ef>fi</span>
+		<span style=color:#66d9ef>if</span> <span style=color:#f92672>[[</span> $line <span style=color:#f92672>=</span>~ <span style=color:#e6db74>&#34;Running&#34;</span> <span style=color:#f92672>]]</span>; <span style=color:#66d9ef>then</span>
+			RUNNING<span style=color:#f92672>=</span><span style=color:#66d9ef>$(($(</span>cat $RUNNING_FILE<span style=color:#66d9ef>)</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span><span style=color:#66d9ef>))</span>
+			echo $RUNNING &gt; $RUNNING_FILE;
+		<span style=color:#66d9ef>fi</span>
+	<span style=color:#66d9ef>done</span>
+
+	STOPPED<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>cat $STOPPED_FILE<span style=color:#66d9ef>)</span>
+	RUNNING<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>cat $RUNNING_FILE<span style=color:#66d9ef>)</span>
+
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span>$STOPPED<span style=color:#e6db74>&#34;</span> !<span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#f92672>]</span> <span style=color:#f92672>||</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span>$RUNNING<span style=color:#e6db74>&#34;</span> !<span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+		echo <span style=color:#e6db74>&#34; [</span>$RUNNING<span style=color:#e6db74> running </span>$STOPPED<span style=color:#e6db74> stopped]&#34;</span>;
+ 	<span style=color:#66d9ef>fi</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#66d9ef>function</span> get_load_average <span style=color:#f92672>{</span>
+	echo <span style=color:#e6db74>&#34; [load: </span><span style=color:#66d9ef>$(</span>cat /proc/loadavg<span style=color:#66d9ef>)</span><span style=color:#e6db74>]&#34;</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#66d9ef>function</span> get_current_versions <span style=color:#f92672>{</span>
+	BITS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;&#34;</span>
+
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>which php<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span> !<span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+		<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span>$BITS<span style=color:#e6db74>&#34;</span> !<span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+			BITS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$BITS<span style=color:#e6db74> &#34;</span>;
+		<span style=color:#66d9ef>fi</span>
+		BITS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>BITS<span style=color:#e6db74>}</span><span style=color:#e6db74>php: v</span><span style=color:#66d9ef>$(</span>echo <span style=color:#e6db74>&#34;&lt;?php \$matches = []; preg_match(&#39;/([0-9\.]+)/&#39;, PHP_VERSION, \$matches); echo \$matches[0];&#34;</span> | php<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
+	<span style=color:#66d9ef>fi</span>
+
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>which node<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span> !<span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+		<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span>$BITS<span style=color:#e6db74>&#34;</span> !<span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+			BITS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$BITS<span style=color:#e6db74> &#34;</span>;
+		<span style=color:#66d9ef>fi</span>
+		BITS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>BITS<span style=color:#e6db74>}</span><span style=color:#e6db74>node: </span><span style=color:#66d9ef>$(</span>node -v<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
+	<span style=color:#66d9ef>fi</span>
+
+	<span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span>$BITS<span style=color:#e6db74>&#34;</span> !<span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+		echo <span style=color:#e6db74>&#34; [</span>$BITS<span style=color:#e6db74>]&#34;</span>
+	<span style=color:#66d9ef>fi</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>We can then inject the information into our prompt with the following:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>!/usr/bin/env bash
+THIS_DIR<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span> cd <span style=color:#66d9ef>$(</span> dirname <span style=color:#e6db74>${</span>BASH_SOURCE[0]<span style=color:#e6db74>}</span> <span style=color:#66d9ef>)</span> &gt;/dev/null 2&gt;&amp;<span style=color:#ae81ff>1</span> <span style=color:#f92672>&amp;&amp;</span> pwd <span style=color:#66d9ef>)</span>
+
+source $THIS_DIR/functions.sh
+
+<span style=color:#66d9ef>function</span> generateps1 <span style=color:#f92672>{</span> 
+    local CURRENTTERM_WIDTH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>tput cols<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
+    
+    local COLOUR_GRAY<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;\033[1;30m&#34;</span>
+    local COLOUR_LIGHT_GRAY<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;\033[0;37m&#34;</span>
+    local COLOUR_CYAN<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;\033[0;36m&#34;</span>
+    local COLOUR_RED<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;\033[0;31m&#34;</span>
+    local COLOUR_YELLOW<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;\033[0;33m&#34;</span>
+    local COLOUR_ORANGE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;\033[1;31m&#34;</span>
+    local COLOUR_NONE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;\033[0m&#34;</span>
+    
+    local LAST_EXIT_CODE<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>nonzero_return<span style=color:#66d9ef>)</span>
+    
+    local USERNAME<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>whoami<span style=color:#66d9ef>)</span>
+    local HOSTNAME<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>hostname<span style=color:#66d9ef>)</span>
+    local GIT_CURRENT_BRANCH<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>get_git_branch<span style=color:#66d9ef>)</span>
+    local GIT_CURRENT_AUTHOR<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>get_git_author<span style=color:#66d9ef>)</span>
+    local BACKGROUND_JOBS<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>get_background_job_count<span style=color:#66d9ef>)</span>
+    local GET_CLI_VERSIONS<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>get_current_versions<span style=color:#66d9ef>)</span>
+    
+    local TOP_LINE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;\n</span>$COLOUR_LIGHT_GRAY<span style=color:#e6db74>[</span>$USERNAME<span style=color:#e6db74>@</span>$HOSTNAME<span style=color:#e6db74>]</span>$COLOUR_NONE<span style=color:#e6db74>&#34;</span>
+          TOP_LINE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$TOP_LINE$COLOUR_CYAN$GIT_CURRENT_AUTHOR$COLOUR_NONE<span style=color:#e6db74>&#34;</span>
+          TOP_LINE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$TOP_LINE$COLOUR_RED$BACKGROUND_JOBS$COLOUR_NONE<span style=color:#e6db74>&#34;</span>
+    
+    <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>tput cols<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span> -gt <span style=color:#e6db74>&#34;100&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+        TOP_LINE<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$TOP_LINE$GET_CLI_VERSIONS<span style=color:#e6db74>&#34;</span>
+    <span style=color:#66d9ef>fi</span>
+    
+    local PROMPT<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>dirs<span style=color:#66d9ef>)</span>$COLOUR_YELLOW$GIT_CURRENT_BRANCH$COLOUR_NONE<span style=color:#e6db74> &gt; &#34;</span>
+    
+    echo -e <span style=color:#e6db74>&#34;</span>$TOP_LINE<span style=color:#e6db74>\n</span>$PROMPT<span style=color:#e6db74>&#34;</span>
+<span style=color:#f92672>}</span>
+
+export PS1<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;`generate_ps1`&#34;</span>
+</code></pre></div><p>Using the above we get a really nice looking prompt with all the information you
+could want at your fingertips.</p><p>![Nice looking prompt you have there]({{ &ldquo;/assets/images/posts/2018-03-12/ps1-prompt.png&rdquo; | absolute_url }})</p><h2 id=the-aliases>the aliases</h2><p>Ubuntu includes some nice default aliases <code>ll</code> is an alias of <code>ls -al</code> and can
+have more arguments added to it <code>ll -h</code> works perfectly well.</p><p>Here are some I use.</p><h3 id=colour-grep-output-for-ease-of-use>colour grep output for ease of use</h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>alias grep<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;grep --color=auto&#39;</span> 
+alias egrep<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;egrep --color=auto&#39;</span> 
+alias fgrep<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;fgrep --color=auto&#39;</span>
+</code></pre></div><h3 id=confirm-file-operations>confirm file operations</h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>alias mv<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;mv -i&#39;</span> 
+alias cp<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;cp -i&#39;</span> 
+alias ln<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ln -i&#39;</span>
+alias rm<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;rm -i&#39;</span>
+</code></pre></div><h3 id=handy-ls-aliases>handy ls aliases</h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>alias ll<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ls -al&#39;</span> 
+alias l<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ls -l&#39;</span> 
+alias la<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ls -a&#39;</span>
+</code></pre></div><h3 id=handy-php-version-switcher>handy php version switcher</h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#66d9ef>function</span> phpswitch <span style=color:#f92672>{</span> 
+  <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>which php$1<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span> !<span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+    alias php<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;php</span>$1<span style=color:#e6db74>&#34;</span>
+    echo <span style=color:#e6db74>&#34;Switched to php</span>$1<span style=color:#e6db74> successfully&#34;</span>
+  <span style=color:#66d9ef>else</span>
+    echo <span style=color:#e6db74>&#34;Could not find php</span>$1<span style=color:#e6db74>&#34;</span>
+  <span style=color:#66d9ef>fi</span> 
+<span style=color:#f92672>}</span>
+</code></pre></div><p>All of this and more is at <a href=https://github.com/acodeninja/.dotty target=_blank rel="noreferrer noopener">@acodeninja/.dotty</a>
+,
+my collection of bash terminal customisations geared toward developers working
+with linux.</p></main><footer><div>&copy; Lawrence Goldstien</div><a href=/privacy>Privacy</a><div>My opinions are my own</div></footer><div id=tracker></div><script src=/app.js></script></body></html>

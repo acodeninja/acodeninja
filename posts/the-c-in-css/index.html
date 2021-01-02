@@ -1,0 +1,21 @@
+<!doctype html><html class=light lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=description content="CSS is a very powerful tool for web designers and developers, as with all great tools you need to know how to use it effectively to get things right. This article covers some fundamentals about the Cascading part of CSS to give you a better handle on how your CSS affects the HTML content of sites you work on.
+Cascade based on style location So, what does it mean by Cascade?"><meta name=keywords content="software developer,coder,learning to code"><link rel=canonical href=/posts/the-c-in-css/><title>the c in css | Adventures of a code ninja</title><link rel=stylesheet media=all href=/all.css><link rel=stylesheet media=screen href=/screen.css><link rel=stylesheet media=screen href=/app.css></head><body><header><nav><a href=/>adventures of a code ninja</a><ul><li><a href=/posts>blog</a></li></ul><div id=theme-toggle></div></nav></header><main><h1>the c in css</h1><nav id=TableOfContents><ul><li><a href=#cascade-based-on-style-location>Cascade based on style location</a></li><li><a href=#cascade-based-on-file-position>Cascade based on file position</a></li><li><a href=#conclusion>Conclusion</a></li></ul></nav><br><br><p>CSS is a very powerful tool for web designers and developers, as with all great
+tools you need to know how to use it effectively to get things right. This
+article covers some fundamentals about the Cascading part of CSS to give you a
+better handle on how your CSS affects the HTML content of sites you work on.</p><h2 id=cascade-based-on-style-location>Cascade based on style location</h2><p>So, what does it mean by Cascade? The styles you set using CSS can come from
+several locations, from an external file, from the <code>&lt;head></code> portion of your page
+or applied directly to an element of your page. The web browser treats each with
+a different priority and will allow styles set in the <code>&lt;head></code> tag to override
+anything set in an external CSS file.</p><p>The order goes like this:</p><ul><li>External CSS file</li><li><code>&lt;head></code> tag</li><li>inline styles (styles applied directly to an element)</li><li>Styles that have the !important attribute set</li></ul><p>The !important flag will override any styles set using the other methods, it
+should be avoided generally as it can cause confusion when it comes to working
+out what bits of style affect what.</p><h2 id=cascade-based-on-file-position>Cascade based on file position</h2><p>The other part of the picture is where in your CSS file the styles are declared,
+take this for instance:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-css data-lang=css><span style=color:#f92672>p</span> {
+  <span style=color:#66d9ef>color</span>: <span style=color:#ae81ff>#fff</span>; 
+}
+<span style=color:#f92672>p</span> {
+  <span style=color:#66d9ef>color</span>: <span style=color:#ae81ff>#03f</span>;
+}
+</code></pre></div><p>Here we have the colour of P elements on a page set twice, due to the ‘read from
+the top down’ approach that browsers take to interpreting markup, the second
+declaration will be applied.</p><h2 id=conclusion>Conclusion</h2><p>This basic concept of how CSS works will help you in understanding where you
+should apply styles and how to manage their priority.</p></main><footer><div>&copy; Lawrence Goldstien</div><a href=/privacy>Privacy</a><div>My opinions are my own</div></footer><div id=tracker></div><script src=/app.js></script></body></html>

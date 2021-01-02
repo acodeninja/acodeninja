@@ -1,0 +1,58 @@
+<!doctype html><html class=light lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=description content="Configuring Nginx with SSL can be a bit of a nightmare to do properly. Here is a handy config file I use as a starting base for it.
+#HTTP Redirect server { # Set up the port listener  listen 80; listen [IPV6]:80 default ipv6only=on; # Set the hostname to be served  server_name SITE www.SITE; # Set up access and error logs  accesslog /var/www/SITE/logs/nginx.access.log; errorlog /var/www/SITE/logs/nginx.error.log; # Redirect all requests on http to https  location / { rewrite ^ https://$servername$requesturi?"><meta name=keywords content="software developer,coder,learning to code"><link rel=canonical href=/posts/nginx-ssl-only-configuration/><title>nginx ssl only configuration | Adventures of a code ninja</title><link rel=stylesheet media=all href=/all.css><link rel=stylesheet media=screen href=/screen.css><link rel=stylesheet media=screen href=/app.css></head><body><header><nav><a href=/>adventures of a code ninja</a><ul><li><a href=/posts>blog</a></li></ul><div id=theme-toggle></div></nav></header><main><h1>nginx ssl only configuration</h1><nav id=TableOfContents></nav><br><br><p>Configuring Nginx with SSL can be a bit of a nightmare to do properly.
+Here is a handy config file I use as a starting base for it.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=color:#75715e>#HTTP Redirect
+</span><span style=color:#75715e></span><span style=color:#66d9ef>server</span> {
+    <span style=color:#75715e># Set up the port listener
+</span><span style=color:#75715e></span>    <span style=color:#f92672>listen</span> <span style=color:#ae81ff>80</span>; 
+    <span style=color:#f92672>listen</span> <span style=color:#e6db74>[IPV6]:80</span> <span style=color:#e6db74>default</span> <span style=color:#e6db74>ipv6only=on</span>;
+    
+    <span style=color:#75715e># Set the hostname to be served
+</span><span style=color:#75715e></span>    <span style=color:#f92672>server_name</span> <span style=color:#e6db74>SITE</span> <span style=color:#e6db74>www.SITE</span>;
+
+    <span style=color:#75715e># Set up access and error logs
+</span><span style=color:#75715e></span>    <span style=color:#f92672>accesslog</span> <span style=color:#e6db74>/var/www/SITE/logs/nginx.access.log</span>;
+    <span style=color:#f92672>errorlog</span> <span style=color:#e6db74>/var/www/SITE/logs/nginx.error.log</span>;
+
+    <span style=color:#75715e># Redirect all requests on http to https
+</span><span style=color:#75715e></span>    <span style=color:#f92672>location</span> <span style=color:#e6db74>/</span> {
+        <span style=color:#f92672>rewrite</span> <span style=color:#e6db74>^</span> <span style=color:#e6db74>https://</span>$servername$requesturi? <span style=color:#e6db74>permanent</span>;
+    }
+}
+
+<span style=color:#66d9ef>HTTPS</span>
+<span style=color:#e6db74>server</span> {
+
+    <span style=color:#75715e># Set up the port listener
+</span><span style=color:#75715e></span>    <span style=color:#f92672>listen</span> <span style=color:#ae81ff>443</span>;
+    <span style=color:#f92672>listen</span> <span style=color:#e6db74>[IPv6]:443</span> <span style=color:#e6db74>default</span> <span style=color:#e6db74>ipv6only=on</span>;
+
+    <span style=color:#75715e># Set the hostname to be served
+</span><span style=color:#75715e></span>    <span style=color:#f92672>server_name</span> <span style=color:#e6db74>SITE</span> <span style=color:#e6db74>www.SITE</span>;
+
+    <span style=color:#75715e># Set up SSL
+</span><span style=color:#75715e></span>    <span style=color:#f92672>ssl</span> <span style=color:#66d9ef>on</span>;
+    <span style=color:#f92672>sslcertificate</span> <span style=color:#e6db74>/var/www/SITE/certs/ssl.crt</span>;
+    <span style=color:#f92672>sslcertificatekey</span> <span style=color:#e6db74>/var/www/SITE/certs/ssl.key</span>;
+    <span style=color:#f92672>sslsessiontimeout</span> <span style=color:#ae81ff>5m</span>;
+    <span style=color:#f92672>sslpreferserverciphers</span> <span style=color:#66d9ef>on</span>;
+    
+    <span style=color:#75715e># Set up access and error logs
+</span><span style=color:#75715e></span>    <span style=color:#f92672>accesslog</span> <span style=color:#e6db74>/var/www/SITE/logs/nginx.access.log</span>;
+    <span style=color:#f92672>errorlog</span> <span style=color:#e6db74>/var/www/SITE/logs/nginx.error.log</span>;
+    
+    <span style=color:#75715e># Set up the root of public html folders 
+</span><span style=color:#75715e></span>    <span style=color:#f92672>root</span> <span style=color:#e6db74>/var/www/SITE/www</span>; 
+    <span style=color:#f92672>index</span> <span style=color:#e6db74>index.php</span> <span style=color:#e6db74>index.htm</span> <span style=color:#e6db74>index.html</span>;
+
+    <span style=color:#75715e># Set up the php system 
+</span><span style=color:#75715e></span>    <span style=color:#f92672>location</span> ~ <span style=color:#e6db74>.php$</span> {
+        <span style=color:#f92672>fastcgipass</span> 127.0.0.1:<span style=color:#ae81ff>9000</span>; 
+        <span style=color:#f92672>fastcgiindex</span> <span style=color:#e6db74>index.php</span>; 
+        <span style=color:#f92672>fastcgiparam</span> <span style=color:#e6db74>SCRIPTFILENAME</span> <span style=color:#e6db74>/var/www/SITE/www</span>$fastcgiscriptname; 
+        <span style=color:#f92672>include</span> <span style=color:#e6db74>fastcgi_params</span>;
+    }
+} 
+</code></pre></div><p>Looking through the config file you can see a number of parts, the two most
+important parts are as follows:</p><ul><li>rewrite ^ https://$server_name$request_uri? permanent; This allows any
+requests made to the http service to be redirected to the https</li><li>ssl on; This tells the server to use SSL on port 443 to server https
+encrypted pages.</li></ul><p>I hope that this short article helps get you up and running with SSL on Nginx.</p></main><footer><div>&copy; Lawrence Goldstien</div><a href=/privacy>Privacy</a><div>My opinions are my own</div></footer><div id=tracker></div><script src=/app.js></script></body></html>
