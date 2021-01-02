@@ -12,18 +12,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Hugo 🚧
-        run: |
-          HUGO_VERSION=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | jq -r '.tag_name')
-          mkdir tmp/ && cd tmp/
-          curl -sSL https://github.com/gohugoio/hugo/releases/download/${HUGO_VERSION}/hugo_extended_${HUGO_VERSION: -6}_Linux-64bit.tar.gz | tar -xzf-
-          sudo mv hugo /usr/local/bin/
-          cd .. && rm -rf tmp/
-
       - name: Build 🔧
         run: |
           git worktree add -B gh-pages public origin/gh-pages
-          hugo --minify
+          make build
 
       - name: Deploy 🚀
         run: |
