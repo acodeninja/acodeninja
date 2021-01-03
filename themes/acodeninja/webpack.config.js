@@ -1,4 +1,5 @@
 const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const RemoveFilePlugin = require('remove-files-webpack-plugin');
 
@@ -111,6 +112,11 @@ const makeSassLoader = (name) => ({
     new MiniCssExtractPlugin({
       filename: "./[name].css",
     }),
+    new CopyPlugin({
+      patterns: [
+        {from: 'src/images', to: 'images'},
+      ],
+    }),
   ],
 });
 
@@ -119,6 +125,7 @@ const makeSassLoader = (name) => ({
 //     include: [join("static", `${name}.js`)],
 //   },
 // })
+
 
 module.exports = [
   makeSassLoader('all'),
