@@ -1,4 +1,4 @@
-title = "Adventures of a code ninja"
+title = "👨‍💻 Adventures of a code ninja"
 baseURL = "/"
 languageCode = "en-gb"
 theme = "acodeninja"
@@ -12,7 +12,7 @@ posts = "/posts/:title/"
 
 [languages]
   [languages.en]
-  subtitle = "Adventures of a code ninja"
+  subtitle = "👨‍💻 Adventures of a code ninja"
   keywords = "software developer, coder, learning to code"
   copyright = "Lawrence Goldstien"
   menuMore = "Show more"
@@ -25,7 +25,7 @@ posts = "/posts/:title/"
   dateFormatSingle = "2006-01-02"
   dateFormatList = "2006-01-02"
   [languages.en.params.logo]
-    logoText = "adventures of a code ninja"
+    logoText = "👨‍💻 adventures of a code ninja"
     logoHomeLink = "/"
   [languages.en.params.socialnames]
     Github = "acodeninja"
