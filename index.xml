@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Adventures of a code ninja</title>
+    <title>👨‍💻 Adventures of a code ninja</title>
     <link>/</link>
-    <description>Recent content on Adventures of a code ninja</description>
+    <description>Recent content on 👨‍💻 Adventures of a code ninja</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <copyright>Lawrence Goldstien</copyright>
@@ -279,8 +279,7 @@ One problem that I came across with Nginx was implementing features found in the
       <guid>/privacy/</guid>
       <description>I always look to limit any impact on your privacy for any visiting this website.
 On this page I&amp;rsquo;ll let you know what runs in your browser when you visit my site, and what it is needed for.
-Cookies I do not currently set any cookies when you visit my site.
-Local Storage I make use of local storage to store page and site settings, if Javascript is enabled. These values are not accessible by other websites if your browser is working securely.</description>
+Cookies &amp;amp; Local Storage I make use of local storage to store page and site settings, if Javascript is enabled. These values are not accessible by other websites if your browser is working securely.</description>
     </item>
     
   </channel>
