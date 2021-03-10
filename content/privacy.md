@@ -8,13 +8,7 @@ I always look to limit any impact on your privacy for any visiting this website.
 On this page I'll let you know what runs in your browser when you visit my 
 site, and what it is needed for.
 
-## Cookies
-
-I do not currently set any 
-[cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) when you 
-visit my site.
-
-## Local Storage
+## Cookies & Local Storage
 
 I make use of [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage)
 to store page and site settings, if Javascript is enabled. These values are not 
