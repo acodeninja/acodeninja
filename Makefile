@@ -44,7 +44,13 @@ install: .bin/hugo themes/acodeninja/node_modules
 .bin/hugo:
 	@echo "📥 Downloading .bin/hugo"
 	@mkdir -p .bin
+	@curl -s -L "https://github.com/gohugoio/hugo/releases/download/v$(HUGO_VERSION)/hugo_$(HUGO_VERSION)_checksums.txt" -o .bin/hugo_checksums.txt
 	@curl -s -L "https://github.com/gohugoio/hugo/releases/download/v$(HUGO_VERSION)/hugo_$(HUGO_VERSION)_$(OPERATING_SYSTEM)-$(CPU_ARCHITECTURE).tar.gz" -o .bin/hugo.tar.gz
+	@IFS=' ' read -ra CHECKSUM <<< `shasum -a 256 .bin/hugo.tar.gz`; \
+		if grep "$$CHECKSUM" .bin/hugo_checksums.txt >> /dev/null; \
+			then echo "✅  Verified download"; \
+			else echo "❌  Could not verify download ($$CHECKSUM)"; exit 127; \
+	    fi
 	@cd .bin && tar -zxf hugo.tar.gz
 	@chmod +x .bin/hugo
 
