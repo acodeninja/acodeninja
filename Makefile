@@ -1,4 +1,4 @@
-.PHONY: dev dev-frontend dev-hugo install
+.PHONY: build clean dev dev-frontend dev-hugo install
 
 build: install
 	@cd themes/acodeninja && yarn build
