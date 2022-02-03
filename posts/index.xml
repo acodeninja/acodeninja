@@ -196,8 +196,7 @@ So today while at my day job I am listening to Zoe Keating’s Album “Into the
       <pubDate>Wed, 27 Feb 2013 00:00:00 +0000</pubDate>
       
       <guid>/posts/centre-without-text-align-center/</guid>
-      <description>CSS is great for changing things around on a page but knowing the best way to accomplish something when you are just starting out is difficult. So how do you centre block level elements, and what on earth are block level elements anyway? Well for a list of html elements that are block level check out the MDN site here: https://developer.mozilla.org/en-US/docs/HTML/Block-level_elements
-So now we know what they are what is the best way to centre them on a page or within a parent element?</description>
+      <description>CSS is great for changing things around on a page but knowing the best way to accomplish something when you are just starting out is difficult. So how do you centre block level elements, and what on earth are block level elements anyway? Well for a list of html elements that are block level check out the MDN site here: https://developer.mozilla.org/en-US/docs/HTML/Block-level_elements So now we know what they are what is the best way to centre them on a page or within a parent element?</description>
     </item>
     
     <item>

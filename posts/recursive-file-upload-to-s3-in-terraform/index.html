@@ -72,7 +72,7 @@ completely inside terraform.</p>
 <h2 id="creating-the-s3-bucket">creating the S3 bucket</h2>
 <p>To begin with, we need an S3 bucket defined in our terraform project. The code
 block below comes with a website block that sets up web hosting for the bucket.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_s3_bucket&#34; &#34;s3_static&#34;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_s3_bucket&#34; &#34;s3_static&#34;</span> {
   bucket  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;testing-website-static-hosting&#34;</span>
   acl     <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;public-read&#34;</span>
 
@@ -92,7 +92,7 @@ Andy&rsquo;s post, but leveraging the <code>each.value</code> property in place 
 filename.</p>
 <p>The mimetypes variable is used with the file extension taken from the file
 path split on <code>.</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;upload_directory&#34;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;upload_directory&#34;</span> {
   default <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${path.cwd}/codebases/website-static/&#34;</span>
 }
 
@@ -121,7 +121,7 @@ path split on <code>.</code>.</p>
 <p>The caveat from Andy&rsquo;s post around deleting files that are no longer in the list
 is not an issue any longer. If you remove a file from the folder and run
 terraform plan  you will see a deletion.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">An execution plan has been generated and is shown below.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">An execution plan has been generated and is shown below.
 Resource actions are indicated with the following symbols:
   - destroy
 

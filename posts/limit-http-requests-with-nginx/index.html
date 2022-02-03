@@ -64,7 +64,7 @@ rates using the <code>ngx_http_limit_req_module</code> module.</p>
 log of requests. We need to decide which key on a request is used as a reference
 in the memory zone. The obvious first contender is the remote IP address of the
 requesting client.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># /etc/nginx/conf.d/rate-limit-zones.conf</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># /etc/nginx/conf.d/rate-limit-zones.conf</span>
 limit_req_zone $binary_remote_addr zone<span style="color:#f92672">=</span>ipaddr:10m rate<span style="color:#f92672">=</span>1r/s;
 </code></pre></div><p>To declare a memory zone, we use the <code>limit_req_zone</code> directive. We tell Nginx
 what we want to use as a key, in this case <code>$binary_remote_addr</code>, the remote IP
@@ -90,7 +90,7 @@ accessed.</li>
 <p>Configuring a limit against a server
 A limit can be applied inside a server  block. The most straight forward way is
 to apply a limit to a whole virtual server.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># /etc/nginx/sites-enabled/default</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># /etc/nginx/sites-enabled/default</span>
 server <span style="color:#f92672">{</span>
     limit_req zone<span style="color:#f92672">=</span>ipaddr burst<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> nodelay;
     ...
@@ -106,7 +106,7 @@ directive.</p>
 delayed, or nodelay  to indicate that no requests should be delayed.</p>
 <h2 id="advanced-configuration">advanced configuration</h2>
 <p>You could get a bit more fancy and only rate limit your API endpoints.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># /etc/nginx/sites-enabled/default</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># /etc/nginx/sites-enabled/default</span>
 server <span style="color:#f92672">{</span>
     ...
     location /api/ <span style="color:#f92672">{</span>
@@ -116,7 +116,7 @@ server <span style="color:#f92672">{</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Or you can get even more fancy and not limit requests made to your API by local
 services.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># /etc/nginx/sites-enabled/default</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># /etc/nginx/sites-enabled/default</span>
 geo $is_external_call <span style="color:#f92672">{</span>
     default         1;
     10.0.0.0/8      0;

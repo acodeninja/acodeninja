@@ -80,9 +80,9 @@ fails, and the error is returned to the validator instance.</p>
 <p>Using this validator is really easy, check out the <a href="https://github.com/acodeninja/laravel-pwned-passwords-validator" target="_blank" rel="noreferrer noopener">Github Repo</a>
 
 or just use composer to install it</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ composer require acodeninja/laravel-pwned-passwords-validator
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ composer require acodeninja/laravel-pwned-passwords-validator
 </code></pre></div><p>Then use it either in your request classes</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#e6db74">/**  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#e6db74">/**  
 </span><span style="color:#e6db74"> * Get the validation rules that apply to the request.  
 </span><span style="color:#e6db74"> *  
 </span><span style="color:#e6db74"> * @return array 
@@ -95,7 +95,7 @@ or just use composer to install it</p>
     ];
 }
 </code></pre></div><p>Or your controllers (if you swing that way)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$validator <span style="color:#f92672">=</span> <span style="color:#a6e22e">Validator</span><span style="color:#f92672">::</span><span style="color:#a6e22e">make</span>($request<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">all</span>(), [
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$validator <span style="color:#f92672">=</span> <span style="color:#a6e22e">Validator</span><span style="color:#f92672">::</span><span style="color:#a6e22e">make</span>($request<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">all</span>(), [
     <span style="color:#e6db74">&#39;email&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|email|unique:users,email&#39;</span>, 
     <span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|pwned_password_strict&#39;</span>,
 ])<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">validate</span>();

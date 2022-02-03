@@ -70,7 +70,7 @@ tests rely on.</p>
 <p>The class <code>Illuminate\Foundation\Testing\RefreshDatabase</code>  has a method used to
 action the refresh refreshTestDatabase  which just calls out to <code>artisan</code> for
 the <code>migrate:fresh</code> command. Step in my nice little override:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">// tests/ResetsDatabase.php
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">// tests/ResetsDatabase.php
 </span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 
 <span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Tests</span>;
@@ -105,7 +105,7 @@ the <code>migrate:fresh</code> command. Step in my nice little override:</p>
 </code></pre></div><p>You can use this in your tests the same way you would the RefreshDatabase
 class. But instead of just refreshing the database, you will get db:seed for
 free along with any test seeds you want to run.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">// tests/Feature/UserApiTest.php
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">// tests/Feature/UserApiTest.php
 </span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 
 <span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Tests\Feature</span>;
@@ -120,7 +120,7 @@ free along with any test seeds you want to run.</p>
 <p>The same can be achieved in dusk [https://laravel.com/docs/5.7/dusk]  with a
 similar change in the DatabaseMigrations  trait provided for resetting the
 database.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">// tests/ResetsDatabaseInDusk.php
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">// tests/ResetsDatabaseInDusk.php
 </span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 
 <span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Tests</span>;

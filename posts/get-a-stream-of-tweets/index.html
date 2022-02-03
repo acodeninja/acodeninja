@@ -58,7 +58,7 @@ From &ldquo;Introduction to Data Science&rdquo; A coursera program with lectures
 Bill Howe. You will need to edit the access and consumer credentials to make this
 application work.</p>
 <p>Run as follows: <code>python twitterstream.py &gt; output.json</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> oauth2 <span style="color:#f92672">as</span> oauth import urllib2 <span style="color:#f92672">as</span> urllib
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> oauth2 <span style="color:#66d9ef">as</span> oauth <span style="color:#f92672">import</span> urllib2 <span style="color:#66d9ef">as</span> urllib
 
 accesstokenkey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&lt;Enter your access token key here&gt;&#34;</span> 
 accesstokensecret <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&lt;Enter your access token secret here&gt;&#34;</span>
@@ -95,7 +95,7 @@ httpshandler <span style="color:#f92672">=</span> urllib<span style="color:#f926
     <span style="color:#66d9ef">if</span> httpmethod <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;POST&#34;</span>:
         encodedpostdata <span style="color:#f92672">=</span> req<span style="color:#f92672">.</span>topostdata()
     <span style="color:#66d9ef">else</span>:
-        encodedpostdata <span style="color:#f92672">=</span> None
+        encodedpostdata <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
 
     url <span style="color:#f92672">=</span> req<span style="color:#f92672">.</span>to_url()
 
@@ -113,7 +113,7 @@ httpshandler <span style="color:#f92672">=</span> urllib<span style="color:#f926
     response <span style="color:#f92672">=</span> twitterreq(url, <span style="color:#e6db74">&#34;GET&#34;</span>, parameters)
     
     <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> response:
-        <span style="color:#66d9ef">print</span> line<span style="color:#f92672">.</span>strip()
+        print line<span style="color:#f92672">.</span>strip()
 
 <span style="color:#66d9ef">if</span> name  <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;main&#39;</span>:
     fetchsamples()

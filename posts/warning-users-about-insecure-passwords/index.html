@@ -53,7 +53,7 @@ checking passwords and warning users on login To check if a password is secure e
   <h2 id="laravel-pwned-passwords-validator">laravel pwned passwords validator</h2>
 <p>This small guide expects you to have my pwned passwords validator for laravel
 5.6. It&rsquo;s painless to install and set up:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ composer require acodeninja/laravel-pwned-passwords-validator
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ composer require acodeninja/laravel-pwned-passwords-validator
 </code></pre></div><p>Once installed, Laravel&rsquo;s package discovery will take care of loading the
 package for use in your application. Read more about using the
 <a href="/posts/2018-03-15-laravel-pwned-passwords-validator/">validator</a>
@@ -64,7 +64,7 @@ validator. To do this, you use the validator and redirect with errors if the
 login password fails to pass.</p>
 <p>Simply put, add the following to your application&rsquo;s login controller, in a
 default application this is at <code>app/Http/Controllers/Auth/LoginController.php</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#e6db74">/**
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#e6db74">/**
 </span><span style="color:#e6db74"> * @param Request $request
 </span><span style="color:#e6db74"> * @param User $user
 </span><span style="color:#e6db74"> * @return $this|\Illuminate\Http\RedirectResponse
@@ -83,7 +83,7 @@ default application this is at <code>app/Http/Controllers/Auth/LoginController.p
 }
 </code></pre></div><p>You can then display the errors as normal on the page your application redirects
 to, normally this would be <code>resources/views/home.blade.php</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">@</span><span style="color:#66d9ef">if</span> ($errors<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">any</span>())
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">@</span><span style="color:#66d9ef">if</span> ($errors<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">any</span>())
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;alert alert-danger&#34;</span><span style="color:#f92672">&gt;</span>         
         <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ul</span><span style="color:#f92672">&gt;</span>
         <span style="color:#f92672">@</span><span style="color:#66d9ef">foreach</span> ($errors<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">all</span>() <span style="color:#66d9ef">as</span> $error)
@@ -94,7 +94,7 @@ to, normally this would be <code>resources/views/home.blade.php</code>.</p>
 <span style="color:#f92672">@</span><span style="color:#66d9ef">endif</span>
 </code></pre></div><p>Or you can make it look a little nicer and display it above other messages with
 something like the following.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">@</span><span style="color:#66d9ef">if</span> ($errors<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#39;password&#39;</span>))     
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">@</span><span style="color:#66d9ef">if</span> ($errors<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#39;password&#39;</span>))     
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;alert alert-danger&#34;</span><span style="color:#f92672">&gt;</span>         
         {{ $errors<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">first</span>(<span style="color:#e6db74">&#39;password&#39;</span>) }}    
     <span style="color:#f92672">&lt;/</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>

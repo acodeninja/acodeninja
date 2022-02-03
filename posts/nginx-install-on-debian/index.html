@@ -62,7 +62,7 @@ system, and I will cover my way here.</p>
 <p>First step is to get the sources for Nginx and php5-fpm into your apt source
 list. To do this you need to add the following lines to your
 <code>/etc/apt/sources.list</code> file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># NGinX Sources</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># NGinX Sources</span>
 deb http://nginx.org/packages/debian/ squeeze nginx deb-src
 http://nginx.org/packages/debian/ squeeze nginx
 
@@ -78,7 +78,7 @@ be checked and trusted.</p>
 <p><strong>Nginx</strong>
 With Nginx you need to download their signing key, to do this run the following
 command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ wget http://nginx.org/keys/nginx_signing.key
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ wget http://nginx.org/keys/nginx_signing.key
 $ sudo apt-key add nginx_signing.key
 </code></pre></div><p>Drop the sudo if you are running as root (shouldn’t be but just in case). This
 will add the key to your apt keychain and allow for verification of the packages
@@ -86,7 +86,7 @@ you download.</p>
 <p><strong>php5-fpm</strong>
 php-fpm is the same, run the following command to add the signing key for the
 dotdeb repository.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ wget http://www.dotdeb.org/dotdeb.gpg
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ wget http://www.dotdeb.org/dotdeb.gpg
 $ sudo apt-key add dotdeb.gpg
 </code></pre></div><p>Once all this is done feel free to go ahead and run aptitude update</p>
 <h2 id="step-3--aptitude-install">Step 3 – aptitude install</h2>
@@ -102,12 +102,12 @@ need a few components:</p>
 <li>PHP-IMAP</li>
 </ul>
 <p>So for this I would go ahead and run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo aptitude install <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo aptitude install <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  nginx mysql-server-5.5 mysql-client-5.5 php5-fpm <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  php5-curl php5-gd php5-mysql php5-imap
 </code></pre></div><p>This will set up nginx with php5-fpm adding in the required modules, for a
 stripped down set up that doesn&rsquo;t include any extras try:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo aptitude install <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo aptitude install <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  nginx mysql-server-5.5 mysql-client-5.5 php5-fpm php5-mysql
 </code></pre></div><p>You can even get rid of the mysql packages if you have no plans to run an sql
 server.</p>

@@ -59,19 +59,19 @@
 <p>What makes a good bash prompt?</p>
 <p>Ubuntu 17.10 has a nice easy to look at prompt, but it doesn&rsquo;t give you a lot of
 information.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">acodeninja@laptop:~$ _
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">acodeninja@laptop:~$ _
 </code></pre></div><p>It&rsquo;s nice to have some information relevant to your current task.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>acodeninja@laptop<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>master !? - me@acode.ninja<span style="color:#f92672">]</span> 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>acodeninja@laptop<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>master !? - me@acode.ninja<span style="color:#f92672">]</span> 
 ~/code/dotty &gt; _
 </code></pre></div><p>Or tasks you have running in the background</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>acodeninja@laptop<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>jobs: <span style="color:#ae81ff">1</span> running <span style="color:#ae81ff">2</span> stopped<span style="color:#f92672">]</span> 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>acodeninja@laptop<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>jobs: <span style="color:#ae81ff">1</span> running <span style="color:#ae81ff">2</span> stopped<span style="color:#f92672">]</span> 
 ~/code/dotty &gt; _
 </code></pre></div><p>Or the exit code of your last command</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>acodeninja@laptop<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>130<span style="color:#f92672">]</span> 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>acodeninja@laptop<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>130<span style="color:#f92672">]</span> 
 ~/code/dotty &gt; _
 </code></pre></div><p>The following functions give us all we need to put the information above into
 our terminal prompt.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/sh
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/sh
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e"># get last command return value</span>
 <span style="color:#66d9ef">function</span> nonzero_return<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
@@ -189,7 +189,7 @@ our terminal prompt.</p>
 	<span style="color:#66d9ef">fi</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>We can then inject the information into our prompt with the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">!/usr/bin/env bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">!/usr/bin/env bash
 THIS_DIR<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span> cd <span style="color:#66d9ef">$(</span> dirname <span style="color:#e6db74">${</span>BASH_SOURCE[0]<span style="color:#e6db74">}</span> <span style="color:#66d9ef">)</span> &gt;/dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> pwd <span style="color:#66d9ef">)</span>
 
 source $THIS_DIR/functions.sh
@@ -236,20 +236,20 @@ could want at your fingertips.</p>
 have more arguments added to it <code>ll -h</code>  works perfectly well.</p>
 <p>Here are some I use.</p>
 <h3 id="colour-grep-output-for-ease-of-use">colour grep output for ease of use</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">alias grep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;grep --color=auto&#39;</span> 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">alias grep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;grep --color=auto&#39;</span> 
 alias egrep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;egrep --color=auto&#39;</span> 
 alias fgrep<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;fgrep --color=auto&#39;</span>
 </code></pre></div><h3 id="confirm-file-operations">confirm file operations</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">alias mv<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mv -i&#39;</span> 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">alias mv<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mv -i&#39;</span> 
 alias cp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cp -i&#39;</span> 
 alias ln<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ln -i&#39;</span>
 alias rm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;rm -i&#39;</span>
 </code></pre></div><h3 id="handy-ls-aliases">handy ls aliases</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">alias ll<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ls -al&#39;</span> 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">alias ll<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ls -al&#39;</span> 
 alias l<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ls -l&#39;</span> 
 alias la<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ls -a&#39;</span>
 </code></pre></div><h3 id="handy-php-version-switcher">handy php version switcher</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#66d9ef">function</span> phpswitch <span style="color:#f92672">{</span> 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#66d9ef">function</span> phpswitch <span style="color:#f92672">{</span> 
   <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>which php$1<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
     alias php<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;php</span>$1<span style="color:#e6db74">&#34;</span>
     echo <span style="color:#e6db74">&#34;Switched to php</span>$1<span style="color:#e6db74"> successfully&#34;</span>
