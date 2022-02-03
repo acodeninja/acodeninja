@@ -1,5 +1,6 @@
 .PHONY: build clean dev dev-frontend dev-hugo install
 
+SHELL := /usr/bin/env bash
 HUGO_VERSION := "0.92.1"
 CPU_ARCHITECTURE := UNKNOWN
 
