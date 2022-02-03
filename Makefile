@@ -1,5 +1,27 @@
 .PHONY: build clean dev dev-frontend dev-hugo install
 
+HUGO_VERSION := "0.92.1"
+CPU_ARCHITECTURE := UNKNOWN
+
+ifeq ($(OS),Windows_NT)
+    OPERATING_SYSTEM := Windows
+else
+	ifeq ($(shell uname -s),Darwin)
+		OPERATING_SYSTEM := "macOS"
+	else
+		OPERATING_SYSTEM := $(shell uname -s)
+	endif
+endif
+
+ifeq ($(shell uname -m),x86_64)
+    CPU_ARCHITECTURE := 64bit
+endif
+
+ifeq ($(CPU_ARCHITECTURE),UNKNOWN)
+	shell echo "Cannot detect CPU Architecture"
+	exit
+endif
+
 build: install
 	@cd themes/acodeninja && yarn build
 	@.bin/hugo
@@ -22,7 +44,7 @@ install: .bin/hugo themes/acodeninja/node_modules
 .bin/hugo:
 	@echo "📥 Downloading .bin/hugo"
 	@mkdir -p .bin
-	@cd .bin && curl -L "https://github.com/gohugoio/hugo/releases/download/v0.76.5/hugo_0.76.5_Linux-64bit.tar.gz" -o hugo.tar.gz
+	@curl -s -L "https://github.com/gohugoio/hugo/releases/download/v$(HUGO_VERSION)/hugo_$(HUGO_VERSION)_$(OPERATING_SYSTEM)-$(CPU_ARCHITECTURE).tar.gz" -o .bin/hugo.tar.gz
 	@cd .bin && tar -zxf hugo.tar.gz
 	@chmod +x .bin/hugo
 
