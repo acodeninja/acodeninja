@@ -4,6 +4,10 @@ build: install
 	@cd themes/acodeninja && yarn build
 	@.bin/hugo
 
+clean:
+	@rm -rf .bin
+	@rm -rf themes/acodeninja/node_modules
+
 dev: install
 	@$(MAKE) -j dev-frontend dev-hugo
 
