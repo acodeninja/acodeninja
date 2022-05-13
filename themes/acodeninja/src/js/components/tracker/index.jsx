@@ -84,7 +84,7 @@ export default class Tracker extends Component {
         {storedToken === null && (
           <div className="popup">
             <strong>Do you mind?</strong>
-            <p>I'd like to understand more about how you use my site. Is that ok?</p>
+            <p>I'd like to track your visit so I can better understand how people use my site. Is that ok?</p>
             <div>
               <a aria-label="Accept"
                  onClick={this.accept}
