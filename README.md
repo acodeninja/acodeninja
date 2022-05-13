@@ -1,6 +1,6 @@
 # Hello 👋, I'm Lawrence, a software developer based in London.
 
-Find me on the usual platforms:
+Find me on my website and the usual platforms:
 
 * [Website](https://acode.ninja/)
 * [Twitter](https://twitter.com/acodeninja)
