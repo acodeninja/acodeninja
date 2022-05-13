@@ -38,7 +38,7 @@ dev-frontend:
 	@cd themes/acodeninja && yarn dev
 
 dev-hugo:
-	@.bin/hugo serve
+	@.bin/hugo serve --disableFastRender
 
 install: .bin/hugo themes/acodeninja/node_modules
 
