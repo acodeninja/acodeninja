@@ -1,7 +1,7 @@
 .PHONY: build clean dev dev-frontend dev-hugo install
 
 SHELL := /usr/bin/env bash
-HUGO_VERSION := "0.92.1"
+HUGO_VERSION := "0.111.3"
 CPU_ARCHITECTURE := UNKNOWN
 
 ifeq ($(OS),Windows_NT)
@@ -24,7 +24,7 @@ ifeq ($(CPU_ARCHITECTURE),UNKNOWN)
 endif
 
 build: install
-	@cd themes/acodeninja && yarn build
+	@cd themes/acodeninja && rm -rf static/* && yarn build
 	@.bin/hugo
 
 clean:
@@ -56,5 +56,6 @@ install: .bin/hugo themes/acodeninja/node_modules
 	@chmod +x .bin/hugo
 
 themes/acodeninja/node_modules:
+	@npm i -g yarn
 	@echo "📥 Downloading node_modules"
 	@cd themes/acodeninja && yarn install

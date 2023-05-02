@@ -1,7 +1,6 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const RemoveFilePlugin = require('remove-files-webpack-plugin');
 
 const join = (...paths) => path.join(__dirname, ...paths);
 
@@ -69,12 +68,13 @@ const makeJsxLoader = (name) => ({
 
 const makeSassLoader = (name) => ({
   resolve: {
-    extensions: [".css"],
+    extensions: [".css", ".scss", ".woff", ".woff2"],
     modules: ["src", "node_modules"],
   },
   entry: {
     [name]: `./src/scss/${name}.scss`,
   },
+  target: 'browserslist:last 2 versions',
   output: {
     path: join('static'),
     publicPath: "",
@@ -119,13 +119,6 @@ const makeSassLoader = (name) => ({
     }),
   ],
 });
-
-// new RemoveFilePlugin({
-//   after: {
-//     include: [join("static", `${name}.js`)],
-//   },
-// })
-
 
 module.exports = [
   makeSassLoader('all'),

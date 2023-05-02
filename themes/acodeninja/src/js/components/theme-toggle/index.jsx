@@ -10,9 +10,7 @@ export default class ThemeToggle extends React.Component {
 
     const dark = storage.get('theme-dark', false);
 
-    this.state = {
-      dark,
-    };
+    this.state = {dark};
 
     this.updateThemeClass(dark);
 
@@ -46,8 +44,9 @@ export default class ThemeToggle extends React.Component {
     const {dark} = this.state;
 
     return (
-      <button aria-label={`Switch theme to ${dark ? 'light' : 'dark'}`} onClick={this.toggle}>
-        <img src={dark ? toggleLight : toggleDark} alt="" />
+      <button aria-label={`Switch theme to ${dark ? 'light' : 'dark'}`}
+              onClick={this.toggle}>
+        <img src={dark ? toggleLight : toggleDark} alt=""/>
       </button>
     )
   }

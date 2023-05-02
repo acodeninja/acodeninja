@@ -1,6 +1,22 @@
 @import "reset";
-@import "typeography";
 @import "pagination";
+
+html {
+  font-family: 'Fira Code', 'sans-serif';
+  font-variant-ligatures: common-ligatures;
+
+  pre, code {
+    font-feature-settings: "liga" 1;
+    font-feature-settings: "dlig" 1;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.5em;
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
+}
 
 .social {
   a {
@@ -11,4 +27,8 @@
       display: inline;
     }
   }
+}
+
+* {
+  text-rendering: optimizeLegibility;
 }
