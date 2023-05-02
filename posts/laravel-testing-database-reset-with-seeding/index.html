@@ -17,6 +17,7 @@ feature testing One of the great features Laravel provides is the ability to ref
 
   <title>laravel testing: database reset with seeding | 👨‍💻 Adventures of a code ninja</title>
 
+  <link rel="stylesheet" media="screen" href="https://unpkg.com/firacode@6.2.0/distr/fira_code.css"/>
   <link rel="stylesheet" media="all" href="/all.css"/>
   <link rel="stylesheet" media="screen" href="/screen.css"/>
   <link rel="stylesheet" media="screen" href="/app.css"/>
@@ -70,89 +71,89 @@ tests rely on.</p>
 <p>The class <code>Illuminate\Foundation\Testing\RefreshDatabase</code>  has a method used to
 action the refresh refreshTestDatabase  which just calls out to <code>artisan</code> for
 the <code>migrate:fresh</code> command. Step in my nice little override:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">// tests/ResetsDatabase.php
-</span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-
-<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Tests</span>;
-
-<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Contracts\Console\Kernel</span>; 
-<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Foundation\Testing\RefreshDatabase</span>; 
-<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Foundation\Testing\RefreshDatabaseState</span>;
-
-<span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">ResetsDatabase</span> {
-    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">RefreshDatabase</span>;
-    
-    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">refreshTestDatabase</span>()
-    {
-        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span> <span style="color:#a6e22e">RefreshDatabaseState</span><span style="color:#f92672">::</span>$migrated) {
-            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;migrate:fresh&#39;</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">shouldDropViews</span>() <span style="color:#f92672">?</span> [
-                <span style="color:#e6db74">&#39;--drop-views&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>,
-            ] <span style="color:#f92672">:</span> []);
-
-            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;db:seed&#39;</span>, []);
-            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;db:seed&#39;</span>, [
-                <span style="color:#e6db74">&#39;--class&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;TestDatabaseSeeder&#39;</span>,
-            ]);
-
-            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">app</span>[<span style="color:#a6e22e">Kernel</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>]<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setArtisan</span>(<span style="color:#66d9ef">null</span>);
-
-            <span style="color:#a6e22e">RefreshDatabaseState</span><span style="color:#f92672">::</span>$migrated <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
-        }
-
-        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">beginDatabaseTransaction</span>();
-    }
-}
-</code></pre></div><p>You can use this in your tests the same way you would the RefreshDatabase
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// tests/ResetsDatabase.php
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Tests</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Contracts\Console\Kernel</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Foundation\Testing\RefreshDatabase</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Foundation\Testing\RefreshDatabaseState</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">ResetsDatabase</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">RefreshDatabase</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">refreshTestDatabase</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span> <span style="color:#a6e22e">RefreshDatabaseState</span><span style="color:#f92672">::</span>$migrated) {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;migrate:fresh&#39;</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">shouldDropViews</span>() <span style="color:#f92672">?</span> [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;--drop-views&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>            ] <span style="color:#f92672">:</span> []);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;db:seed&#39;</span>, []);
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;db:seed&#39;</span>, [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;--class&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;TestDatabaseSeeder&#39;</span>,
+</span></span><span style="display:flex;"><span>            ]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">app</span>[<span style="color:#a6e22e">Kernel</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>]<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setArtisan</span>(<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">RefreshDatabaseState</span><span style="color:#f92672">::</span>$migrated <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">beginDatabaseTransaction</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>You can use this in your tests the same way you would the RefreshDatabase
 class. But instead of just refreshing the database, you will get db:seed for
 free along with any test seeds you want to run.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">// tests/Feature/UserApiTest.php
-</span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-
-<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Tests\Feature</span>;
-
-<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Tests\ResetsDatabase</span>; 
-<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Tests\TestCase</span>;
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserApiTest</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">TestCase</span> {
-    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">ResetsDatabase</span>;
-}
-</code></pre></div><h2 id="what-about-dusk">what about dusk?</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// tests/Feature/UserApiTest.php
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Tests\Feature</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Tests\ResetsDatabase</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Tests\TestCase</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserApiTest</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">TestCase</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">ResetsDatabase</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="what-about-dusk">what about dusk?</h2>
 <p>The same can be achieved in dusk [https://laravel.com/docs/5.7/dusk]  with a
 similar change in the DatabaseMigrations  trait provided for resetting the
 database.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">// tests/ResetsDatabaseInDusk.php
-</span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-
-<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Tests</span>;
-
-<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Contracts\Console\Kernel</span>; 
-<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Foundation\Testing\DatabaseMigrations</span>; 
-<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Foundation\Testing\RefreshDatabaseState</span>;
-
-<span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">ResetsDatabaseInDusk</span> {
-    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">DatabaseMigrations</span>;
-    
-    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">runDatabaseMigrations</span>()
-    {
-        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;migrate:fresh&#39;</span>, [
-            <span style="color:#e6db74">&#39;--drop-views&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>,
-        ]);
-
-        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;db:seed&#39;</span>, []);
-        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;db:seed&#39;</span>, [
-            <span style="color:#e6db74">&#39;--class&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;TestDatabaseSeeder&#39;</span>,
-        ]);
-
-        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">app</span>[<span style="color:#a6e22e">Kernel</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>]<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setArtisan</span>(<span style="color:#66d9ef">null</span>);
-
-        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">beforeApplicationDestroyed</span>(<span style="color:#66d9ef">function</span> () {
-            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;migrate:rollback&#39;</span>);
-
-            <span style="color:#a6e22e">RefreshDatabaseState</span><span style="color:#f92672">::</span>$migrated <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
-        });
-    }
-}
-</code></pre></div><p>This will do the same as the previous trait but for your Browser tests.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// tests/ResetsDatabaseInDusk.php
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Tests</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Contracts\Console\Kernel</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Foundation\Testing\DatabaseMigrations</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Foundation\Testing\RefreshDatabaseState</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">trait</span> <span style="color:#a6e22e">ResetsDatabaseInDusk</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">DatabaseMigrations</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">runDatabaseMigrations</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;migrate:fresh&#39;</span>, [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;--drop-views&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;db:seed&#39;</span>, []);
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;db:seed&#39;</span>, [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;--class&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;TestDatabaseSeeder&#39;</span>,
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">app</span>[<span style="color:#a6e22e">Kernel</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>]<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setArtisan</span>(<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">beforeApplicationDestroyed</span>(<span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span>            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">artisan</span>(<span style="color:#e6db74">&#39;migrate:rollback&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">RefreshDatabaseState</span><span style="color:#f92672">::</span>$migrated <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This will do the same as the previous trait but for your Browser tests.</p>
 
 
 </main><footer>

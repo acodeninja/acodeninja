@@ -17,6 +17,7 @@ One problem I have had to solve a number of times, is uploading the contents of 
 
   <title>recursive file upload to s3 in terraform | 👨‍💻 Adventures of a code ninja</title>
 
+  <link rel="stylesheet" media="screen" href="https://unpkg.com/firacode@6.2.0/distr/fira_code.css"/>
   <link rel="stylesheet" media="all" href="/all.css"/>
   <link rel="stylesheet" media="screen" href="/screen.css"/>
   <link rel="stylesheet" media="screen" href="/app.css"/>
@@ -72,16 +73,16 @@ completely inside terraform.</p>
 <h2 id="creating-the-s3-bucket">creating the S3 bucket</h2>
 <p>To begin with, we need an S3 bucket defined in our terraform project. The code
 block below comes with a website block that sets up web hosting for the bucket.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_s3_bucket&#34; &#34;s3_static&#34;</span> {
-  bucket  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;testing-website-static-hosting&#34;</span>
-  acl     <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;public-read&#34;</span>
-
-  <span style="color:#66d9ef">website</span> {
-    index_document <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;index.html&#34;</span>
-    error_document <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;error.html&#34;</span>
-  }
-}
-</code></pre></div><h2 id="uploading-multiple-files">uploading multiple files</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hcl" data-lang="hcl"><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_s3_bucket&#34; &#34;s3_static&#34;</span> {
+</span></span><span style="display:flex;"><span>  bucket  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;testing-website-static-hosting&#34;</span>
+</span></span><span style="display:flex;"><span>  acl     <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;public-read&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">website</span> {
+</span></span><span style="display:flex;"><span>    index_document <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;index.html&#34;</span>
+</span></span><span style="display:flex;"><span>    error_document <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;error.html&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="uploading-multiple-files">uploading multiple files</h2>
 <p>Now we need get a set of files from a local directory containing the website
 using the <a href="https://www.terraform.io/docs/configuration/functions/fileset.html" target="_blank" rel="noreferrer noopener">fileset</a>
 
@@ -92,43 +93,43 @@ Andy&rsquo;s post, but leveraging the <code>each.value</code> property in place 
 filename.</p>
 <p>The mimetypes variable is used with the file extension taken from the file
 path split on <code>.</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;upload_directory&#34;</span> {
-  default <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${path.cwd}/codebases/website-static/&#34;</span>
-}
-
-<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;mime_types&#34;</span> {
-  default <span style="color:#f92672">=</span> {
-    htm   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;text/html&#34;</span>
-    html  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;text/html&#34;</span>
-    css   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;text/css&#34;</span>
-    ttf   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;font/ttf&#34;</span>
-    js    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;application/javascript&#34;</span>
-    map   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;application/javascript&#34;</span>
-    json  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;application/json&#34;</span>
-  }
-}
-
-<span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_s3_bucket_object&#34; &#34;website_files&#34;</span> {
-  for_each      <span style="color:#f92672">=</span> <span style="color:#66d9ef">fileset</span>(<span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">upload_directory</span>, <span style="color:#e6db74">&#34;**/*.*&#34;</span>)
-  bucket        <span style="color:#f92672">=</span> <span style="color:#66d9ef">aws_s3_bucket</span>.<span style="color:#66d9ef">s3_static</span>.<span style="color:#66d9ef">bucket</span>
-  key           <span style="color:#f92672">=</span> <span style="color:#66d9ef">replace</span>(<span style="color:#66d9ef">each</span>.<span style="color:#66d9ef">value</span>, <span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">upload_directory</span>, <span style="color:#e6db74">&#34;&#34;</span>)
-  source        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.upload_directory}${each.value}&#34;</span>
-  acl           <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;public-read&#34;</span>
-  etag          <span style="color:#f92672">=</span> <span style="color:#66d9ef">filemd5</span>(<span style="color:#e6db74">&#34;${var.upload_directory}${each.value}&#34;</span>)
-  content_type  <span style="color:#f92672">=</span> <span style="color:#66d9ef">lookup</span>(<span style="color:#66d9ef">local</span>.<span style="color:#66d9ef">mime_types</span>, <span style="color:#66d9ef">split</span>(<span style="color:#e6db74">&#34;.&#34;, each.value)[length(split(&#34;.&#34;</span>, <span style="color:#66d9ef">each</span>.<span style="color:#66d9ef">value</span>)) <span style="color:#960050;background-color:#1e0010">-</span> <span style="color:#ae81ff">1</span>])
-}
-</code></pre></div><h2 id="no-caveats">no caveats!</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-hcl" data-lang="hcl"><span style="display:flex;"><span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;upload_directory&#34;</span> {
+</span></span><span style="display:flex;"><span>  default <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${path.cwd}/codebases/website-static/&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;mime_types&#34;</span> {
+</span></span><span style="display:flex;"><span>  default <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    htm   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;text/html&#34;</span>
+</span></span><span style="display:flex;"><span>    html  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;text/html&#34;</span>
+</span></span><span style="display:flex;"><span>    css   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;text/css&#34;</span>
+</span></span><span style="display:flex;"><span>    ttf   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;font/ttf&#34;</span>
+</span></span><span style="display:flex;"><span>    js    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;application/javascript&#34;</span>
+</span></span><span style="display:flex;"><span>    map   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;application/javascript&#34;</span>
+</span></span><span style="display:flex;"><span>    json  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;application/json&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_s3_bucket_object&#34; &#34;website_files&#34;</span> {
+</span></span><span style="display:flex;"><span>  for_each      <span style="color:#f92672">=</span> <span style="color:#66d9ef">fileset</span>(<span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">upload_directory</span>, <span style="color:#e6db74">&#34;**/*.*&#34;</span>)
+</span></span><span style="display:flex;"><span>  bucket        <span style="color:#f92672">=</span> <span style="color:#66d9ef">aws_s3_bucket</span>.<span style="color:#66d9ef">s3_static</span>.<span style="color:#66d9ef">bucket</span>
+</span></span><span style="display:flex;"><span>  key           <span style="color:#f92672">=</span> <span style="color:#66d9ef">replace</span>(<span style="color:#66d9ef">each</span>.<span style="color:#66d9ef">value</span>, <span style="color:#66d9ef">var</span>.<span style="color:#66d9ef">upload_directory</span>, <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>  source        <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${var.upload_directory}${each.value}&#34;</span>
+</span></span><span style="display:flex;"><span>  acl           <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;public-read&#34;</span>
+</span></span><span style="display:flex;"><span>  etag          <span style="color:#f92672">=</span> <span style="color:#66d9ef">filemd5</span>(<span style="color:#e6db74">&#34;${var.upload_directory}${each.value}&#34;</span>)
+</span></span><span style="display:flex;"><span>  content_type  <span style="color:#f92672">=</span> <span style="color:#66d9ef">lookup</span>(<span style="color:#66d9ef">local</span>.<span style="color:#66d9ef">mime_types</span>, <span style="color:#66d9ef">split</span>(<span style="color:#e6db74">&#34;.&#34;, each.value)[length(split(&#34;.&#34;</span>, <span style="color:#66d9ef">each</span>.<span style="color:#66d9ef">value</span>)) <span style="color:#960050;background-color:#1e0010">-</span> <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="no-caveats">no caveats!</h2>
 <p>The caveat from Andy&rsquo;s post around deleting files that are no longer in the list
 is not an issue any longer. If you remove a file from the folder and run
 terraform plan  you will see a deletion.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">An execution plan has been generated and is shown below.
-Resource actions are indicated with the following symbols:
-  - destroy
-
-Terraform will perform the following actions:
-
-  aws_s3_bucket_object.website_files<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;test.html&#34;</span><span style="color:#f92672">]</span> will be destroyed
-</code></pre></div><p>Hopefully this will help those who are using terraform to host a site in S3.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>An execution plan has been generated and is shown below.
+</span></span><span style="display:flex;"><span>Resource actions are indicated with the following symbols:
+</span></span><span style="display:flex;"><span>  - destroy
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Terraform will perform the following actions:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  aws_s3_bucket_object.website_files<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;test.html&#34;</span><span style="color:#f92672">]</span> will be destroyed
+</span></span></code></pre></div><p>Hopefully this will help those who are using terraform to host a site in S3.
 I&rsquo;ve been using this to build a maintenance holding page for emergency
 situations where the main application is down.</p>
 

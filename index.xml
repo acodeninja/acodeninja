@@ -56,7 +56,7 @@ checking passwords and warning users on login To check if a password is secure e
       <pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/posts/laravel-pwned-passwords-validator/</guid>
-      <description>a bit about pwned passwords So, a while ago the pwned passwords database was made available to the public. It was a great idea, a collection of all the discrete passwords that had been included in all the data breaches from &#39;;&amp;ndash;have i been pwned? . Annoyingly to check this database with version 1 of the api you could only specify a username to see if that was included in a breach.</description>
+      <description>a bit about pwned passwords So, a while ago the pwned passwords database was made available to the public. It was a great idea, a collection of all the discrete passwords that had been included in all the data breaches from &amp;rsquo;;&amp;ndash;have i been pwned? . Annoyingly to check this database with version 1 of the api you could only specify a username to see if that was included in a breach.</description>
     </item>
     
     <item>
@@ -68,7 +68,7 @@ checking passwords and warning users on login To check if a password is secure e
       <description>why? Lazy loading components gives a great performance improvement. Larger components can take ages to load and result in an unusable page for a few seconds while the massive app.js file is loaded.
 how? You can follow these steps on the tutorial repo .
 1. babel plugins You will need to add both the babel-plugin-dynamic-import-webpack and babel-plugin-syntax-dynamic-import packages to your package.json
-$ npm install --save-dev \  babel-plugin-dynamic-import-webpack \  babel-plugin-syntax-dynamic-import tutorial commit</description>
+$ npm install --save-dev \ babel-plugin-dynamic-import-webpack \ babel-plugin-syntax-dynamic-import tutorial commit 2.</description>
     </item>
     
     <item>
@@ -110,7 +110,7 @@ Adverts should complement the content on a page, rather than being specific to t
       <description> DOMContentLoaded,
 document ready or not?
 jQuery: overhead.
- document.addEventListener(&amp;#34;DOMContentLoaded&amp;#34;, function(event) { console.log(&amp;#39;document load time: &amp;#39; + event.timeStamp); }); </description>
+document.addEventListener(&amp;#34;DOMContentLoaded&amp;#34;, function(event) { console.log(&amp;#39;document load time: &amp;#39; + event.timeStamp); }); </description>
     </item>
     
     <item>
@@ -122,7 +122,7 @@ jQuery: overhead.
       <description> prototyping chaining,
 object extension for all the
 modern programmers
- var Ninja = function () {}; Ninja.prototype.throw = function (item) { console.log(&amp;#39;Throwing &amp;#39; + item); }; var Shinobi = function () {}; Shinobi.prototype = Object.create(Ninja.prototype); var shinobi = new Shinobi; shinobi.throw(&amp;#39;knife&amp;#39;); // Throwing knife </description>
+var Ninja = function () {}; Ninja.prototype.throw = function (item) { console.log(&amp;#39;Throwing &amp;#39; + item); }; var Shinobi = function () {}; Shinobi.prototype = Object.create(Ninja.prototype); var shinobi = new Shinobi; shinobi.throw(&amp;#39;knife&amp;#39;); // Throwing knife </description>
     </item>
     
     <item>
@@ -134,7 +134,7 @@ modern programmers
       <description> objects are frozen,
 never to be extended
 or altered again
- class Ninja { constructor() { this.dead = false; Object.freeze(this); } } var shinobi = new Ninja(); shinobi.dead = true; console.log(shinobi); // Ninja { dead: false } </description>
+class Ninja { constructor() { this.dead = false; Object.freeze(this); } } var shinobi = new Ninja(); shinobi.dead = true; console.log(shinobi); // Ninja { dead: false } </description>
     </item>
     
     <item>
@@ -146,7 +146,7 @@ or altered again
       <description> object oriented
 information hiding done.
 closures: private methods
- class Person { constructor(name, dob) { var dob = dob; this.name = name; this.getBirthyear = () =&amp;gt; new Date(dob).getFullYear(); } } var person = new Person(&amp;#39;thejsninja&amp;#39;, &amp;#39;1985-12-04&amp;#39;); console.log(person.getBirthyear()); // 1985 </description>
+class Person { constructor(name, dob) { var dob = dob; this.name = name; this.getBirthyear = () =&amp;gt; new Date(dob).getFullYear(); } } var person = new Person(&amp;#39;thejsninja&amp;#39;, &amp;#39;1985-12-04&amp;#39;); console.log(person.getBirthyear()); // 1985 </description>
     </item>
     
     <item>
@@ -226,7 +226,7 @@ Cascade based on style location So, what does it mean by Cascade?</description>
       
       <guid>/posts/nginx-ssl-only-configuration/</guid>
       <description>Configuring Nginx with SSL can be a bit of a nightmare to do properly. Here is a handy config file I use as a starting base for it.
-#HTTP Redirect server { # Set up the port listener  listen 80; listen [IPV6]:80 default ipv6only=on; # Set the hostname to be served  server_name SITE www.SITE; # Set up access and error logs  accesslog /var/www/SITE/logs/nginx.access.log; errorlog /var/www/SITE/logs/nginx.error.log; # Redirect all requests on http to https  location / { rewrite ^ https://$servername$requesturi?</description>
+#HTTP Redirect server { # Set up the port listener listen 80; listen [IPV6]:80 default ipv6only=on; # Set the hostname to be served server_name SITE www.SITE; # Set up access and error logs accesslog /var/www/SITE/logs/nginx.access.log; errorlog /var/www/SITE/logs/nginx.error.log; # Redirect all requests on http to https location / { rewrite ^ https://$servername$requesturi?</description>
     </item>
     
     <item>
@@ -267,7 +267,7 @@ One problem that I came across with Nginx was implementing features found in the
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>About me 🧔  coder maker gamer  </description>
+      <description>About me 🧔 coder maker gamer </description>
     </item>
     
     <item>

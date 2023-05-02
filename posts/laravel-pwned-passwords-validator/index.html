@@ -6,7 +6,7 @@
   />
 
   <meta name="description"
-        content="a bit about pwned passwords So, a while ago the pwned passwords database was made available to the public. It was a great idea, a collection of all the discrete passwords that had been included in all the data breaches from &#39;;&amp;ndash;have i been pwned? . Annoyingly to check this database with version 1 of the api you could only specify a username to see if that was included in a breach."
+        content="a bit about pwned passwords So, a while ago the pwned passwords database was made available to the public. It was a great idea, a collection of all the discrete passwords that had been included in all the data breaches from &amp;rsquo;;&amp;ndash;have i been pwned? . Annoyingly to check this database with version 1 of the api you could only specify a username to see if that was included in a breach."
   />
   <meta name="keywords"
         content="software developer, coder, learning to code, laravel, haveibeenpwned, security, password security"
@@ -16,6 +16,7 @@
 
   <title>laravel pwned passwords validator | 👨‍💻 Adventures of a code ninja</title>
 
+  <link rel="stylesheet" media="screen" href="https://unpkg.com/firacode@6.2.0/distr/fira_code.css"/>
   <link rel="stylesheet" media="all" href="/all.css"/>
   <link rel="stylesheet" media="screen" href="/screen.css"/>
   <link rel="stylesheet" media="screen" href="/app.css"/>
@@ -54,7 +55,7 @@
   <h2 id="a-bit-about-pwned-passwords">a bit about pwned passwords</h2>
 <p>So, a while ago the pwned passwords database was made available to the public.
 It was a great idea, a collection of all the discrete passwords that had been
-included in all the data breaches from <a href="https://haveibeenpwned.com/" target="_blank" rel="noreferrer noopener">';&ndash;have i been pwned?</a>
+included in all the data breaches from <a href="https://haveibeenpwned.com/" target="_blank" rel="noreferrer noopener">&rsquo;;&ndash;have i been pwned?</a>
 .
 Annoyingly to check this database with version 1 of the api you could only
 specify a username to see if that was included in a breach.</p>
@@ -80,26 +81,26 @@ fails, and the error is returned to the validator instance.</p>
 <p>Using this validator is really easy, check out the <a href="https://github.com/acodeninja/laravel-pwned-passwords-validator" target="_blank" rel="noreferrer noopener">Github Repo</a>
 
 or just use composer to install it</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ composer require acodeninja/laravel-pwned-passwords-validator
-</code></pre></div><p>Then use it either in your request classes</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#e6db74">/**  
-</span><span style="color:#e6db74"> * Get the validation rules that apply to the request.  
-</span><span style="color:#e6db74"> *  
-</span><span style="color:#e6db74"> * @return array 
-</span><span style="color:#e6db74"> */</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">rules</span>()
-{
-    <span style="color:#66d9ef">return</span> [
-        <span style="color:#e6db74">&#39;email&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|email|unique:users,email&#39;</span>, 
-        <span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|pwned_password_strict&#39;</span>,
-    ];
-}
-</code></pre></div><p>Or your controllers (if you swing that way)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$validator <span style="color:#f92672">=</span> <span style="color:#a6e22e">Validator</span><span style="color:#f92672">::</span><span style="color:#a6e22e">make</span>($request<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">all</span>(), [
-    <span style="color:#e6db74">&#39;email&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|email|unique:users,email&#39;</span>, 
-    <span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|pwned_password_strict&#39;</span>,
-])<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">validate</span>();
-</code></pre></div><h2 id="thanks">thanks</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ composer require acodeninja/laravel-pwned-passwords-validator
+</span></span></code></pre></div><p>Then use it either in your request classes</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#e6db74">/**  
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> * Get the validation rules that apply to the request.  
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> *  
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> * @return array 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">rules</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;email&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|email|unique:users,email&#39;</span>, 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|pwned_password_strict&#39;</span>,
+</span></span><span style="display:flex;"><span>    ];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Or your controllers (if you swing that way)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>$validator <span style="color:#f92672">=</span> <span style="color:#a6e22e">Validator</span><span style="color:#f92672">::</span><span style="color:#a6e22e">make</span>($request<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">all</span>(), [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;email&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|email|unique:users,email&#39;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;required|pwned_password_strict&#39;</span>,
+</span></span><span style="display:flex;"><span>])<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">validate</span>();
+</span></span></code></pre></div><h2 id="thanks">thanks</h2>
 <p>Thanks go out to <a href="https://twitter.com/riskybusiness" target="_blank" rel="noreferrer noopener">Patrick Gray</a>
  for a great
 podcast that I&rsquo;ve followed for years, and to <a href="https://twitter.com/troyhunt" target="_blank" rel="noreferrer noopener">Troy Hunt</a>

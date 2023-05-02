@@ -17,6 +17,7 @@ Cascade based on style location So, what does it mean by Cascade?"
 
   <title>the c in css | 👨‍💻 Adventures of a code ninja</title>
 
+  <link rel="stylesheet" media="screen" href="https://unpkg.com/firacode@6.2.0/distr/fira_code.css"/>
   <link rel="stylesheet" media="all" href="/all.css"/>
   <link rel="stylesheet" media="screen" href="/screen.css"/>
   <link rel="stylesheet" media="screen" href="/app.css"/>
@@ -73,13 +74,13 @@ out what bits of style affect what.</p>
 <h2 id="cascade-based-on-file-position">Cascade based on file position</h2>
 <p>The other part of the picture is where in your CSS file the styles are declared,
 take this for instance:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#f92672">p</span> {
-  <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#fff</span>; 
-}
-<span style="color:#f92672">p</span> {
-  <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#03f</span>;
-}
-</code></pre></div><p>Here we have the colour of P elements on a page set twice, due to the ‘read from
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#f92672">p</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#fff</span>; 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">p</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#03f</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Here we have the colour of P elements on a page set twice, due to the ‘read from
 the top down’ approach that browsers take to interpreting markup, the second
 declaration will be applied.</p>
 <h2 id="conclusion">Conclusion</h2>

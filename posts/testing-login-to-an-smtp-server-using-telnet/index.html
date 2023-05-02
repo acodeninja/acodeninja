@@ -17,6 +17,7 @@ To do this you will need to open the command prompt, on windows you can do this 
 
   <title>testing login to an smtp server using telnet | 👨‍💻 Adventures of a code ninja</title>
 
+  <link rel="stylesheet" media="screen" href="https://unpkg.com/firacode@6.2.0/distr/fira_code.css"/>
   <link rel="stylesheet" media="all" href="/all.css"/>
   <link rel="stylesheet" media="screen" href="/screen.css"/>
   <link rel="stylesheet" media="screen" href="/app.css"/>
@@ -52,20 +53,20 @@ systems.</p>
 by pressing the windows key and tapping the R button once. The dialog that pops
 up just needs “cmd” input and the OK button pressing.</p>
 <p>The commands should be entered as follows:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ telnet smtp.someserver.com <span style="color:#ae81ff">25</span>
-</code></pre></div><p>This will show the following on screen:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Trying 212.159.8.107... Connected to smtp.someserver.com. 
-Escape character is <span style="color:#e6db74">&#39;^]&#39;</span>. <span style="color:#ae81ff">220</span> smtp01 smtp smtp.someserver.com
-</code></pre></div><p>To which you should respond by typing:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ehlo server
-</code></pre></div><p>The ehlo command produces a list of capabilities and starts then exchange of
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ telnet smtp.someserver.com <span style="color:#ae81ff">25</span>
+</span></span></code></pre></div><p>This will show the following on screen:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Trying 212.159.8.107... Connected to smtp.someserver.com. 
+</span></span><span style="display:flex;"><span>Escape character is <span style="color:#e6db74">&#39;^]&#39;</span>. <span style="color:#ae81ff">220</span> smtp01 smtp smtp.someserver.com
+</span></span></code></pre></div><p>To which you should respond by typing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ehlo server
+</span></span></code></pre></div><p>The ehlo command produces a list of capabilities and starts then exchange of
 information between yourself and the SMTP server. Once this has been done you
 need to tell the server you intend to give it a username and password. To tell
 the server this you need to enter the following:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">auth login
-</code></pre></div><p>The server will then respond with</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ae81ff">334</span> VXNlcm5hbWU6
-</code></pre></div><p>This apparently random set of characters is actually a string encoded in base64
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>auth login
+</span></span></code></pre></div><p>The server will then respond with</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#ae81ff">334</span> VXNlcm5hbWU6
+</span></span></code></pre></div><p>This apparently random set of characters is actually a string encoded in base64
 this actually says “username”. So as it is asking the question in base64 we have
 to reply in the same encoding, to do this you will need to convert the username
 into base64. There is a handy website for doing this here:
