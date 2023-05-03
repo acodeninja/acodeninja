@@ -1,4 +1,4 @@
-# Hello 👋, I'm Lawrence, a software developer based in London.
+# Hello 👋, I'm Lawrence, a lead software engineer based in London.
 
 Find me on my website and the usual platforms:
 
