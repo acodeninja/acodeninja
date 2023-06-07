@@ -3,7 +3,7 @@ import * as storage from "../../lib/storage";
 import './index.scss';
 
 export default class Tracker extends Component {
-  GA_CODE = "UA-84862644-2"
+  GA_CODE = "G-B4NSPB1FB3"
 
   constructor(props) {
     super(props);
@@ -62,6 +62,12 @@ export default class Tracker extends Component {
 
       document.getElementsByTagName("head")[0].appendChild(data_script);
     }
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-B4NSPB1FB3');
   }
 
   render() {
